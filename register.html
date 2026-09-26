@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register &amp; Get Involved — Web3 Carnival</title>
-  <meta name="description" content="5-step registration flow and pass generator for Web3 Carnival 2026.">
+  <meta name="description" content="5-step registration flow and digital event pass generator for Web3 Carnival 2026.">
   <meta name="theme-color" content="#05060B">
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -35,21 +35,196 @@
           <span aria-current="page">Register</span>
         </nav>
         <h1 id="page-title" class="page-title">Register &amp; Get Involved</h1>
-        <p class="page-lead">Apply as an Attendee, Sponsor, Speaker, Media, Community Partner, or Super Demo project.</p>
+        <p class="page-lead">Five short steps to your personalized Web3 Carnival pass — as an Attendee, Speaker, Builder, Investor, or Partner.</p>
       </div>
     </section>
 
-    <div class="container">
-      <div class="shell-status-card">
-        <div class="shell-status-icon" aria-hidden="true">🎫</div>
-        <h2>5-Step Registration &amp; Digital Event Pass (Signature Feature #2)</h2>
-        <p>This shell is connected to the Web3 Carnival design system foundation. The sequential 5-step registration stepper and dynamic digital event pass reveal will be built in Phase 8.</p>
-        <div style="display: flex; gap: var(--space-3); margin-top: var(--space-2);">
-          <a href="index.html" class="btn btn-secondary">Back to Home</a>
-          <a href="event.html" class="btn btn-primary">Event Schedule</a>
-        </div>
+    <section class="section register-section" aria-labelledby="register-flow-heading">
+      <h2 id="register-flow-heading" class="sr-only">Registration steps</h2>
+      <div class="container register-shell">
+
+        <!-- ==================================================================
+             PROGRESS INDICATOR
+             ================================================================== -->
+        <nav class="reg-progress" aria-label="Registration progress" data-reg-progress>
+          <ol class="reg-progress-list" data-reg-progress-list>
+            <li class="reg-progress-item" data-progress-item="1">
+              <button type="button" class="reg-progress-btn" data-progress-btn="1" aria-current="step">
+                <span class="reg-progress-dot" aria-hidden="true">1</span>
+                <span class="reg-progress-label">Your Goal</span>
+              </button>
+            </li>
+            <li class="reg-progress-item" data-progress-item="2">
+              <button type="button" class="reg-progress-btn" data-progress-btn="2" disabled>
+                <span class="reg-progress-dot" aria-hidden="true">2</span>
+                <span class="reg-progress-label">Interests</span>
+              </button>
+            </li>
+            <li class="reg-progress-item" data-progress-item="3">
+              <button type="button" class="reg-progress-btn" data-progress-btn="3" disabled>
+                <span class="reg-progress-dot" aria-hidden="true">3</span>
+                <span class="reg-progress-label">Your Details</span>
+              </button>
+            </li>
+            <li class="reg-progress-item" data-progress-item="4">
+              <button type="button" class="reg-progress-btn" data-progress-btn="4" disabled>
+                <span class="reg-progress-dot" aria-hidden="true">4</span>
+                <span class="reg-progress-label">Event Plan</span>
+              </button>
+            </li>
+            <li class="reg-progress-item" data-progress-item="5">
+              <button type="button" class="reg-progress-btn" data-progress-btn="5" disabled>
+                <span class="reg-progress-dot" aria-hidden="true">5</span>
+                <span class="reg-progress-label">Your Pass</span>
+              </button>
+            </li>
+          </ol>
+
+          <div class="reg-progress-mobile" aria-hidden="true">
+            <p class="reg-progress-mobile-label" data-reg-progress-mobile-label>Step 1 of 5 — Your Goal</p>
+            <div class="reg-progress-bar-track">
+              <div class="reg-progress-bar-fill" data-reg-progress-fill></div>
+            </div>
+          </div>
+        </nav>
+
+        <p class="sr-only" role="status" aria-live="polite" data-step-announcer></p>
+
+        <!-- ==================================================================
+             STEPS 1–4 (FORM)
+             ================================================================== -->
+        <form data-registration-form novalidate>
+
+          <!-- STEP 1 — YOUR GOAL -->
+          <section class="reg-step" data-step-panel="1" aria-labelledby="step1-heading">
+            <fieldset class="reg-fieldset">
+              <legend class="reg-step-legend">
+                <span class="reg-step-eyebrow">Step 1 of 5</span>
+                <h3 id="step1-heading" class="reg-step-title" tabindex="-1">What brings you to Web3 Carnival?</h3>
+                <p class="reg-step-desc">Choose the path that fits you best. This shapes what we show you next.</p>
+              </legend>
+              <div class="reg-goal-grid" data-goal-grid aria-describedby="goal-error"></div>
+              <p class="form-error" id="goal-error" role="alert" hidden></p>
+            </fieldset>
+          </section>
+
+          <!-- STEP 2 — YOUR INTERESTS -->
+          <section class="reg-step" data-step-panel="2" hidden aria-labelledby="step2-heading">
+            <fieldset class="reg-fieldset">
+              <legend class="reg-step-legend">
+                <span class="reg-step-eyebrow">Step 2 of 5</span>
+                <h3 id="step2-heading" class="reg-step-title" tabindex="-1">Your Interests</h3>
+                <p class="reg-step-desc">Select the tracks you want to follow across the carnival. Pick as many as apply.</p>
+              </legend>
+              <div class="reg-track-grid" data-track-grid aria-describedby="interests-error"></div>
+              <p class="form-error" id="interests-error" role="alert" hidden></p>
+            </fieldset>
+          </section>
+
+          <!-- STEP 3 — YOUR DETAILS -->
+          <section class="reg-step" data-step-panel="3" hidden aria-labelledby="step3-heading">
+            <div class="reg-step-legend">
+              <span class="reg-step-eyebrow">Step 3 of 5</span>
+              <h3 id="step3-heading" class="reg-step-title" tabindex="-1">Your Details</h3>
+              <p class="reg-step-desc">Tell us who's coming — this is what appears on your digital pass.</p>
+            </div>
+
+            <div class="reg-details-grid">
+              <div class="form-group">
+                <label class="form-label" for="reg-name">Full Name</label>
+                <input class="form-input" type="text" id="reg-name" name="name" autocomplete="name" aria-describedby="reg-name-error" aria-required="true">
+                <p class="form-error" id="reg-name-error" role="alert" hidden></p>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="reg-email">Email Address</label>
+                <input class="form-input" type="email" id="reg-email" name="email" autocomplete="email" inputmode="email" aria-describedby="reg-email-error" aria-required="true">
+                <p class="form-error" id="reg-email-error" role="alert" hidden></p>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="reg-role">Role</label>
+                <select class="form-select" id="reg-role" name="role" aria-describedby="reg-role-error" aria-required="true">
+                  <option value="" disabled selected>Select your role</option>
+                  <option value="founder-ceo">Founder / CEO</option>
+                  <option value="developer">Developer / Engineer</option>
+                  <option value="investor">Investor / VC</option>
+                  <option value="media">Media / Press</option>
+                  <option value="community">Community / DAO Contributor</option>
+                  <option value="student">Student / Academic</option>
+                  <option value="other">Other</option>
+                </select>
+                <p class="form-error" id="reg-role-error" role="alert" hidden></p>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="reg-org">Organization <span class="form-optional">(optional)</span></label>
+                <input class="form-input" type="text" id="reg-org" name="organization" autocomplete="organization" placeholder="e.g. NovaLayer Labs">
+              </div>
+            </div>
+          </section>
+
+          <!-- STEP 4 — YOUR EVENT PLAN -->
+          <section class="reg-step" data-step-panel="4" hidden aria-labelledby="step4-heading">
+            <div class="reg-step-legend">
+              <span class="reg-step-eyebrow">Step 4 of 5</span>
+              <h3 id="step4-heading" class="reg-step-title" tabindex="-1">Your Event Plan</h3>
+              <p class="reg-step-desc">Fine-tune how you'll spend your time on-site. Everything in this step is optional.</p>
+            </div>
+
+            <fieldset class="reg-fieldset reg-plan-block">
+              <legend class="reg-plan-legend">Saved Sessions from My Journey</legend>
+              <div data-plan-sessions></div>
+            </fieldset>
+
+            <fieldset class="reg-fieldset reg-plan-block">
+              <legend class="reg-plan-legend">Networking Preferences</legend>
+              <p class="reg-plan-hint">What kind of connections are you hoping to make?</p>
+              <div class="reg-check-grid" data-plan-networking></div>
+            </fieldset>
+
+            <fieldset class="reg-fieldset reg-plan-block">
+              <legend class="reg-plan-legend">Event Interests</legend>
+              <p class="reg-plan-hint">Beyond your tracks, what themes matter most to you?</p>
+              <div class="reg-check-grid" data-plan-interests></div>
+            </fieldset>
+          </section>
+
+          <!-- STEP NAVIGATION -->
+          <div class="reg-nav-row" data-reg-nav>
+            <button type="button" class="btn btn-secondary" data-reg-back hidden>Back</button>
+            <button type="submit" class="btn btn-primary" data-reg-continue>Continue</button>
+          </div>
+        </form>
+
+        <!-- ==================================================================
+             STEP 5 — YOUR PASS
+             ================================================================== -->
+        <section class="reg-step reg-step-pass" data-step-panel="5" hidden aria-labelledby="step5-heading">
+          <div class="reg-step-legend">
+            <span class="reg-step-eyebrow">Step 5 of 5</span>
+            <h3 id="step5-heading" class="reg-step-title" tabindex="-1">Your Pass</h3>
+            <p class="reg-step-desc">Here's your personalized digital event pass.</p>
+          </div>
+
+          <p class="reg-prototype-note" role="note">
+            <strong>Prototype preview.</strong> This pass is generated entirely in your browser for demonstration purposes. Nothing on this page has been submitted to Web3 Carnival or its organizers, and no registration has actually been made.
+          </p>
+
+          <div class="digital-pass-wrap">
+            <div class="digital-pass" data-digital-pass data-reveal-pending></div>
+          </div>
+
+          <div class="reg-pass-actions">
+            <button type="button" class="btn btn-primary" data-pass-download>Download / Print Pass</button>
+            <button type="button" class="btn btn-secondary" data-pass-restart>Start Over</button>
+            <a href="event.html" class="btn btn-ghost" data-pass-back-event>Back to Event</a>
+          </div>
+          <p class="reg-pass-print-hint">Tip: choose "Save as PDF" in your browser's print dialog to download your pass.</p>
+        </section>
+
       </div>
-    </div>
+    </section>
   </main>
 
   <!-- Footer rendered by navigation.js -->
@@ -58,6 +233,7 @@
   <script src="js/data.js"></script>
   <script src="js/theme.js"></script>
   <script src="js/navigation.js"></script>
+  <script src="js/registration.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
