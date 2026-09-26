@@ -104,6 +104,19 @@
     .final-cta-inner {
       max-width: 820px;
     }
+
+    /* Event page — Phase 2 */
+    .sessions-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .venue-grid {
+      grid-template-columns: 1.1fr 1fr;
+    }
+  
+    .timeline-stage {
+      gap: var(--space-6);
+    }
   
     .footer-top {
       grid-template-columns: 2fr 1fr 1fr;
@@ -156,6 +169,10 @@
     }
   
     .past-events-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  
+    .sessions-grid {
       grid-template-columns: repeat(3, 1fr);
     }
   
