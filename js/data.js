@@ -123,28 +123,16 @@ const WEB3_CARNIVAL_DATA = {
     }
   ],
 
-  // The 8 locked audience / ecosystem segments from design.md.
-  // trackIds/opportunityIds are additive for the Ecosystem Map (Phase 6):
-  // they connect each segment to the real tracks it maps to and the real
-  // "Get Involved" paths (§1) most relevant to it, so the map's relationships
-  // are drawn from the site's actual taxonomy rather than invented links.
+  // The 8 locked audience / ecosystem segments from design.md
   ecosystemSegments: [
-    { id: "startups", name: "Startups", icon: "🚀", description: "Early-stage founders disrupting legacy rails.",
-      trackIds: ["infra", "defi", "nft"], opportunityIds: ["super-demo", "speaker"] },
-    { id: "enthusiasts", name: "Web3 Enthusiasts", icon: "⚡", description: "Active users and decentralized technology advocates.",
-      trackIds: ["metaverse", "nft", "dao"], opportunityIds: ["community", "volunteer"] },
-    { id: "developers", name: "Developers", icon: "🧑‍💻", description: "Engineers deploying protocol-level code.",
-      trackIds: ["infra", "zk", "metaverse"], opportunityIds: ["speaker", "super-demo"] },
-    { id: "investors", name: "Investors", icon: "💰", description: "Venture funds, angel syndicates, and capital allocators.",
-      trackIds: ["defi", "enterprise", "infra"], opportunityIds: ["sponsor", "speaker"] },
-    { id: "policymakers", name: "Policy Makers", icon: "⚖️", description: "Regulators and legal advisors guiding compliance.",
-      trackIds: ["dao", "enterprise", "zk"], opportunityIds: ["speaker", "media"] },
-    { id: "enterprises", name: "Enterprises", icon: "🏙️", description: "Fortune 500 corporations adopting Web3 stacks.",
-      trackIds: ["enterprise", "defi", "infra"], opportunityIds: ["sponsor", "speaker"] },
-    { id: "academia", name: "Academia and Institutions", icon: "🎓", description: "Research labs and university blockchain societies.",
-      trackIds: ["zk", "dao", "infra"], opportunityIds: ["speaker", "media"] },
-    { id: "incubators", name: "Incubators and Accelerators", icon: "🌱", description: "Growth hubs scaling Web3 talent.",
-      trackIds: ["infra", "defi", "dao"], opportunityIds: ["sponsor", "community"] }
+    { id: "startups", name: "Startups", description: "Early-stage founders disrupting legacy rails." },
+    { id: "enthusiasts", name: "Web3 Enthusiasts", description: "Active users and decentralized technology advocates." },
+    { id: "developers", name: "Developers", description: "Engineers deploying protocol-level code." },
+    { id: "investors", name: "Investors", description: "Venture funds, angel syndicates, and capital allocators." },
+    { id: "policymakers", name: "Policy Makers", description: "Regulators and legal advisors guiding compliance." },
+    { id: "enterprises", name: "Enterprises", description: "Fortune 500 corporations adopting Web3 stacks." },
+    { id: "academia", name: "Academia and Institutions", description: "Research labs and university blockchain societies." },
+    { id: "incubators", name: "Incubators and Accelerators", description: "Growth hubs scaling Web3 talent." }
   ],
 
   // Real "why us" stats from design.md (Animated proof)
@@ -530,6 +518,61 @@ const WEB3_CARNIVAL_DATA = {
       tier: "Community & Media",
       partners: ["CoinDesk", "CoinTelegraph", "BeInCrypto", "Blockworks", "Bankless", "Decrypt"]
     }
+  ],
+
+  // Partner category metadata (Sponsors & Partners page, §7 Sponsors) — the
+  // 5 real tiers the live site groups partners into. Real names for
+  // Sponsors / Crypto Payment / Media are read from partnerTiers above via
+  // tierIndex, so there is exactly one source of truth for those names — no
+  // list is duplicated or retyped here. Ticketing and Community have no
+  // confirmed named partner anywhere in the supplied foundation, so they
+  // carry placeholderCount instead of a tierIndex and render as clearly
+  // labeled placeholder slots rather than invented company names.
+  partnerCategories: [
+    { id: "sponsors", label: "Sponsors", icon: "\uD83D\uDEE1\uFE0F", tierIndex: 0, tierLabel: "Strategic Sponsor", description: "Blockchain foundations and protocol teams backing the flagship stages and tracks." },
+    { id: "crypto-payment", label: "Crypto Payment Partner", icon: "\uD83D\uDCB3", tierIndex: 1, tierLabel: "Crypto Payment Partner", description: "On-ramp, off-ramp, and compliance infrastructure behind ticketing and on-site payments." },
+    { id: "ticketing", label: "Ticketing", icon: "\uD83C\uDF9F\uFE0F", tierIndex: null, placeholderCount: 2, tierLabel: "Ticketing Partner", description: "The platform layer handling registration, check-in, and pass distribution." },
+    { id: "community", label: "Community", icon: "\uD83C\uDF10", tierIndex: null, placeholderCount: 3, tierLabel: "Community Partner", description: "Local chapters, developer guilds, and DAOs mobilizing their members to attend." },
+    { id: "media", label: "Media", icon: "\uD83D\uDCF0", tierIndex: 2, tierLabel: "Media Partner", description: "Global crypto and business press bringing the carnival to their audiences." }
+  ],
+
+  // Selected partner spotlights (Sponsors & Partners page §4) — one real,
+  // already-listed name per represented tier, described only in general,
+  // publicly-known terms about what that kind of organization does. No
+  // specific event-history claim (dates, quotes, deal terms) is invented
+  // beyond what this foundation confirms.
+  partnerSpotlights: [
+    {
+      partner: "Ethereum Foundation",
+      categoryId: "sponsors",
+      tierLabel: "Strategic Sponsor",
+      focus: "Blockchain & its Infrastructure",
+      blurb: "The nonprofit steward of the Ethereum protocol anchors the Sponsors tier \u2014 the kind of foundation-level credibility that tells builders and enterprises the ecosystem's core infrastructure is represented on the carnival floor."
+    },
+    {
+      partner: "Transak",
+      categoryId: "crypto-payment",
+      tierLabel: "Crypto Payment Partner",
+      focus: "CeFi DeFi & Staking",
+      blurb: "A fiat-to-crypto on/off-ramp used across consumer wallets and exchanges, Transak represents the payment-rail layer that lets attendees move between traditional and on-chain value without friction."
+    },
+    {
+      partner: "CoinDesk",
+      categoryId: "media",
+      tierLabel: "Media Partner",
+      focus: "Global press coverage",
+      blurb: "One of the longest-running dedicated crypto news outlets, CoinDesk's presence in the Media tier is what carries the lineup, announcements, and on-the-ground coverage to a global crypto-native audience."
+    }
+  ],
+
+  // Partnership value proposition (Sponsors & Partners page §5) — framed
+  // around the real reach numbers already defined in `stats` above, not
+  // invented metrics.
+  partnerValueProps: [
+    { icon: "\uD83C\uDF0D", title: "Global, hybrid reach", desc: "In-person and virtual stages put a brand in front of 5,000+ attendees across every time zone, not just the room." },
+    { icon: "\uD83E\uDDD1\u200D\uD83D\uDCBB", title: "The builders, not just the buzz", desc: "1,000+ Web3 developers and 1,500+ potential startups make up the floor \u2014 an audience that ships, not just watches." },
+    { icon: "\uD83D\uDCBC", title: "Capital in the room", desc: "250+ investors and accelerators attend specifically to source deal flow, giving sponsors direct access to allocators." },
+    { icon: "\uD83D\uDCE3", title: "Amplification built in", desc: "500+ KOLs and the Media tier's outlets extend a partner's visibility well past the three event days." }
   ]
 };
 
