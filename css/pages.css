@@ -265,3 +265,294 @@
   color: var(--text-primary);
   border-color: var(--accent-indigo);
 }
+
+/* ==========================================================================
+   5. Homepage — Phase 1 Sections
+   ========================================================================== */
+
+/* --- Scroll reveal (section-entry fades, ~250ms, no bounce) --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 320ms cubic-bezier(0.16, 1, 0.3, 1), transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero subtle reveal on load (no scroll trigger needed, above the fold) */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-content > * {
+    animation: hero-fade-up 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .hero-content > *:nth-child(1) { animation-delay: 0ms; }
+  .hero-content > *:nth-child(2) { animation-delay: 60ms; }
+  .hero-content > *:nth-child(3) { animation-delay: 120ms; }
+  .hero-content > *:nth-child(4) { animation-delay: 180ms; }
+  .hero-content > *:nth-child(5) { animation-delay: 240ms; }
+}
+
+@keyframes hero-fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Shared "section header with a trailing link" row used by preview sections */
+.preview-header-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.preview-header-link {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--accent-cyan);
+  white-space: nowrap;
+  padding-bottom: var(--space-1);
+}
+
+/* --- Personalized Entry Strip ("What brings you to Web3 Carnival?") --- */
+.persona-section {
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: var(--space-8) 0;
+}
+
+.persona-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.persona-question {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}
+
+.persona-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.persona-btn {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-medium);
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius-full);
+  background: var(--bg-raised);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.persona-btn:hover {
+  border-color: var(--border-medium);
+  color: var(--text-primary);
+}
+
+.persona-btn.selected {
+  color: #FFFFFF;
+  border-color: transparent;
+  background: var(--gradient-signature);
+  box-shadow: var(--shadow-glow);
+}
+
+.persona-recommend {
+  display: none;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  background: var(--gradient-signature-subtle);
+  border: 1px solid var(--border-highlight);
+  border-radius: var(--radius-md);
+}
+
+.persona-recommend.show {
+  display: flex;
+}
+
+.persona-recommend-text {
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  flex: 1 1 260px;
+}
+
+/* --- Upcoming Event Snapshot --- */
+.event-snapshot-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  align-items: stretch;
+}
+
+.event-snapshot-info h2 {
+  margin-bottom: var(--space-3);
+}
+
+.event-snapshot-info p {
+  margin-bottom: var(--space-5);
+}
+
+.event-snapshot-facts {
+  background: linear-gradient(var(--bg-surface), var(--bg-surface)) padding-box,
+              var(--gradient-card-border) border-box;
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.event-fact-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.event-fact-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.event-fact-icon {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  background: rgba(91, 95, 239, 0.15);
+  color: var(--accent-cyan);
+  display: grid;
+  place-items: center;
+  font-size: 1.05rem;
+}
+
+.event-fact-label {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.event-fact-value {
+  font-size: var(--text-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}
+
+/* --- Countdown Section --- */
+.countdown-section {
+  background: var(--gradient-signature-subtle);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  text-align: center;
+}
+
+.countdown-section .countdown-box {
+  justify-content: center;
+  margin: var(--space-6) auto 0;
+}
+
+/* --- Featured Past Events --- */
+.past-events-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+.past-event-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform var(--transition-base), border-color var(--transition-base);
+}
+
+.past-event-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-medium);
+}
+
+.past-event-banner {
+  aspect-ratio: 16 / 9;
+  background: var(--gradient-hero-glow), var(--bg-raised);
+  display: grid;
+  place-items: center;
+  font-size: 2.25rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.past-event-body {
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.past-event-edition {
+  font-family: var(--font-display);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}
+
+.past-event-meta {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+/* --- Final CTA --- */
+.final-cta-section {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.16) 0%, rgba(91, 95, 239, 0.14) 45%, rgba(34, 211, 238, 0.1) 100%);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.final-cta-inner {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.final-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+/* --- Track cards as full-card links (whole card is clickable, §5) --- */
+a.card-track {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+}
+
+a.card-track:hover {
+  color: inherit;
+}
+
+.card-track-cta {
+  font-family: var(--font-display);
+  font-weight: var(--fw-semibold);
+  color: var(--accent-cyan);
+}

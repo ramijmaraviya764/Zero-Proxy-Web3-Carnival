@@ -24,8 +24,12 @@
 
     if (!daysEl || !hoursEl || !minsEl || !secsEl) return;
 
-    // Target: November 14, 2026 09:00:00 UTC
-    const targetDate = new Date('2026-11-14T09:00:00Z').getTime();
+    // Target date lives in js/data.js (WEB3_CARNIVAL_DATA.eventDetails.countdownTarget)
+    // so it is never hardcoded into page markup or logic.
+    const targetIso = (typeof WEB3_CARNIVAL_DATA !== 'undefined' && WEB3_CARNIVAL_DATA.eventDetails)
+      ? WEB3_CARNIVAL_DATA.eventDetails.countdownTarget
+      : '2026-11-14T09:00:00Z';
+    const targetDate = new Date(targetIso).getTime();
 
     function update() {
       const now = new Date().getTime();
@@ -109,6 +113,91 @@
   }
 
   /**
+   * Section-entry scroll reveals via IntersectionObserver.
+   * Respects prefers-reduced-motion by showing the static end-state directly.
+   */
+  function initScrollReveal() {
+    const revealEls = document.querySelectorAll('.reveal');
+    if (!revealEls.length) return;
+
+    if (isReducedMotion() || !('IntersectionObserver' in window)) {
+      revealEls.forEach(el => el.classList.add('is-visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    revealEls.forEach(el => observer.observe(el));
+  }
+
+  /**
+   * Homepage Personalized Entry strip ("What brings you to Web3 Carnival?")
+   * Lightweight, skippable personalization — never blocks the rest of the page.
+   * Selection is stored in localStorage and drives a recommended next-step CTA.
+   */
+  function initPersonaStrip() {
+    const wrap = document.querySelector('[data-persona-strip]');
+    if (!wrap) return;
+
+    const STORAGE_KEY = 'w3c_persona_choice';
+    const buttons = wrap.querySelectorAll('.persona-btn');
+    const recommendPanel = wrap.querySelector('[data-persona-recommend]');
+    const recommendText = wrap.querySelector('[data-persona-recommend-text]');
+    const recommendCta = wrap.querySelector('[data-persona-recommend-cta]');
+
+    const personas = (typeof WEB3_CARNIVAL_DATA !== 'undefined' && WEB3_CARNIVAL_DATA.personas)
+      ? WEB3_CARNIVAL_DATA.personas
+      : [];
+
+    function applySelection(id, persist) {
+      const persona = personas.find(p => p.id === id);
+      if (!persona) return;
+
+      buttons.forEach(btn => {
+        const isMatch = btn.getAttribute('data-persona-id') === id;
+        btn.classList.toggle('selected', isMatch);
+        btn.setAttribute('aria-pressed', isMatch ? 'true' : 'false');
+      });
+
+      if (recommendText) recommendText.textContent = persona.recommend;
+      if (recommendCta) {
+        recommendCta.textContent = persona.ctaLabel;
+        recommendCta.setAttribute('href', persona.ctaHref);
+      }
+      if (recommendPanel) recommendPanel.classList.add('show');
+
+      if (persist) {
+        try {
+          localStorage.setItem(STORAGE_KEY, id);
+        } catch (e) {
+          // localStorage disabled / restricted — selection just won't persist
+        }
+      }
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        applySelection(btn.getAttribute('data-persona-id'), true);
+      });
+    });
+
+    // Restore prior selection on load, if any
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) applySelection(stored, false);
+    } catch (e) {
+      // ignore
+    }
+  }
+
+  /**
    * Interactive Filter Buttons (Reusable UI Component Handler)
    */
   function initFilterBars() {
@@ -138,6 +227,8 @@
     initCountdownTimer();
     initStatCounters();
     initFilterBars();
+    initScrollReveal();
+    initPersonaStrip();
 
     // Log Designathon System Verification
     console.info(

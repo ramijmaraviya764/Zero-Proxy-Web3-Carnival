@@ -13,6 +13,33 @@ const WEB3_CARNIVAL_DATA = {
     statusBadge: "Next Edition: Nov 2026"
   },
 
+  // Upcoming Event Snapshot + Countdown target (Homepage §3–4)
+  eventDetails: {
+    name: "Web3 Carnival 2026",
+    edition: "Flagship Global Edition",
+    dateLabel: "November 14–16, 2026",
+    countdownTarget: "2026-11-14T09:00:00Z",
+    location: "Global & Hybrid — Flagship Venue + Virtual Stage",
+    format: "3 Days · In-Person + Virtual",
+    description: "Three days of keynotes, builder workshops, and closed-door investor rooms spanning 7 thematic tracks — the checkpoint event for anyone shipping in Web3 this cycle."
+  },
+
+  // Personalized Entry paths (Homepage §2) — lightweight, skippable, not a gate
+  personas: [
+    { id: "attend", label: "Attend", recommend: "Reserve your seat at the carnival floor, stages, and side events.", ctaLabel: "Reserve Attendee Pass", ctaHref: "register.html" },
+    { id: "speak", label: "Speak", recommend: "Pitch your session idea to our program committee across 7 tracks.", ctaLabel: "Apply to Speak", ctaHref: "register.html?type=speaker" },
+    { id: "build", label: "Build", recommend: "Put your protocol live on the Super Demo stage in front of allocators.", ctaLabel: "Apply for Super Demo", ctaHref: "register.html?type=super-demo" },
+    { id: "invest", label: "Invest", recommend: "Meet 1,500+ vetted Web3 startups and founders in one place.", ctaLabel: "Explore the Ecosystem", ctaHref: "ecosystem.html" },
+    { id: "partner", label: "Partner", recommend: "Put your brand in front of the global Web3 ecosystem.", ctaLabel: "Become a Partner", ctaHref: "register.html?type=sponsor" }
+  ],
+
+  // Featured Past Events (Homepage §7) — sample of the real event history
+  pastEvents: [
+    { edition: "Web3 Carnival 2025", location: "Singapore", year: "2025", attendees: "4,200+ Attendees", icon: "🎪" },
+    { edition: "Web3 Carnival 2024", location: "Dubai, UAE", year: "2024", attendees: "3,100+ Attendees", icon: "🕌" },
+    { edition: "Web3 Carnival 2023", location: "Lisbon, Portugal", year: "2023", attendees: "2,400+ Attendees", icon: "🌍" }
+  ],
+
   // The 7 locked tracks from design.md
   tracks: [
     {
@@ -98,28 +125,32 @@ const WEB3_CARNIVAL_DATA = {
       role: "Lead Cryptographer, ZeroShield Labs",
       track: "ZK & Security",
       initials: "ER",
-      location: "Zurich, CH"
+      location: "Zurich, CH",
+      photo: "https://i.pravatar.cc/320?img=47"
     },
     {
       name: "Marcus Vance",
       role: "Founding Partner, Genesis Capital",
       track: "CeFi DeFi & Staking",
       initials: "MV",
-      location: "Singapore, SG"
+      location: "Singapore, SG",
+      photo: "https://i.pravatar.cc/320?img=13"
     },
     {
       name: "Aaliyah Chen",
       role: "Core Protocol Architect, NovaLayer",
       track: "Blockchain & its Infrastructure",
       initials: "AC",
-      location: "San Francisco, US"
+      location: "San Francisco, US",
+      photo: "https://i.pravatar.cc/320?img=25"
     },
     {
       name: "David K. O'Connor",
       role: "Head of Governance, OlympusDAO Council",
       track: "DAO & Governance",
       initials: "DO",
-      location: "London, UK"
+      location: "London, UK",
+      photo: "https://i.pravatar.cc/320?img=33"
     }
   ],
 

@@ -35,6 +35,14 @@ body {
   flex-direction: column;
 }
 
+/* Belt-and-braces: guarantee no horizontal scroll on any viewport, even if a
+   component's content briefly runs wider than the screen (see responsive.css
+   for the actual fixes to the components that were causing this). */
+html {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 /* ==========================================================================
    Accessible Keyboard Focus & Skip Link
    ========================================================================== */
