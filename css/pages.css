@@ -1376,3 +1376,450 @@ a.card-track:hover {
   .card-speaker { transition: none; }
   .card-speaker-img { transition: none; }
 }
+
+/* ==========================================================================
+   Phase 5 — Past Events (Archive)
+   Intro meta row, visual timeline, filterable edition cards, selected-edition
+   highlight panel, archive statistics + attendance comparison, photography
+   placeholder gallery, and the speaker/partner archive note.
+   Mobile-first: single column / stacked timeline first, widened via the
+   min-width blocks further down.
+   ========================================================================== */
+
+/* --- 1. Intro meta row --- */
+.editions-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-6);
+  margin-top: var(--space-5);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.editions-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.editions-meta-value {
+  font-family: var(--font-display);
+  font-weight: var(--fw-semibold);
+  font-size: var(--text-lg);
+  color: var(--text-primary);
+}
+
+.editions-meta-label {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+/* --- 2. Visual timeline --- */
+.editions-timeline {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-8);
+  padding: var(--space-2) var(--space-1) var(--space-4);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+}
+
+.editions-timeline-node {
+  appearance: none;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  width: 168px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-3) 0;
+  border: 0;
+  border-top: 3px solid var(--border-medium);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--transition-base), opacity var(--transition-base);
+}
+
+.editions-timeline-node-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-top: -10px;
+  background: var(--bg-raised);
+  border: 3px solid var(--border-medium);
+  transition: background var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.editions-timeline-node-year {
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  font-size: var(--text-xl);
+}
+
+.editions-timeline-node-label {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  line-height: var(--lh-meta);
+}
+
+.editions-timeline-node:hover {
+  border-top-color: var(--accent-cyan);
+}
+
+.editions-timeline-node.is-selected {
+  border-top-color: var(--accent-cyan);
+}
+
+.editions-timeline-node.is-selected .editions-timeline-node-dot {
+  background: var(--accent-cyan);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.18);
+}
+
+.editions-timeline-node.is-dimmed {
+  opacity: 0.4;
+}
+
+.editions-timeline-node.is-upcoming {
+  border-top-color: transparent;
+  border-image: var(--gradient-signature) 1;
+}
+
+.editions-timeline-node.is-upcoming .editions-timeline-node-dot {
+  background: var(--gradient-signature);
+  border-color: transparent;
+}
+
+.editions-timeline-node.is-upcoming .editions-timeline-node-label {
+  color: var(--accent-cyan);
+}
+
+/* --- 3. Filter row + edition cards --- */
+.editions-filter-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.editions-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+.edition-card {
+  appearance: none;
+  width: 100%;
+  text-align: left;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--bg-surface);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.edition-card:hover,
+.edition-card:focus-visible {
+  transform: translateY(-4px);
+  border-color: var(--border-medium);
+}
+
+.edition-card.is-selected {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 0 2px var(--accent-cyan), var(--shadow-glow);
+}
+
+.edition-card-banner {
+  aspect-ratio: 16 / 9;
+  background: var(--gradient-hero-glow), var(--bg-raised);
+  display: grid;
+  place-items: center;
+  font-size: 2.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.edition-card-body {
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.edition-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.edition-card-name {
+  font-family: var(--font-display);
+  font-weight: var(--fw-semibold);
+  font-size: var(--text-xl);
+}
+
+.edition-card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+.edition-card-cta {
+  margin-top: auto;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-subtle);
+  color: var(--accent-cyan);
+  font-weight: var(--fw-semibold);
+  font-size: var(--text-xs);
+}
+
+/* --- 4. Selected edition highlight --- */
+.edition-detail-shell {
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--bg-raised);
+  overflow: hidden;
+}
+
+.edition-detail-visual {
+  position: relative;
+  min-height: 220px;
+  background: var(--gradient-hero-glow), var(--bg-surface);
+  display: grid;
+  place-items: center;
+  font-size: 4rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.edition-detail-visual-tag {
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+}
+
+.edition-detail-copy {
+  padding: var(--space-7);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.edition-detail-copy h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.65rem, 4vw, 2.25rem);
+  line-height: var(--lh-heading);
+}
+
+.edition-detail-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.edition-detail-summary {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: var(--lh-body);
+  max-width: 60ch;
+}
+
+.edition-detail-stat {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.edition-detail-stat strong {
+  font-family: var(--font-display);
+  font-size: var(--text-stat);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.02em;
+}
+
+.edition-detail-stat span {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+/* --- 5. Statistics + attendance comparison --- */
+.edition-compare {
+  margin-top: var(--space-8);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--bg-surface);
+  padding: var(--space-6);
+}
+
+.edition-compare-title {
+  margin: 0 0 var(--space-5);
+  font-family: var(--font-display);
+  font-weight: var(--fw-semibold);
+}
+
+.edition-compare-row {
+  display: grid;
+  grid-template-columns: 96px 1fr 96px;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.edition-compare-row:last-child {
+  margin-bottom: 0;
+}
+
+.edition-compare-label {
+  font-family: var(--font-display);
+  font-weight: var(--fw-semibold);
+  font-size: var(--text-sm);
+}
+
+.edition-compare-track {
+  height: 10px;
+  border-radius: var(--radius-full);
+  background: var(--bg-raised);
+  overflow: hidden;
+}
+
+.edition-compare-fill {
+  height: 100%;
+  width: 0;
+  border-radius: var(--radius-full);
+  background: var(--gradient-signature);
+  transition: width 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.edition-compare-value {
+  text-align: right;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- 6. Photography / highlights gallery --- */
+.archive-gallery-header {
+  margin-bottom: var(--space-2);
+}
+
+.archive-gallery-note {
+  margin: 0 0 var(--space-6);
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  max-width: 62ch;
+}
+
+.archive-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+.archive-gallery-tile {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--border-medium);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: var(--text-secondary);
+}
+
+.archive-gallery-tile-icon {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 2.25rem;
+  opacity: 0.55;
+}
+
+.archive-gallery-badge {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  z-index: 1;
+}
+
+.archive-gallery-tile figcaption {
+  position: relative;
+  z-index: 1;
+  padding: var(--space-2) var(--space-3);
+  background: linear-gradient(0deg, rgba(5, 6, 11, 0.75), transparent);
+  font-size: var(--text-xs);
+  line-height: var(--lh-meta);
+}
+
+/* --- 7. Speaker / partner archive panel --- */
+.archive-roster-panel {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-5);
+  border: 1px dashed var(--border-medium);
+  border-radius: var(--radius-lg);
+  padding: var(--space-7);
+  background: var(--bg-surface);
+}
+
+.archive-roster-note {
+  margin: 0 0 var(--space-4);
+  color: var(--text-secondary);
+  line-height: var(--lh-body);
+  max-width: 68ch;
+}
+
+.archive-roster-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.archive-roster-actions {
+  justify-content: flex-start;
+}
+
+/* --- Responsive --- */
+@media (min-width: 480px) {
+  .archive-gallery { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 640px) {
+  .editions-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 768px) {
+  .edition-detail-shell { grid-template-columns: 0.9fr 1.1fr; }
+  .edition-detail-visual { min-height: 100%; border-bottom: 0; border-right: 1px solid var(--border-subtle); }
+  .edition-compare-row { grid-template-columns: 120px 1fr 110px; }
+  .archive-roster-panel { align-items: center; }
+}
+
+@media (min-width: 1024px) {
+  .editions-grid { grid-template-columns: repeat(3, 1fr); }
+  .archive-gallery { grid-template-columns: repeat(4, 1fr); }
+  .editions-filter-row { flex-direction: row; align-items: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .edition-card, .editions-timeline-node, .edition-compare-fill { transition: none; }
+}

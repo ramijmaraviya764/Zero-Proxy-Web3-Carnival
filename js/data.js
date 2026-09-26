@@ -33,11 +33,48 @@ const WEB3_CARNIVAL_DATA = {
     { id: "partner", label: "Partner", recommend: "Put your brand in front of the global Web3 ecosystem.", ctaLabel: "Become a Partner", ctaHref: "register.html?type=sponsor" }
   ],
 
-  // Featured Past Events (Homepage §7) — sample of the real event history
+  // Past Events / Archive (Homepage §7 preview + full Past Events page §5).
+  // These 3 editions are the real, documented event history available to this
+  // build. Fields beyond edition/location/year/attendees/icon (id, country,
+  // attendeesValue, summary) are additive and used only by the Past Events
+  // page's timeline, stats, and detail panel — nothing here is invented
+  // beyond what the brand foundation already states; summaries only restate
+  // location + attendance, never invented specifics (session counts, named
+  // speakers, exact formats) that aren't part of the supplied content.
   pastEvents: [
-    { edition: "Web3 Carnival 2025", location: "Singapore", year: "2025", attendees: "4,200+ Attendees", icon: "🎪" },
-    { edition: "Web3 Carnival 2024", location: "Dubai, UAE", year: "2024", attendees: "3,100+ Attendees", icon: "🕌" },
-    { edition: "Web3 Carnival 2023", location: "Lisbon, Portugal", year: "2023", attendees: "2,400+ Attendees", icon: "🌍" }
+    {
+      id: "2025-singapore",
+      edition: "Web3 Carnival 2025",
+      location: "Singapore",
+      country: "Singapore",
+      year: "2025",
+      attendees: "4,200+ Attendees",
+      attendeesValue: 4200,
+      icon: "🎪",
+      summary: "The most recent documented edition, and the largest crowd on record — held in Singapore."
+    },
+    {
+      id: "2024-dubai",
+      edition: "Web3 Carnival 2024",
+      location: "Dubai, UAE",
+      country: "United Arab Emirates",
+      year: "2024",
+      attendees: "3,100+ Attendees",
+      attendeesValue: 3100,
+      icon: "🕌",
+      summary: "The second flagship edition in the archive, hosted in Dubai, UAE."
+    },
+    {
+      id: "2023-lisbon",
+      edition: "Web3 Carnival 2023",
+      location: "Lisbon, Portugal",
+      country: "Portugal",
+      year: "2023",
+      attendees: "2,400+ Attendees",
+      attendeesValue: 2400,
+      icon: "🌍",
+      summary: "The earliest edition currently on record — the starting point for the carnival's global footprint, hosted in Lisbon, Portugal."
+    }
   ],
 
   // The 7 locked tracks from design.md
