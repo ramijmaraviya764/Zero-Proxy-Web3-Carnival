@@ -198,6 +198,70 @@
   }
 
   /**
+   * Homepage preview strips — rendered from WEB3_CARNIVAL_DATA so this content
+   * has one source of truth (design.md §10) instead of being hand-duplicated
+   * in index.html.
+   */
+  function escapeHtml(value) {
+    const div = document.createElement('div');
+    div.textContent = value == null ? '' : String(value);
+    return div.innerHTML;
+  }
+
+  function initPastEventsPreview() {
+    const grid = document.querySelector('[data-past-events-preview]');
+    if (!grid) return;
+    const events = (typeof WEB3_CARNIVAL_DATA !== 'undefined' && Array.isArray(WEB3_CARNIVAL_DATA.pastEvents))
+      ? WEB3_CARNIVAL_DATA.pastEvents
+      : [];
+
+    grid.innerHTML = events.map(ev => `
+      <article class="past-event-card">
+        <div class="past-event-banner" aria-hidden="true">${escapeHtml(ev.icon)}</div>
+        <div class="past-event-body">
+          <span class="past-event-edition">${escapeHtml(ev.edition)}</span>
+          <span class="past-event-meta">${escapeHtml(ev.location)} · ${escapeHtml(ev.attendees)}</span>
+        </div>
+      </article>
+    `).join('');
+  }
+
+  function initSpeakersPreview() {
+    const grid = document.querySelector('[data-speakers-preview]');
+    if (!grid) return;
+    const speakers = (typeof WEB3_CARNIVAL_DATA !== 'undefined' && Array.isArray(WEB3_CARNIVAL_DATA.sampleSpeakers))
+      ? WEB3_CARNIVAL_DATA.sampleSpeakers
+      : [];
+
+    grid.innerHTML = speakers.map((speaker, index) => `
+      <article class="card-speaker">
+        <div class="card-speaker-media">
+          <img class="card-speaker-img" src="${escapeHtml(speaker.photo)}" alt="Portrait of ${escapeHtml(speaker.name)}" loading="lazy">
+        </div>
+        <div class="card-speaker-body">
+          <span class="pill ${index % 2 === 0 ? 'pill-cyan' : 'pill-accent'}" style="align-self: flex-start;">${escapeHtml(speaker.track)}</span>
+          <h3 class="card-speaker-name">${escapeHtml(speaker.name)}</h3>
+          <p class="card-speaker-role">${escapeHtml(speaker.role)}</p>
+          <span class="card-speaker-location">📍 ${escapeHtml(speaker.location)}</span>
+        </div>
+      </article>
+    `).join('');
+  }
+
+  function initPartnersPreview() {
+    const grid = document.querySelector('[data-partners-preview]');
+    if (!grid) return;
+    const tiers = (typeof WEB3_CARNIVAL_DATA !== 'undefined' && Array.isArray(WEB3_CARNIVAL_DATA.partnerTiers))
+      ? WEB3_CARNIVAL_DATA.partnerTiers
+      : [];
+    // Homepage preview surfaces the top (Strategic Sponsors) tier only;
+    // the full tiered breakdown lives on partners.html.
+    const featured = tiers.length ? tiers[0].partners : [];
+
+    grid.innerHTML = featured.map(name => `<div class="partner-tile">${escapeHtml(name)}</div>`).join('');
+  }
+
+  /**
    * Interactive Filter Buttons (Reusable UI Component Handler)
    */
   function initFilterBars() {
@@ -229,6 +293,9 @@
     initFilterBars();
     initScrollReveal();
     initPersonaStrip();
+    initPastEventsPreview();
+    initSpeakersPreview();
+    initPartnersPreview();
 
     // Log Designathon System Verification
     console.info(
