@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web3 Carnival — World's Premier Web3 & Blockchain Event</title>
+  <meta name="description" content="Web3 Carnival is the world's premier gathering bridging decentralized technologies, builders, institutional leaders, and innovators worldwide.">
+  <meta name="theme-color" content="#05060B">
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Design System CSS in Order -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Accessible Skip-to-content Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header rendered by navigation.js (single source of truth — see design.md §10) -->
+  <header id="site-header" class="site-header"></header>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    
+    <!-- Hero Section -->
+    <section class="hero-section" aria-labelledby="hero-title">
+      <div class="hero-glow-orb" aria-hidden="true"></div>
+      <div class="container hero-content">
+        <div class="hero-badge-wrap">
+          <span class="pill pill-status-live">Next Edition: Nov 14-16, 2026</span>
+          <span class="pill pill-cyan">GDG KalaKriti · FinTech Track</span>
+        </div>
+
+        <h1 id="hero-title" class="hero-title">
+          World's Premier <span class="text-gradient">Web3 &amp; Blockchain</span> Event.
+        </h1>
+
+        <p class="hero-desc lead">
+          Bridging the brightest decentralized minds, high-throughput protocol builders, venture allocators, and visionary enterprises across 7 dedicated thematic tracks.
+        </p>
+
+        <div class="hero-actions">
+          <a href="register.html" class="btn btn-primary btn-lg">Register</a>
+          <a href="event.html" class="btn btn-secondary btn-lg">Explore Event</a>
+        </div>
+
+        <div class="pill pill-accent" style="padding: var(--space-4); border-radius: var(--radius-lg); font-size: var(--text-sm); margin-top: var(--space-2);">
+          <span>📍 Global Hybrid Edition · 7 Tracks · 5,000+ Expected Attendees</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Personalized Entry — lightweight, skippable strip (not a gate) -->
+    <section class="persona-section" aria-labelledby="persona-heading" data-persona-strip>
+      <div class="container persona-inner">
+        <h2 id="persona-heading" class="persona-question">What brings you to Web3 Carnival?</h2>
+
+        <div class="persona-options" role="group" aria-label="Select what brings you to Web3 Carnival">
+          <button type="button" class="persona-btn" data-persona-id="attend" aria-pressed="false">Attend</button>
+          <button type="button" class="persona-btn" data-persona-id="speak" aria-pressed="false">Speak</button>
+          <button type="button" class="persona-btn" data-persona-id="build" aria-pressed="false">Build</button>
+          <button type="button" class="persona-btn" data-persona-id="invest" aria-pressed="false">Invest</button>
+          <button type="button" class="persona-btn" data-persona-id="partner" aria-pressed="false">Partner</button>
+        </div>
+
+        <div class="persona-recommend" data-persona-recommend aria-live="polite">
+          <p class="persona-recommend-text" data-persona-recommend-text>Choose an option above for a tailored next step.</p>
+          <a href="register.html" class="btn btn-primary btn-sm" data-persona-recommend-cta>Register</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Upcoming Event Snapshot -->
+    <section class="section reveal" aria-labelledby="snapshot-heading">
+      <div class="container">
+        <div class="event-snapshot-grid">
+          <div class="event-snapshot-info">
+            <span class="section-eyebrow">Upcoming Edition</span>
+            <h2 id="snapshot-heading">Web3 Carnival 2026</h2>
+            <p class="lead">Three days of keynotes, builder workshops, and closed-door investor rooms spanning 7 thematic tracks — the checkpoint event for anyone shipping in Web3 this cycle.</p>
+            <a href="event.html" class="btn btn-secondary">View Full Event Details &rarr;</a>
+          </div>
+
+          <div class="event-snapshot-facts">
+            <div class="event-fact-row">
+              <div class="event-fact-icon" aria-hidden="true">📅</div>
+              <div>
+                <div class="event-fact-label">Dates</div>
+                <div class="event-fact-value">November 14–16, 2026</div>
+              </div>
+            </div>
+            <div class="event-fact-row">
+              <div class="event-fact-icon" aria-hidden="true">📍</div>
+              <div>
+                <div class="event-fact-label">Location</div>
+                <div class="event-fact-value">Global &amp; Hybrid — Flagship Venue + Virtual Stage</div>
+              </div>
+            </div>
+            <div class="event-fact-row">
+              <div class="event-fact-icon" aria-hidden="true">🎟️</div>
+              <div>
+                <div class="event-fact-label">Format</div>
+                <div class="event-fact-value">3 Days · In-Person + Virtual · 7 Tracks</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Countdown -->
+    <section class="section countdown-section reveal" aria-labelledby="countdown-heading">
+      <div class="container">
+        <span class="section-eyebrow">Return Hook</span>
+        <h2 id="countdown-heading" class="section-title">The Carnival Begins In</h2>
+        <p class="section-desc" style="margin: 0 auto;">Mark the dates — the countdown resets to the next flagship edition.</p>
+
+        <div class="countdown-box" aria-label="Countdown to Web3 Carnival 2026">
+          <div class="countdown-unit">
+            <span id="count-days" class="countdown-num">48</span>
+            <span class="countdown-label">Days</span>
+          </div>
+          <span class="countdown-sep" aria-hidden="true">:</span>
+          <div class="countdown-unit">
+            <span id="count-hours" class="countdown-num">14</span>
+            <span class="countdown-label">Hours</span>
+          </div>
+          <span class="countdown-sep" aria-hidden="true">:</span>
+          <div class="countdown-unit">
+            <span id="count-mins" class="countdown-num">32</span>
+            <span class="countdown-label">Mins</span>
+          </div>
+          <span class="countdown-sep" aria-hidden="true">:</span>
+          <div class="countdown-unit">
+            <span id="count-secs" class="countdown-num">10</span>
+            <span class="countdown-label">Secs</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 Tracks Highlight Section -->
+    <section class="section reveal" style="background: var(--bg-surface-alpha);" aria-labelledby="tracks-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Curated Taxonomy</span>
+          <h2 id="tracks-heading" class="section-title">The 7 Thematic Tracks</h2>
+          <p class="section-desc">Anchoring every keynote, breakout workshop, and startup pitch across the carnival.</p>
+        </div>
+
+        <div class="tracks-grid">
+          <a href="tracks.html#infra" class="card-track">
+            <div class="card-track-header">
+              <div class="card-track-icon" aria-hidden="true">⛓️</div>
+              <span class="card-track-number">TRACK 01</span>
+            </div>
+            <h3 class="card-track-title">Blockchain &amp; its Infrastructure</h3>
+            <p class="card-track-desc">L1/L2 scalability, cross-chain interoperability, consensus mechanics, and decentralized compute pipelines.</p>
+            <div class="card-track-footer">
+              <span class="pill pill-accent">Core Protocol</span>
+              <span class="card-track-cta">View Track &rarr;</span>
+            </div>
+          </a>
+
+          <a href="tracks.html#dao" class="card-track">
+            <div class="card-track-header">
+              <div class="card-track-icon" aria-hidden="true">🏛️</div>
+              <span class="card-track-number">TRACK 02</span>
+            </div>
+            <h3 class="card-track-title">DAO &amp; Governance</h3>
+            <p class="card-track-desc">Decentralized decision frameworks, treasury orchestration, tokenomics architecture, and on-chain voting.</p>
+            <div class="card-track-footer">
+              <span class="pill pill-accent">Governance</span>
+              <span class="card-track-cta">View Track &rarr;</span>
+            </div>
+          </a>
+
+          <a href="tracks.html#metaverse" class="card-track">
+            <div class="card-track-header">
+              <div class="card-track-icon" aria-hidden="true">🎮</div>
+              <span class="card-track-number">TRACK 03</span>
+            </div>
+            <h3 class="card-track-title">Metaverse &amp; GameFi</h3>
+            <p class="card-track-desc">Virtual economies, sovereign digital identity, immersive environments, and next-generation play-and-own games.</p>
+            <div class="card-track-footer">
+              <span class="pill pill-accent">Virtual Worlds</span>
+              <span class="card-track-cta">View Track &rarr;</span>
+            </div>
+          </a>
+
+          <a href="tracks.html#zk" class="card-track">
+            <div class="card-track-header">
+              <div class="card-track-icon" aria-hidden="true">🛡️</div>
+              <span class="card-track-number">TRACK 04</span>
+            </div>
+            <h3 class="card-track-title">ZK &amp; Security</h3>
+            <p class="card-track-desc">Zero-knowledge cryptography, verifiable computation, smart contract formal verification, and audits.</p>
+            <div class="card-track-footer">
+              <span class="pill pill-accent">Cryptography</span>
+              <span class="card-track-cta">View Track &rarr;</span>
+            </div>
+          </a>
+
+          <a href="tracks.html#defi" class="card-track">
+            <div class="card-track-header">
+              <div class="card-track-icon" aria-hidden="true">📈</div>
+              <span class="card-track-number">TRACK 05</span>
+            </div>
+            <h3 class="card-track-title">CeFi DeFi &amp; Staking</h3>
+            <p class="card-track-desc">Institutional liquidity, automated market primitives, sovereign yield protocols, and staking systems.</p>
+            <div class="card-track-footer">
+              <span class="pill pill-accent">Finance</span>
+              <span class="card-track-cta">View Track &rarr;</span>
+            </div>
+          </a>
+
+          <a href="tracks.html#enterprise" class="card-track">
+            <div class="card-track-header">
+              <div class="card-track-icon" aria-hidden="true">🏢</div>
+              <span class="card-track-number">TRACK 06</span>
+            </div>
+            <h3 class="card-track-title">Enterprise Blockchain</h3>
+            <p class="card-track-desc">Supply chain traceability, enterprise consortiums, compliance automation, and real-world asset tokenization.</p>
+            <div class="card-track-footer">
+              <span class="pill pill-accent">Enterprise</span>
+              <span class="card-track-cta">View Track &rarr;</span>
+            </div>
+          </a>
+
+          <a href="tracks.html#nft" class="card-track">
+            <div class="card-track-header">
+              <div class="card-track-icon" aria-hidden="true">💎</div>
+              <span class="card-track-number">TRACK 07</span>
+            </div>
+            <h3 class="card-track-title">NFT &amp; Utilities</h3>
+            <p class="card-track-desc">Next-gen utility tokens, intellectual property rights, dynamic media metadata, and phygital experiences.</p>
+            <div class="card-track-footer">
+              <span class="pill pill-accent">Digital Assets</span>
+              <span class="card-track-cta">View Track &rarr;</span>
+            </div>
+          </a>
+        </div>
+
+        <div style="text-align: center; margin-top: var(--space-8);">
+          <a href="tracks.html" class="btn btn-secondary btn-lg">Explore All 7 Tracks &amp; Sessions</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Real Stats / Animated Proof Section -->
+    <section class="section reveal" aria-labelledby="stats-heading">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-eyebrow">Real Impact</span>
+          <h2 id="stats-heading" class="section-title">The Web3 Carnival Footprint</h2>
+          <p class="section-desc">Authentic data from our global editions bringing together the worldwide decentralized ecosystem.</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-block">
+            <span class="stat-numeral" data-counter-target="5000" data-counter-suffix="+">5,000+</span>
+            <span class="stat-label">Attendees</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-numeral" data-counter-target="250" data-counter-suffix="+">250+</span>
+            <span class="stat-label">Investors &amp; Accelerators</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-numeral" data-counter-target="1000" data-counter-suffix="+">1,000+</span>
+            <span class="stat-label">Web3 Developers</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-numeral" data-counter-target="500" data-counter-suffix="+">500+</span>
+            <span class="stat-label">KOLs</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-numeral" data-counter-target="750" data-counter-suffix="+">750+</span>
+            <span class="stat-label">Partners</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-numeral" data-counter-target="1500" data-counter-suffix="+">1,500+</span>
+            <span class="stat-label">Potential Web3 Startups</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Past Events -->
+    <section class="section reveal" style="background: var(--bg-surface-alpha);" aria-labelledby="past-events-heading">
+      <div class="container">
+        <div class="section-header preview-header-row">
+          <div>
+            <span class="section-eyebrow">Trust &amp; Track Record</span>
+            <h2 id="past-events-heading" class="section-title">Featured Past Events</h2>
+            <p class="section-desc">A look back at the editions that built the Web3 Carnival ecosystem.</p>
+          </div>
+          <a href="past-events.html" class="preview-header-link">View All Past Editions &rarr;</a>
+        </div>
+
+        <div class="past-events-grid">
+          <article class="past-event-card">
+            <div class="past-event-banner" aria-hidden="true">🎪</div>
+            <div class="past-event-body">
+              <span class="past-event-edition">Web3 Carnival 2025</span>
+              <span class="past-event-meta">Singapore · 4,200+ Attendees</span>
+            </div>
+          </article>
+          <article class="past-event-card">
+            <div class="past-event-banner" aria-hidden="true">🕌</div>
+            <div class="past-event-body">
+              <span class="past-event-edition">Web3 Carnival 2024</span>
+              <span class="past-event-meta">Dubai, UAE · 3,100+ Attendees</span>
+            </div>
+          </article>
+          <article class="past-event-card">
+            <div class="past-event-banner" aria-hidden="true">🌍</div>
+            <div class="past-event-body">
+              <span class="past-event-edition">Web3 Carnival 2023</span>
+              <span class="past-event-meta">Lisbon, Portugal · 2,400+ Attendees</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Speaker Preview -->
+    <section class="section reveal" aria-labelledby="speakers-heading">
+      <div class="container">
+        <div class="section-header preview-header-row">
+          <div>
+            <span class="section-eyebrow">Curated Lineup</span>
+            <h2 id="speakers-heading" class="section-title">Speakers Taking the Stage</h2>
+            <p class="section-desc">A preview of the builders, allocators, and protocol leads confirmed so far.</p>
+          </div>
+          <a href="speakers.html" class="preview-header-link">View All Speakers &rarr;</a>
+        </div>
+
+        <div class="speakers-grid">
+          <article class="card-speaker">
+            <div class="card-speaker-media">
+              <img class="card-speaker-img" src="https://i.pravatar.cc/320?img=47" alt="Portrait of Dr. Elena Rostova">
+            </div>
+            <div class="card-speaker-body">
+              <span class="pill pill-cyan" style="align-self: flex-start;">ZK &amp; Security</span>
+              <h3 class="card-speaker-name">Dr. Elena Rostova</h3>
+              <p class="card-speaker-role">Lead Cryptographer, ZeroShield Labs</p>
+              <span class="card-speaker-location">📍 Zurich, CH</span>
+            </div>
+          </article>
+
+          <article class="card-speaker">
+            <div class="card-speaker-media">
+              <img class="card-speaker-img" src="https://i.pravatar.cc/320?img=13" alt="Portrait of Marcus Vance">
+            </div>
+            <div class="card-speaker-body">
+              <span class="pill pill-accent" style="align-self: flex-start;">CeFi DeFi &amp; Staking</span>
+              <h3 class="card-speaker-name">Marcus Vance</h3>
+              <p class="card-speaker-role">Founding Partner, Genesis Capital</p>
+              <span class="card-speaker-location">📍 Singapore, SG</span>
+            </div>
+          </article>
+
+          <article class="card-speaker">
+            <div class="card-speaker-media">
+              <img class="card-speaker-img" src="https://i.pravatar.cc/320?img=25" alt="Portrait of Aaliyah Chen">
+            </div>
+            <div class="card-speaker-body">
+              <span class="pill pill-cyan" style="align-self: flex-start;">Blockchain Infra</span>
+              <h3 class="card-speaker-name">Aaliyah Chen</h3>
+              <p class="card-speaker-role">Core Protocol Architect, NovaLayer</p>
+              <span class="card-speaker-location">📍 San Francisco, US</span>
+            </div>
+          </article>
+
+          <article class="card-speaker">
+            <div class="card-speaker-media">
+              <img class="card-speaker-img" src="https://i.pravatar.cc/320?img=33" alt="Portrait of David K. O'Connor">
+            </div>
+            <div class="card-speaker-body">
+              <span class="pill pill-accent" style="align-self: flex-start;">DAO &amp; Governance</span>
+              <h3 class="card-speaker-name">David K. O'Connor</h3>
+              <p class="card-speaker-role">Head of Governance, OlympusDAO Council</p>
+              <span class="card-speaker-location">📍 London, UK</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partners Preview -->
+    <section class="section reveal" style="background: var(--bg-surface-alpha);" aria-labelledby="partners-heading">
+      <div class="container">
+        <div class="section-header preview-header-row">
+          <div>
+            <span class="section-eyebrow">Backed By The Ecosystem</span>
+            <h2 id="partners-heading" class="section-title">Partners &amp; Sponsors</h2>
+            <p class="section-desc">750+ organizations backing the carnival across every tier.</p>
+          </div>
+          <a href="partners.html" class="preview-header-link">View All Partners &rarr;</a>
+        </div>
+
+        <div class="partner-grid">
+          <div class="partner-tile">Ethereum Foundation</div>
+          <div class="partner-tile">Polygon Labs</div>
+          <div class="partner-tile">Arbitrum</div>
+          <div class="partner-tile">Solana Ventures</div>
+          <div class="partner-tile">Chainlink</div>
+          <div class="partner-tile">Near Protocol</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="section final-cta-section reveal" aria-labelledby="final-cta-heading">
+      <div class="container final-cta-inner">
+        <span class="section-eyebrow">Your Move</span>
+        <h2 id="final-cta-heading" class="section-title" style="margin-bottom: 0;">Find your place in the Web3 ecosystem.</h2>
+        <p class="section-desc">Whichever seat fits you — attendee, speaker, builder, investor, or partner — the carnival has a path in.</p>
+        <div class="final-cta-actions">
+          <a href="register.html" class="btn btn-primary btn-lg">Register</a>
+          <a href="ecosystem.html" class="btn btn-secondary btn-lg">Explore the Ecosystem</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer rendered by navigation.js (single source of truth — see design.md §10) -->
+  <footer id="site-footer" class="site-footer"></footer>
+
+  <!-- Scripts in order -->
+  <script src="js/data.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

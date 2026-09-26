@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event &amp; Conference — Web3 Carnival</title>
+  <meta name="description" content="Agenda, timeline, venue info, and smart event discovery for Web3 Carnival 2026.">
+  <meta name="theme-color" content="#05060B">
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Design System CSS -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header rendered by navigation.js -->
+  <header id="site-header" class="site-header"></header>
+
+  <main id="main-content">
+
+    <!-- ==================================================================
+         1. PAGE INTRODUCTION
+         Event name, date, location, positioning, Register CTA
+         ================================================================== -->
+    <section class="page-header" aria-labelledby="page-title">
+      <div class="container page-header-content">
+        <nav class="page-breadcrumbs" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">Event</span>
+        </nav>
+
+        <h1 id="page-title" class="page-title">Web3 Carnival 2026</h1>
+        <p class="page-lead">Three days of keynotes, builder workshops, and closed-door investor rooms spanning 7 thematic tracks — the checkpoint event for anyone shipping in Web3 this cycle.</p>
+
+        <div class="hero-badge-wrap" style="margin: var(--space-5) 0;">
+          <span class="pill pill-status-live">📅 November 14–16, 2026</span>
+          <span class="pill pill-cyan">📍 Singapore · Hybrid + Virtual Stage</span>
+        </div>
+
+        <div class="hero-actions">
+          <a href="register.html" class="btn btn-primary btn-lg">Register for Event</a>
+          <a href="#discovery" class="btn btn-secondary btn-lg">Browse Sessions</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         2. EVENT OVERVIEW
+         ================================================================== -->
+    <section class="section reveal" aria-labelledby="overview-heading">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="overview-heading" class="section-title">Event Overview</h2>
+          <p class="overview-lead">Three days of keynotes, builder workshops, and closed-door investor rooms — in person in Singapore and streamed to a hybrid virtual stage, spanning 7 thematic tracks.</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-block">
+            <span class="stat-numeral" data-counter-target="3" data-counter-suffix="">00</span>
+            <span class="stat-label">Days</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-numeral" data-counter-target="7" data-counter-suffix="">00</span>
+            <span class="stat-label">Thematic Tracks</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-numeral" data-counter-target="14" data-counter-suffix="+">00</span>
+            <span class="stat-label">Sessions &amp; Workshops</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-numeral" data-counter-target="5000" data-counter-suffix="+">0000</span>
+            <span class="stat-label">Expected Attendees</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         3. EVENT EXPERIENCE TIMELINE
+         Discover → Explore → Connect → Build → Celebrate
+         ================================================================== -->
+    <section class="section reveal" style="background: var(--bg-surface-alpha);" aria-labelledby="timeline-heading">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="timeline-heading" class="section-title">The Carnival Experience</h2>
+          <p class="section-desc">One arc, five stages — the path every attendee moves through across the three days.</p>
+        </div>
+
+        <div class="experience-timeline" data-timeline>
+          <!-- Rendered from WEB3_CARNIVAL_DATA.eventTimeline by js/filters.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         4 & 5. SMART EVENT DISCOVERY + SESSION CARDS
+         ================================================================== -->
+    <section class="section reveal" id="discovery" aria-labelledby="discovery-heading" data-discovery-root>
+      <div class="container">
+        <div class="section-header">
+          <h2 id="discovery-heading" class="section-title">Smart Event Discovery</h2>
+          <p class="section-desc">Filter by track, day, interest, and experience level to build your own schedule.</p>
+        </div>
+
+        <div class="discovery-panel">
+          <div class="discovery-filter-group">
+            <span class="discovery-filter-label" id="filter-track-label">Track</span>
+            <div class="filter-bar" data-filter-group="track" aria-labelledby="filter-track-label"></div>
+          </div>
+          <div class="discovery-filter-group">
+            <span class="discovery-filter-label" id="filter-day-label">Day</span>
+            <div class="filter-bar" data-filter-group="day" aria-labelledby="filter-day-label"></div>
+          </div>
+          <div class="discovery-filter-group">
+            <span class="discovery-filter-label" id="filter-interest-label">Interest</span>
+            <div class="filter-bar" data-filter-group="interest" aria-labelledby="filter-interest-label"></div>
+          </div>
+          <div class="discovery-filter-group">
+            <span class="discovery-filter-label" id="filter-level-label">Experience Level</span>
+            <div class="filter-bar" data-filter-group="level" aria-labelledby="filter-level-label"></div>
+          </div>
+        </div>
+
+        <div class="discovery-results-row">
+          <p class="discovery-results-count" data-results-count aria-live="polite">Showing all sessions</p>
+          <button type="button" class="discovery-reset-btn" data-discovery-reset>Reset Filters</button>
+        </div>
+
+        <div class="sessions-grid" data-sessions-grid aria-live="polite">
+          <!-- Rendered from WEB3_CARNIVAL_DATA.sessions by js/filters.js -->
+        </div>
+
+        <div class="discovery-empty-state" data-empty-state hidden>
+          <p>No sessions match those filters yet. Try resetting or choosing a different combination.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         7. PERSONAL EVENT JOURNEY
+         ================================================================== -->
+    <section class="section reveal" aria-labelledby="journey-heading">
+      <div class="container">
+        <div class="journey-panel">
+          <div class="journey-header-row">
+            <h2 id="journey-heading" style="margin: 0;">My Journey</h2>
+            <span class="pill pill-accent journey-count-badge" aria-hidden="true"><span data-journey-count>0</span> Saved</span>
+          </div>
+
+          <p class="journey-empty" data-journey-empty>You haven't added any sessions yet — browse the discovery panel above and tap "Add to Journey" on anything that looks good.</p>
+          <ul class="journey-list" data-journey-list style="display: none;" aria-label="Your saved sessions"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         8. VENUE / EVENT INFO
+         ================================================================== -->
+    <section class="section reveal" style="background: var(--bg-surface-alpha);" aria-labelledby="venue-heading">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="venue-heading" class="section-title">Venue &amp; Logistics</h2>
+          <p class="section-desc">Everything you need to know before you land — in person or on the virtual stage.</p>
+        </div>
+
+        <div class="venue-grid">
+          <div class="event-snapshot-facts">
+            <div class="event-fact-row">
+              <div class="event-fact-icon" aria-hidden="true">🏛️</div>
+              <div>
+                <div class="event-fact-label">Venue</div>
+                <div class="event-fact-value" data-venue-name>Marina Convergence Hall</div>
+              </div>
+            </div>
+            <div class="event-fact-row">
+              <div class="event-fact-icon" aria-hidden="true">📍</div>
+              <div>
+                <div class="event-fact-label">City</div>
+                <div class="event-fact-value" data-venue-city>Singapore · Hybrid with a Virtual Stage</div>
+              </div>
+            </div>
+            <div class="event-fact-row">
+              <div class="event-fact-icon" aria-hidden="true">🗺️</div>
+              <div>
+                <div class="event-fact-label">Address</div>
+                <div class="event-fact-value" data-venue-address>8 Bayfront Concourse, Singapore 018956</div>
+              </div>
+            </div>
+            <div class="event-fact-row">
+              <div class="event-fact-icon" aria-hidden="true">🕗</div>
+              <div>
+                <div class="event-fact-label">Hours</div>
+                <div class="event-fact-value" data-venue-hours>Doors open 08:00 daily · Main stage runs 09:00–19:00</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="venue-logistics-list" data-venue-logistics>
+            <!-- Rendered from WEB3_CARNIVAL_DATA.venue by js/filters.js -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         9. REGISTER CTA
+         ================================================================== -->
+    <section class="section final-cta-section reveal" aria-labelledby="register-cta-heading">
+      <div class="container final-cta-inner">
+        <h2 id="register-cta-heading">Ready to Lock In Your Carnival?</h2>
+        <p class="register-journey-note" data-register-note aria-live="polite">Add sessions to your journey above, then bring them into registration.</p>
+        <div class="final-cta-actions">
+          <a href="register.html" class="btn btn-primary btn-lg">Continue to Registration</a>
+          <a href="index.html" class="btn btn-secondary btn-lg">Back to Home</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         6. SESSION INTERACTION — Accessible Detail Modal
+         ================================================================== -->
+    <div class="modal-overlay" data-session-modal aria-hidden="true">
+      <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="session-modal-title" aria-describedby="session-modal-desc">
+        <!-- Rendered dynamically by js/filters.js when a session is opened -->
+        <h2 id="session-modal-title" class="sr-only"></h2>
+        <p id="session-modal-desc" class="sr-only"></p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer rendered by navigation.js -->
+  <footer id="site-footer" class="site-footer"></footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/filters.js"></script>
+</body>
+</html>
