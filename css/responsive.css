@@ -1,0 +1,121 @@
+/**
+ * Web3 Carnival Design System - Responsive Breakpoints
+ * Mobile-First Media Queries (480px, 768px, 1024px, 1440px)
+ */
+
+/* ==========================================================================
+   Small Mobile Devices (>= 480px)
+   ========================================================================== */
+@media (min-width: 480px) {
+  .hero-meta-bar {
+    grid-template-columns: auto auto;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .partner-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ==========================================================================
+   Tablets / Medium Screens (>= 768px)
+   ========================================================================== */
+@media (min-width: 768px) {
+  .section {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-16);
+  }
+
+  .hero-section {
+    padding-top: calc(var(--space-16) + 1.5rem);
+    padding-bottom: var(--space-20);
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .tracks-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .speakers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ecosystem-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .partner-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .footer-top {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* ==========================================================================
+   Desktop Screens (>= 1024px)
+   ========================================================================== */
+@media (min-width: 1024px) {
+  .container {
+    padding-left: var(--container-pad-desktop);
+    padding-right: var(--container-pad-desktop);
+  }
+
+  /* Navigation Transitions to Full Desktop Menu */
+  .mobile-toggle {
+    display: none;
+  }
+
+  .mobile-nav-drawer {
+    display: none !important;
+  }
+
+  .nav-menu {
+    display: flex;
+    align-items: center;
+  }
+
+  .tracks-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .speakers-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .partner-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .footer-top {
+    grid-template-columns: 1.8fr 1fr 1fr 1fr 1.6fr;
+  }
+}
+
+/* ==========================================================================
+   Large / Ultra-Wide Displays (>= 1440px)
+   ========================================================================== */
+@media (min-width: 1440px) {
+  .hero-title {
+    max-width: 900px;
+  }
+}

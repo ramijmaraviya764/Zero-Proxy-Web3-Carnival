@@ -1,0 +1,267 @@
+/**
+ * Web3 Carnival Design System - Page Layouts
+ * Hero Sections, Showcase Architecture & Page Shell Wrappers
+ */
+
+/* ==========================================================================
+   1. Homepage & General Hero Section
+   ========================================================================== */
+.hero-section {
+  position: relative;
+  padding-top: calc(var(--space-12) + 1rem);
+  padding-bottom: var(--space-16);
+  background: var(--gradient-hero-glow);
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.hero-glow-orb {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(91, 95, 239, 0.25) 0%, rgba(139, 92, 246, 0.15) 40%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-6);
+  max-width: 860px;
+}
+
+.hero-badge-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.hero-title {
+  font-size: var(--text-4xl);
+  font-weight: var(--fw-bold);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+}
+
+.hero-title .text-gradient {
+  background: var(--gradient-signature);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-desc {
+  font-size: var(--text-lg);
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 64ch;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+/* Hero Meta & Countdown Bar */
+.hero-meta-bar {
+  margin-top: var(--space-8);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+/* ==========================================================================
+   2. Subpage Header (Shell Layout for Event, Tracks, Speakers, etc.)
+   ========================================================================== */
+.page-header {
+  padding-top: var(--space-12);
+  padding-bottom: var(--space-10);
+  background: var(--gradient-signature-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  position: relative;
+}
+
+.page-header-content {
+  max-width: 780px;
+}
+
+.page-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin-bottom: var(--space-3);
+}
+
+.page-breadcrumbs a {
+  color: var(--text-secondary);
+}
+
+.page-breadcrumbs a:hover {
+  color: var(--accent-cyan);
+}
+
+.page-title {
+  font-size: var(--text-3xl);
+  margin-bottom: var(--space-3);
+}
+
+.page-lead {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  line-height: var(--lh-body);
+}
+
+/* ==========================================================================
+   3. Shell Placeholder Card (For Later Phase Extension)
+   ========================================================================== */
+.shell-status-card {
+  background: var(--bg-surface);
+  border: 1px dashed var(--border-medium);
+  border-radius: var(--radius-lg);
+  padding: var(--space-10) var(--space-6);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  max-width: 680px;
+  margin: var(--space-12) auto;
+}
+
+.shell-status-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  background: rgba(91, 95, 239, 0.15);
+  color: var(--accent-cyan);
+  display: grid;
+  place-items: center;
+  font-size: 1.75rem;
+}
+
+.shell-status-card h2 {
+  font-size: var(--text-2xl);
+}
+
+.shell-status-card p {
+  color: var(--text-secondary);
+  max-width: 50ch;
+}
+
+/* ==========================================================================
+   4. Showcase Section Layouts (Grid Framework)
+   ========================================================================== */
+.tracks-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+.speakers-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+.ecosystem-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+.ecosystem-node {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  transition: all var(--transition-fast);
+}
+
+.ecosystem-node:hover {
+  border-color: var(--accent-cyan);
+  background: var(--bg-raised);
+}
+
+.ecosystem-node-badge {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-indigo);
+}
+
+.ecosystem-node-name {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}
+
+/* Path Strip (Section 7 in design.md) */
+.path-strip {
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: var(--space-4) 0;
+}
+
+.path-strip-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.path-strip-label {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-cyan);
+  font-weight: var(--fw-semibold);
+}
+
+.path-pills {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.path-pill-link {
+  font-size: var(--text-xs);
+  font-family: var(--font-display);
+  font-weight: var(--fw-medium);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  background: var(--bg-raised);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.path-pill-link:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-indigo);
+}
