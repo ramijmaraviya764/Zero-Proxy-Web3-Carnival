@@ -3,16 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The 7 Tracks — Web3 Carnival</title>
-  <meta name="description" content="Explore the 7 thematic tracks of Web3 Carnival: Blockchain Infrastructure, DAO, Metaverse, ZK, DeFi, Enterprise, and NFT.">
+  <title>Tracks &amp; Speaker Explorer — Web3 Carnival</title>
+  <meta name="description" content="Explore the seven Web3 Carnival tracks, discover related speakers, and follow their sessions into the event programme.">
   <meta name="theme-color" content="#05060B">
-
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Design System CSS -->
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
@@ -20,44 +17,105 @@
   <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
-
   <a href="#main-content" class="skip-link">Skip to main content</a>
-
-  <!-- Header rendered by navigation.js -->
   <header id="site-header" class="site-header"></header>
 
-  <main id="main-content">
-    <section class="page-header" aria-labelledby="page-title">
+  <main id="main-content" class="tracks-explorer-page" data-tracks-explorer>
+    <section class="page-header tracks-page-header" aria-labelledby="page-title">
       <div class="container page-header-content">
         <nav class="page-breadcrumbs" aria-label="Breadcrumb">
-          <a href="index.html">Home</a>
-          <span aria-hidden="true">/</span>
-          <span aria-current="page">Tracks</span>
+          <a href="index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">Tracks</span>
         </nav>
-        <h1 id="page-title" class="page-title">The 7 Thematic Tracks</h1>
-        <p class="page-lead">A deep dive into our core focus areas connecting protocol engineers, founders, and enterprises.</p>
+        <div class="tracks-intro-grid">
+          <div>
+            <p class="tracks-eyebrow">DISCOVER · CONNECT · PLAN</p>
+            <h1 id="page-title" class="page-title">Find the ideas, people and sessions shaping Web3.</h1>
+          </div>
+          <p class="page-lead">Seven thematic tracks are the starting point. Choose a track, meet its speakers, then follow a speaker into the sessions they are bringing to the carnival.</p>
+        </div>
       </div>
     </section>
 
-    <div class="container">
-      <div class="shell-status-card">
-        <div class="shell-status-icon" aria-hidden="true">⛓️</div>
-        <h2>Tracks &amp; Speaker Explorer</h2>
-        <p>This shell is connected to the Web3 Carnival design system foundation. Track-to-speaker cross-linking and session explorer will be extended in Phase 3.</p>
-        <div style="display: flex; gap: var(--space-3); margin-top: var(--space-2);">
-          <a href="index.html" class="btn btn-secondary">Back to Home</a>
-          <a href="speakers.html" class="btn btn-primary">Browse Speakers</a>
+    <section class="section tracks-discovery-section" aria-labelledby="tracks-heading">
+      <div class="container">
+        <div class="tracks-toolbar">
+          <div>
+            <p class="section-kicker">The programme map</p>
+            <h2 id="tracks-heading" class="section-title">Explore the seven tracks</h2>
+          </div>
+          <label class="tracks-search" for="track-search">
+            <span class="sr-only">Search tracks, speakers, or sessions</span>
+            <span aria-hidden="true">⌕</span>
+            <input id="track-search" type="search" placeholder="Search tracks, speakers, sessions" autocomplete="off">
+          </label>
+        </div>
+        <div class="track-filter-bar" role="group" aria-label="Filter tracks"></div>
+        <div class="tracks-explorer-grid" data-track-grid aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="section track-detail-section" id="track-detail" aria-labelledby="track-detail-title" tabindex="-1">
+      <div class="container">
+        <div class="track-detail-shell" data-track-detail>
+          <div class="track-detail-empty">
+            <span class="track-detail-empty-mark" aria-hidden="true">↗</span>
+            <div>
+              <p class="section-kicker">Start with a track</p>
+              <h2 id="track-detail-title">Select a track to open its programme.</h2>
+              <p>Each track connects directly to its speakers and sessions, so you can move from a theme to the people behind it and then into the event schedule.</p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
+
+    <section class="section explorer-results-section" aria-labelledby="speakers-heading">
+      <div class="container">
+        <div class="explorer-section-heading">
+          <div>
+            <p class="section-kicker">Track → Speaker</p>
+            <h2 id="speakers-heading" class="section-title">People behind the track</h2>
+          </div>
+          <p class="explorer-results-note" data-speaker-count aria-live="polite"></p>
+        </div>
+        <div class="explorer-speakers-grid" data-speakers-grid></div>
+      </div>
+    </section>
+
+    <section class="section explorer-results-section explorer-sessions-section" aria-labelledby="sessions-heading">
+      <div class="container">
+        <div class="explorer-section-heading">
+          <div>
+            <p class="section-kicker">Speaker → Session</p>
+            <h2 id="sessions-heading" class="section-title">Sessions worth following</h2>
+          </div>
+          <a href="event.html" class="text-link">Open full event discovery</a>
+        </div>
+        <div class="explorer-sessions-grid" data-track-sessions></div>
+      </div>
+    </section>
+
+    <section class="section final-cta-section tracks-final-cta" aria-labelledby="tracks-cta-heading">
+      <div class="container">
+        <div class="final-cta-inner">
+          <p class="section-kicker">Take the next step</p>
+          <h2 id="tracks-cta-heading">Ready to move from discovery to the carnival?</h2>
+          <p>Explore the full programme or reserve your place for Web3 Carnival 2026.</p>
+          <div class="final-cta-actions">
+            <a href="event.html" class="btn btn-secondary">Explore Event</a>
+            <a href="register.html" class="btn btn-primary">Register</a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- Footer rendered by navigation.js -->
   <footer id="site-footer" class="site-footer"></footer>
 
   <script src="js/data.js"></script>
   <script src="js/theme.js"></script>
   <script src="js/navigation.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/tracks.js"></script>
 </body>
 </html>
