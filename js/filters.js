@@ -31,6 +31,8 @@
     const levelById = Object.fromEntries(levels.map(l => [l.id, l]));
 
     const filterState = { track: 'all', day: 'all', interest: 'all', level: 'all' };
+    let showAllSessions = false;
+    const INITIAL_SESSION_LIMIT = 6;
 
     const grid = root.querySelector('[data-sessions-grid]');
     const resultsCount = root.querySelector('[data-results-count]');
@@ -83,6 +85,7 @@
     if (resetBtn) {
       resetBtn.addEventListener('click', () => {
         Object.keys(filterState).forEach(k => (filterState[k] = 'all'));
+        showAllSessions = false;
         root.querySelectorAll('.filter-bar').forEach(bar => {
           const buttons = bar.querySelectorAll('.filter-btn');
           buttons.forEach((b, idx) => {
@@ -226,8 +229,11 @@
     function renderSessions() {
       const filtered = getFilteredSessions();
 
+      const visibleSessions = showAllSessions ? filtered : filtered.slice(0, INITIAL_SESSION_LIMIT);
+
       if (resultsCount) {
-        resultsCount.innerHTML = `<strong>${filtered.length}</strong> of ${sessions.length} sessions`;
+        const visibleCount = visibleSessions.length;
+        resultsCount.innerHTML = `<strong>${visibleCount}</strong> of ${sessions.length} sessions`;
       }
 
       grid.innerHTML = '';
@@ -243,7 +249,7 @@
 
       const journeyIds = getJourney();
 
-      filtered.forEach(session => {
+      visibleSessions.forEach(session => {
         const track = trackById[session.trackId];
         const day = dayById[session.dayId];
         const level = levelById[session.level];
@@ -279,6 +285,26 @@
       grid.querySelectorAll('[data-journey-toggle]').forEach(btn => {
         btn.addEventListener('click', () => toggleJourney(btn.getAttribute('data-journey-toggle')));
       });
+
+      // Show only the first 6 sessions initially.
+      // The remaining sessions are revealed by the More View button.
+      const existingMoreButton = root.querySelector('[data-more-sessions]');
+      if (existingMoreButton) existingMoreButton.remove();
+
+      if (filtered.length > INITIAL_SESSION_LIMIT && !showAllSessions) {
+        const moreButton = document.createElement('button');
+        moreButton.type = 'button';
+        moreButton.className = 'btn btn-secondary';
+        moreButton.setAttribute('data-more-sessions', 'true');
+        moreButton.textContent = 'More View';
+        moreButton.style.display = 'block';
+        moreButton.style.margin = 'var(--space-6) auto 0';
+        moreButton.addEventListener('click', () => {
+          showAllSessions = true;
+          renderSessions();
+        });
+        grid.insertAdjacentElement('afterend', moreButton);
+      }
     }
 
     // ----------------------------------------------------------------------
