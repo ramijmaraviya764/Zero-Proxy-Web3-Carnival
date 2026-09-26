@@ -115,6 +115,14 @@
         </div>
       </div>
     `;
+
+    // theme.js may have run its initial applyTheme() call before this header
+    // existed (it lives in the DOM as of just now), so its toggle button(s)
+    // never got the correct aria-label/title for the active theme. Re-sync
+    // now that the button is actually in the document.
+    if (window.Web3CarnivalTheme) {
+      window.Web3CarnivalTheme.set(window.Web3CarnivalTheme.get());
+    }
   }
 
   /**

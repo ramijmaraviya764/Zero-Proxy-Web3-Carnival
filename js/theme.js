@@ -69,14 +69,20 @@
   const initialTheme = getPreferredTheme();
   applyTheme(initialTheme);
 
+  // Delegate the click on `document` rather than binding to each button
+  // directly. navigation.js injects the header (and its .theme-toggle-btn)
+  // asynchronously on DOMContentLoaded, and script load order means this
+  // file's own DOMContentLoaded handler can run before that injection
+  // happens — a direct querySelectorAll + addEventListener here would find
+  // zero buttons and silently never bind. Delegation works no matter when,
+  // or how many times, the button is (re)rendered into the page.
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.theme-toggle-btn');
+    if (btn) toggleTheme();
+  });
+
   // Initialize event listeners when DOM is loaded
   document.addEventListener('DOMContentLoaded', () => {
-    // Attach listener to all theme toggle buttons
-    const toggleBtns = document.querySelectorAll('.theme-toggle-btn');
-    toggleBtns.forEach(btn => {
-      btn.addEventListener('click', toggleTheme);
-    });
-
     // Listen to OS changes only if no manual preference stored
     if (window.matchMedia) {
       window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
