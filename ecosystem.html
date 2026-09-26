@@ -34,22 +34,67 @@
           <span aria-hidden="true">/</span>
           <span aria-current="page">Ecosystem</span>
         </nav>
-        <h1 id="page-title" class="page-title">Ecosystem &amp; Stakeholder Map</h1>
-        <p class="page-lead">Connecting 8 distinct audience segments into an interactive relationship network.</p>
+        <h1 id="page-title" class="page-title">Web3 Carnival is a community, not just an event.</h1>
+        <p class="page-lead">Eight stakeholder segments — founders, builders, capital, regulators, institutions — meet here year-round. Select a segment to see how it connects.</p>
       </div>
     </section>
 
-    <div class="container">
-      <div class="shell-status-card">
-        <div class="shell-status-icon" aria-hidden="true">🌐</div>
-        <h2>Interactive Relationship Map (Signature Feature #1)</h2>
-        <p>This shell is connected to the Web3 Carnival design system foundation. The interactive node-link ecosystem diagram connecting the 8 real segments with keyboard-operable filtering will be built in Phase 6.</p>
-        <div style="display: flex; gap: var(--space-3); margin-top: var(--space-2);">
-          <a href="index.html" class="btn btn-secondary">Back to Home</a>
-          <a href="partners.html" class="btn btn-primary">View Partners</a>
+    <div class="path-strip" aria-label="How to move through the ecosystem">
+      <div class="container path-strip-inner">
+        <span class="path-strip-label">Discovery path</span>
+        <div class="path-pills">
+          <span class="path-pill-link path-pill-current" aria-current="page">Ecosystem</span>
+          <span aria-hidden="true">→</span>
+          <a class="path-pill-link" href="tracks.html">Track</a>
+          <span aria-hidden="true">→</span>
+          <a class="path-pill-link" href="speakers.html">Speaker</a>
+          <span aria-hidden="true">→</span>
+          <a class="path-pill-link" href="event.html#discovery">Session</a>
+          <span aria-hidden="true">→</span>
+          <a class="path-pill-link" href="register.html">Register</a>
         </div>
       </div>
     </div>
+
+    <section class="section ecosystem-map-section" aria-labelledby="ecosystem-map-heading">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-eyebrow">Signature Feature — Interactive Relationship Map</p>
+          <h2 id="ecosystem-map-heading" class="section-title">How the ecosystem connects</h2>
+          <p class="section-desc">Every segment plugs into real tracks, real speakers, and a real way to get involved — not just a seat in the audience.</p>
+        </div>
+
+        <div class="ecosystem-layout" data-ecosystem-root>
+          <div class="ecosystem-map" data-ecosystem-map>
+            <div class="ecosystem-map-canvas" data-ecosystem-canvas>
+              <svg class="ecosystem-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false" data-ecosystem-lines></svg>
+              <button type="button" class="ecosystem-hub" data-ecosystem-hub aria-pressed="false" aria-label="Web3 Carnival — clear selection and view the ecosystem overview">
+                <span class="ecosystem-hub-mark" aria-hidden="true">W3C</span>
+                <span class="ecosystem-hub-label">Web3 Carnival</span>
+              </button>
+              <div class="ecosystem-nodes" data-ecosystem-nodes></div>
+            </div>
+            <p class="ecosystem-map-hint">Tab or use the arrow keys to move between segments, then press Enter or Space to select.</p>
+          </div>
+
+          <div class="ecosystem-detail" data-ecosystem-detail aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section final-cta-section" aria-labelledby="ecosystem-cta-heading">
+      <div class="container">
+        <div class="final-cta-inner">
+          <p class="section-kicker">Take the next step</p>
+          <h2 id="ecosystem-cta-heading">Found your segment? Follow it to a track.</h2>
+          <p>From here, every track leads to the speakers building in it, the sessions on the schedule, and registration.</p>
+          <div class="final-cta-actions">
+            <a href="tracks.html" class="btn btn-secondary">Explore Tracks</a>
+            <a href="register.html" class="btn btn-primary">Register</a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- Footer rendered by navigation.js -->
@@ -58,6 +103,7 @@
   <script src="js/data.js"></script>
   <script src="js/theme.js"></script>
   <script src="js/navigation.js"></script>
+  <script src="js/ecosystem.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

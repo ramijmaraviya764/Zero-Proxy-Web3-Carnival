@@ -1823,3 +1823,443 @@ a.card-track:hover {
 @media (prefers-reduced-motion: reduce) {
   .edition-card, .editions-timeline-node, .edition-compare-fill { transition: none; }
 }
+
+/* ==========================================================================
+   6. Ecosystem Map — Phase 6 Signature Feature
+   Mobile-first: base rules below are the selectable network/list hybrid.
+   The @media (min-width: 1024px) block at the end turns the same markup
+   into the hub-and-spoke node-link diagram — no separate desktop template.
+   ========================================================================== */
+
+/* "You are here" variant of the shared path-strip pill (non-interactive) */
+.path-pill-current {
+  background: var(--gradient-signature-subtle);
+  border-color: var(--border-highlight);
+  color: var(--text-primary);
+}
+
+.ecosystem-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+  align-items: start;
+}
+
+/* --- Map wrapper + hint --- */
+.ecosystem-map-canvas {
+  position: relative;
+}
+
+.ecosystem-map-hint {
+  display: none; /* arrow-key hint only applies once the graph exists (desktop) */
+  margin-top: var(--space-3);
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+}
+
+/* --- Hub --- */
+.ecosystem-hub {
+  appearance: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  margin-bottom: var(--space-4);
+  padding: var(--space-5) var(--space-6);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-highlight);
+  background: var(--gradient-signature-subtle);
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.ecosystem-hub:hover {
+  border-color: var(--accent-cyan);
+}
+
+.ecosystem-hub.is-active {
+  box-shadow: var(--shadow-glow);
+  border-color: var(--accent-cyan);
+}
+
+.ecosystem-hub-mark {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--bg-void);
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  font-size: var(--text-xs);
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+  border: 1px solid var(--border-medium);
+}
+
+.ecosystem-hub-label {
+  font-family: var(--font-display);
+  font-weight: var(--fw-semibold);
+  font-size: var(--text-lg);
+  color: var(--text-primary);
+}
+
+/* --- Connecting lines (desktop only — see media block) --- */
+.ecosystem-lines {
+  display: none;
+}
+
+.ecosystem-lines line {
+  stroke: var(--border-medium);
+  stroke-width: 0.35;
+  transition: stroke var(--transition-base), stroke-width var(--transition-base), opacity var(--transition-base);
+}
+
+.ecosystem-lines line.is-active {
+  stroke: var(--accent-cyan);
+  stroke-width: 0.6;
+}
+
+.ecosystem-lines line.is-dimmed {
+  opacity: 0.25;
+}
+
+/* --- Segment nodes: mobile = 2-col selectable grid --- */
+.ecosystem-nodes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+.ecosystem-node-btn {
+  appearance: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  transition: border-color var(--transition-fast), transform var(--transition-fast), background var(--transition-fast), opacity var(--transition-fast);
+}
+
+.ecosystem-node-btn:hover {
+  border-color: var(--border-medium);
+  background: var(--bg-raised);
+}
+
+.ecosystem-node-btn.is-selected {
+  border-color: var(--accent-cyan);
+  background: var(--bg-raised);
+  box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.3);
+}
+
+.ecosystem-node-btn.is-dimmed {
+  opacity: 0.55;
+}
+
+.ecosystem-node-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-sm);
+  background: rgba(91, 95, 239, 0.14);
+  font-size: 1.15rem;
+}
+
+.ecosystem-node-label {
+  font-family: var(--font-display);
+  font-weight: var(--fw-semibold);
+  font-size: var(--text-sm);
+  line-height: var(--lh-card);
+}
+
+/* --- Detail panel (shared by mobile + desktop) --- */
+.ecosystem-detail {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+
+.ecosystem-detail-empty {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-6) var(--space-2);
+}
+
+.ecosystem-detail-empty-mark {
+  color: var(--accent-cyan);
+  font-size: 1.5rem;
+}
+
+.ecosystem-detail-empty-note {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+.ecosystem-detail-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-3);
+}
+
+.ecosystem-detail-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-sm);
+  background: rgba(91, 95, 239, 0.14);
+  font-size: 1.35rem;
+}
+
+.ecosystem-detail-head h3 {
+  font-size: var(--text-2xl);
+}
+
+.ecosystem-detail-desc {
+  color: var(--text-secondary);
+  line-height: var(--lh-body);
+  margin-bottom: var(--space-6);
+}
+
+.ecosystem-detail-section {
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border-subtle);
+  margin-top: var(--space-5);
+}
+
+.ecosystem-detail-section:first-of-type {
+  margin-top: 0;
+}
+
+.ecosystem-detail-section h4 {
+  font-size: var(--text-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-3);
+}
+
+.ecosystem-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.ecosystem-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--radius-full);
+  background: var(--bg-raised);
+  border: 1px solid var(--border-subtle);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-medium);
+  color: var(--text-primary);
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.ecosystem-chip:hover {
+  border-color: var(--accent-cyan);
+  transform: translateY(-1px);
+  color: var(--text-primary);
+}
+
+.ecosystem-chip small {
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-weight: var(--fw-normal);
+  font-size: var(--text-xs);
+}
+
+.ecosystem-chip-outline {
+  background: transparent;
+  border-color: var(--border-medium);
+  color: var(--text-secondary);
+}
+
+.ecosystem-chip-outline:hover {
+  color: var(--accent-cyan);
+  border-color: var(--accent-cyan);
+}
+
+.ecosystem-speaker-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.ecosystem-speaker-chip {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  padding-right: var(--space-3);
+  border-radius: var(--radius-full);
+  background: var(--bg-raised);
+  border: 1px solid var(--border-subtle);
+  max-width: 220px;
+  transition: border-color var(--transition-fast);
+}
+
+.ecosystem-speaker-chip:hover {
+  border-color: var(--accent-cyan);
+}
+
+.ecosystem-speaker-chip-photo {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.35), rgba(34, 211, 238, 0.2));
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-semibold);
+}
+
+.ecosystem-speaker-chip-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ecosystem-speaker-chip-copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.ecosystem-speaker-chip-copy strong {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ecosystem-speaker-chip-copy small {
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ecosystem-detail-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* --- Desktop: hub-and-spoke node-link diagram --- */
+@media (min-width: 1024px) {
+  .ecosystem-layout {
+    grid-template-columns: 1.05fr 1fr;
+    gap: var(--space-10);
+  }
+
+  .ecosystem-map-canvas {
+    aspect-ratio: 1 / 1;
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  .ecosystem-map-hint {
+    display: block;
+    text-align: center;
+  }
+
+  .ecosystem-lines {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .ecosystem-hub {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 168px;
+    height: 168px;
+    border-radius: 50%;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 0;
+    padding: var(--space-4);
+  }
+
+  .ecosystem-hub-mark {
+    width: 44px;
+    height: 44px;
+  }
+
+  .ecosystem-hub-label {
+    font-size: var(--text-base);
+    line-height: 1.2;
+  }
+
+  .ecosystem-nodes {
+    display: block;
+  }
+
+  .ecosystem-node-btn {
+    position: absolute;
+    left: var(--nx);
+    top: var(--ny);
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    width: 136px;
+    flex-direction: column;
+    text-align: center;
+    gap: var(--space-2);
+  }
+
+  .ecosystem-node-btn:hover,
+  .ecosystem-node-btn:focus-visible {
+    transform: translate(-50%, -50%) translateY(-3px);
+  }
+
+  .ecosystem-detail {
+    position: sticky;
+    top: calc(var(--nav-height) + var(--space-6));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ecosystem-node-btn,
+  .ecosystem-hub,
+  .ecosystem-lines line,
+  .ecosystem-chip {
+    transition: none;
+  }
+}

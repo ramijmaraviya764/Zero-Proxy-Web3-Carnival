@@ -123,16 +123,28 @@ const WEB3_CARNIVAL_DATA = {
     }
   ],
 
-  // The 8 locked audience / ecosystem segments from design.md
+  // The 8 locked audience / ecosystem segments from design.md.
+  // trackIds/opportunityIds are additive for the Ecosystem Map (Phase 6):
+  // they connect each segment to the real tracks it maps to and the real
+  // "Get Involved" paths (§1) most relevant to it, so the map's relationships
+  // are drawn from the site's actual taxonomy rather than invented links.
   ecosystemSegments: [
-    { id: "startups", name: "Startups", description: "Early-stage founders disrupting legacy rails." },
-    { id: "enthusiasts", name: "Web3 Enthusiasts", description: "Active users and decentralized technology advocates." },
-    { id: "developers", name: "Developers", description: "Engineers deploying protocol-level code." },
-    { id: "investors", name: "Investors", description: "Venture funds, angel syndicates, and capital allocators." },
-    { id: "policymakers", name: "Policy Makers", description: "Regulators and legal advisors guiding compliance." },
-    { id: "enterprises", name: "Enterprises", description: "Fortune 500 corporations adopting Web3 stacks." },
-    { id: "academia", name: "Academia and Institutions", description: "Research labs and university blockchain societies." },
-    { id: "incubators", name: "Incubators and Accelerators", description: "Growth hubs scaling Web3 talent." }
+    { id: "startups", name: "Startups", icon: "🚀", description: "Early-stage founders disrupting legacy rails.",
+      trackIds: ["infra", "defi", "nft"], opportunityIds: ["super-demo", "speaker"] },
+    { id: "enthusiasts", name: "Web3 Enthusiasts", icon: "⚡", description: "Active users and decentralized technology advocates.",
+      trackIds: ["metaverse", "nft", "dao"], opportunityIds: ["community", "volunteer"] },
+    { id: "developers", name: "Developers", icon: "🧑‍💻", description: "Engineers deploying protocol-level code.",
+      trackIds: ["infra", "zk", "metaverse"], opportunityIds: ["speaker", "super-demo"] },
+    { id: "investors", name: "Investors", icon: "💰", description: "Venture funds, angel syndicates, and capital allocators.",
+      trackIds: ["defi", "enterprise", "infra"], opportunityIds: ["sponsor", "speaker"] },
+    { id: "policymakers", name: "Policy Makers", icon: "⚖️", description: "Regulators and legal advisors guiding compliance.",
+      trackIds: ["dao", "enterprise", "zk"], opportunityIds: ["speaker", "media"] },
+    { id: "enterprises", name: "Enterprises", icon: "🏙️", description: "Fortune 500 corporations adopting Web3 stacks.",
+      trackIds: ["enterprise", "defi", "infra"], opportunityIds: ["sponsor", "speaker"] },
+    { id: "academia", name: "Academia and Institutions", icon: "🎓", description: "Research labs and university blockchain societies.",
+      trackIds: ["zk", "dao", "infra"], opportunityIds: ["speaker", "media"] },
+    { id: "incubators", name: "Incubators and Accelerators", icon: "🌱", description: "Growth hubs scaling Web3 talent.",
+      trackIds: ["infra", "defi", "dao"], opportunityIds: ["sponsor", "community"] }
   ],
 
   // Real "why us" stats from design.md (Animated proof)
