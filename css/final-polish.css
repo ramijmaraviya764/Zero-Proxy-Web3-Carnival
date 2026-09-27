@@ -795,3 +795,50 @@ html {
     transition: none !important;
   }
 }
+
+/* -------------------------------------------------------------------------
+   Ecosystem stakeholder map: deterministic mobile containment.
+   The map cards and detail panel use a fluid width with a hard visual
+   maximum. This keeps both columns centered while preserving consistent
+   horizontal breathing room as the viewport gets narrower.
+   ------------------------------------------------------------------------- */
+@media (max-width: 767px) {
+  .ecosystem-section .ecosystem-layout,
+  .ecosystem-section .ecosystem-layout > div {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .ecosystem-section .ecosystem-map-stage {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .ecosystem-section .ecosystem-nodes-grid {
+    width: min(calc(100% - 2rem), 420px);
+    max-width: 420px;
+    min-width: 0;
+    margin-inline: auto;
+  }
+
+  .ecosystem-section .ecosystem-map-node,
+  .ecosystem-section .ecosystem-card {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .ecosystem-section .ecosystem-details-panel {
+    width: min(calc(100% - 2rem), 620px);
+    max-width: 620px;
+    min-width: 0;
+    margin-inline: auto;
+    box-sizing: border-box;
+    position: static;
+  }
+}
