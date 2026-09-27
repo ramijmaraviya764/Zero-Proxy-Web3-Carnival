@@ -1,93 +1,69 @@
 # Web3 Carnival — Event Experience Platform
 
-A responsive, interaction-focused Web3 Carnival event website built with semantic HTML, modular CSS, and vanilla JavaScript.
+A premium, responsive digital experience designed to help audiences discover, understand, and engage with a Web3 event through a connected journey rather than a collection of standalone pages.
 
-The website is structured as a connected event experience rather than a collection of independent marketing pages. Visitors can discover the event, identify relevant stakeholder segments, explore tracks and speakers, review ecosystem opportunities, complete a guided registration flow, and receive a personalized digital event pass.
-
----
-
-## Production Documentation
-
-This README is the primary delivery document for the frontend repository.
-
-It covers:
-
-- product and information architecture;
-- production deployment;
-- frontend architecture;
-- developer ownership and change points;
-- responsive behavior;
-- browser and device QA;
-- accessibility checks;
-- release verification;
-- current technical boundaries.
-
-This repository is a static frontend application. It can be deployed as a production website through any static web host or web server capable of serving HTML, CSS, JavaScript, and image assets.
+Web3 Carnival brings together event discovery, stakeholder exploration, tracks, speakers, ecosystem opportunities, guided registration, and a personalized digital event pass within one cohesive experience.
 
 ---
 
-## 1. Product Overview
+## Overview
 
-### Objective
+Traditional event websites often present information as separate pages: event details, speakers, schedules, partners, and registration.
 
-The website provides a premium digital experience for a Web3 event with a strong emphasis on:
+Web3 Carnival takes a more connected approach.
 
-- clear information hierarchy;
-- fast event discovery;
-- role-based exploration;
-- responsive behavior across desktop, tablet, and mobile;
-- interaction that improves discovery rather than adding decoration;
-- accessible and keyboard-aware interaction patterns;
-- a lightweight frontend architecture with minimal dependencies.
+The experience is built around a simple progression:
 
-### Core Experience Model
+**Discover → Identify Relevance → Explore → Personalize → Act**
 
-The primary user journey is:
-
-**Discover → Identify relevance → Explore → Personalize → Act**
-
-The model is expressed through the homepage, ecosystem experience, tracks, speakers, and registration flow.
+Visitors can enter the experience from different perspectives, discover content relevant to them, explore the wider ecosystem, and move naturally toward registration and participation.
 
 ---
 
-## 2. Site Architecture
+## Experience Architecture
 
-| Page | Responsibility |
+The platform is organized across focused experiences, each serving a distinct purpose.
+
+| Experience | Purpose |
 |---|---|
-| `index.html` | Landing experience, event proposition, highlights, statistics, and primary entry points |
-| `event.html` | Event details, format, schedule, venue, and supporting information |
-| `tracks.html` | Track discovery and thematic exploration |
-| `speakers.html` | Speaker discovery, filtering, and profile interaction |
-| `past-events.html` | Previous editions and event history |
-| `ecosystem.html` | Stakeholder Relationship Map and connected opportunities |
-| `partners.html` | Partnership and sponsor information |
-| `register.html` | Guided registration flow and personalized digital pass |
-| `contact.html` | Contact routing, support information, form interaction, and FAQ content |
+| **Home** | Introduces the event, its proposition, key highlights, and primary entry points |
+| **Event** | Presents event details, format, schedule, venue, and supporting information |
+| **Tracks** | Enables thematic exploration across the event |
+| **Speakers** | Provides speaker discovery and profile exploration |
+| **Past Events** | Connects the current experience with previous editions |
+| **Ecosystem** | Helps visitors explore stakeholders and connected opportunities |
+| **Partners** | Presents partnership and sponsor information |
+| **Registration** | Guides visitors through a personalized five-step registration journey |
+| **Contact** | Provides contact routes, support information, and FAQs |
 
-The navigation system is shared across the site and uses a dedicated mobile navigation pattern at smaller widths.
+Together, these experiences form one continuous event journey rather than isolated destinations.
 
 ---
 
-## 3. Key Product Experiences
+# The Ecosystem Experience
 
-### 3.1 Stakeholder Relationship Map
+## Stakeholder Relationship Map
 
-The Ecosystem page is organized around stakeholder-driven discovery.
+The Ecosystem page is the central discovery layer of the experience.
 
-The available stakeholder segments are:
+Instead of presenting audiences as a static list, the interface allows visitors to identify themselves within the ecosystem and discover the opportunities, content, and connections most relevant to them.
 
-1. Startups
-2. Web3 Enthusiasts
-3. Developers
-4. Investors
-5. Policy Makers
-6. Enterprises
-7. Academia and Institutions
-8. Incubators and Accelerators
+The experience includes eight stakeholder segments:
 
-Selecting a stakeholder updates the connected opportunity content without requiring a separate page load.
+- Startups
+- Web3 Enthusiasts
+- Developers
+- Investors
+- Policy Makers
+- Enterprises
+- Academia and Institutions
+- Incubators and Accelerators
 
-The relationship model connects stakeholder segments with:
+Selecting a stakeholder dynamically changes the connected ecosystem content so that the visitor can move from:
+
+**Who am I? → What is relevant to me? → Who should I meet? → What can I explore next?**
+
+The relationship model connects stakeholder groups with:
 
 - thematic tracks;
 - opportunities;
@@ -95,47 +71,71 @@ The relationship model connects stakeholder segments with:
 - ecosystem context;
 - next actions.
 
-This makes the ecosystem section an exploration interface rather than a static audience list.
+This transforms the ecosystem section from a conventional audience directory into an interactive discovery interface.
 
-### 3.2 Mobile Ecosystem Behavior
+---
 
-The Stakeholder Relationship Map uses a dedicated responsive composition rather than scaling the desktop geometry indefinitely.
+## Responsive Ecosystem Design
 
-On narrow screens:
+The Stakeholder Relationship Map is designed to adapt its composition to the available screen size rather than simply shrinking a desktop layout.
 
-- stakeholder cards are constrained by the viewport;
-- cards remain horizontally centered;
-- internal grid children are allowed to shrink safely;
-- the detail panel is independently constrained and centered;
+On smaller screens:
+
+- stakeholder cards remain centered;
+- content width responds to the viewport;
+- internal content reflows naturally;
+- detail panels remain within the available space;
 - horizontal overflow is avoided;
-- text wraps inside the available card width;
-- the larger relationship-map composition is preserved for wider viewports.
+- typography and controls remain readable;
+- the wider relationship-map composition is preserved where the viewport allows it.
 
-The responsive correction is intentionally localized to the ecosystem experience so unrelated page sections do not inherit unnecessary layout overrides.
+The goal is to maintain the character and hierarchy of the experience across desktop, tablet, and mobile environments.
 
-### 3.3 Track and Speaker Discovery
+---
 
-Track and speaker content is exposed through dedicated experiences rather than being buried in one long event page.
+# Connected Event Discovery
 
-The shared data model supports relationships such as:
+## Tracks
+
+Tracks organize the event around thematic areas and make a large amount of event content easier to explore.
+
+The experience allows visitors to move from a theme into the people, opportunities, and context associated with it.
+
+A core discovery pattern is:
 
 **Track → Related Speakers → Session Context → Next Action**
 
-### 3.4 Guided Registration
+---
 
-Registration uses a five-step flow:
+## Speakers
 
-1. Goal
-2. Interests
-3. Personal details
-4. Event plan
-5. Digital pass
+The speaker experience provides focused discovery instead of requiring visitors to search through a long event page.
 
-The progressive flow reduces cognitive load and allows the final digital pass to reflect the selections made during registration.
+Speaker information is presented as part of the wider event ecosystem, making it easier to connect people with tracks, topics, and opportunities.
 
-### 3.5 Digital Event Pass
+---
 
-The registration experience creates a browser-side digital pass containing contextual registration information such as:
+# Guided Registration
+
+Registration is designed as a progressive five-step journey:
+
+1. **Goal**
+2. **Interests**
+3. **Personal Details**
+4. **Event Plan**
+5. **Digital Pass**
+
+Rather than presenting one large form, the experience progressively introduces information and decisions.
+
+This keeps the interaction focused while allowing the final result to reflect the visitor's selected interests and event context.
+
+---
+
+# Personalized Digital Event Pass
+
+The registration journey concludes with a personalized digital event pass.
+
+The pass can reflect contextual information such as:
 
 - participant identity;
 - role or organization;
@@ -144,96 +144,164 @@ The registration experience creates a browser-side digital pass containing conte
 - pass identifier;
 - selected tracks or interests.
 
-The generated pass is client-side output. It must not be treated as a server-issued ticket, payment receipt, or authoritative venue credential unless an external production backend is integrated.
-
-### 3.6 Theme Support
-
-The site provides dark and light theme support through a shared theme controller.
-
-Theme preference is persisted locally where browser storage is available. Storage failures are handled without preventing the rest of the interface from operating.
-
-### 3.7 Local Client State
-
-`localStorage` is used selectively for lightweight client-side state such as:
-
-- theme preference;
-- selected ecosystem/journey information;
-- saved journey items;
-- registration-related frontend state.
-
-No server-side persistence or authentication service is included in this repository.
+This creates a natural transition from registration to participation and gives the user a tangible outcome from the journey.
 
 ---
 
-## 4. Design System
+# Design Direction
 
-The visual system follows a premium, dark-first Web3 event direction with restrained accent color and strong typography.
+Web3 Carnival follows a premium, dark-first visual language designed for a contemporary Web3 event.
 
-### Visual characteristics
+### Visual principles
 
 - dark interface foundation;
 - restrained indigo, violet, and cyan accents;
-- editorial typographic hierarchy;
-- deliberate use of gradients, glow, borders, and depth;
-- compact controls rather than oversized UI chrome;
-- content-specific card structures instead of one repeated card template.
+- strong editorial typography;
+- clear information hierarchy;
+- deliberate gradients, glow, borders, and depth;
+- compact and purposeful controls;
+- content-specific layouts rather than repetitive card patterns;
+- strong visual composition without relying on excessive decoration.
 
-### Layout principles
+The design intentionally avoids making every section look identical.
 
-The interface does not force every section into identical rounded containers. Visual grouping is used where it improves hierarchy, scanning, or interaction clarity.
-
-Responsive layouts are recomposed where necessary instead of treating mobile as a scaled-down desktop.
-
----
-
-## 5. Frontend Architecture
-
-The repository is intentionally dependency-light.
-
-### Technologies
-
-- **HTML5** — semantic page structure
-- **CSS3** — design tokens, shared components, page layouts, responsive rules
-- **JavaScript (ES6+)** — interaction, filtering, state, navigation, registration, theme handling
-- **Browser APIs** — DOM APIs, `localStorage`, media-query checks, and client-side event handling
-
-No frontend framework or build pipeline is required by the current implementation.
-
-### CSS responsibilities
-
-| File | Responsibility |
-|---|---|
-| `css/tokens.css` | Design tokens and shared visual variables |
-| `css/base.css` | Resets, typography, global defaults, foundational styles |
-| `css/components.css` | Reusable UI components and shared interaction patterns |
-| `css/pages.css` | Page-specific layouts and component composition |
-| `css/responsive.css` | Shared breakpoint and responsive behavior |
-| `css/final-polish.css` | Final presentation refinements and targeted adjustments |
-
-### JavaScript responsibilities
-
-| File | Responsibility |
-|---|---|
-| `js/data.js` | Shared application and event content |
-| `js/main.js` | Shared page-level behavior |
-| `js/navigation.js` | Desktop/mobile navigation behavior |
-| `js/theme.js` | Theme switching and preference persistence |
-| `js/ecosystem.js` | Stakeholder map and ecosystem interactions |
-| `js/tracks.js` | Track discovery and filtering behavior |
-| `js/speakers.js` | Speaker discovery and filtering |
-| `js/past-events.js` | Past-event interactions |
-| `js/partners.js` | Partner-page interactions |
-| `js/contact.js` | Contact and support interactions |
-| `js/filters.js` | Filtering and saved-journey behavior |
-| `js/registration.js` | Registration flow and digital pass generation |
+Different content types are given their own visual treatment so that the interface communicates hierarchy through structure as well as styling.
 
 ---
 
-## 6. Data and Interaction Model
+# Responsive Experience
 
-The shared JavaScript data layer keeps related event content consistent across pages.
+Responsive behavior is treated as a design requirement rather than simply a scaling exercise.
 
-Conceptually:
+### Desktop
+
+The experience emphasizes:
+
+- visual composition;
+- information density;
+- multi-column layouts;
+- ecosystem relationships;
+- hover and pointer-driven discovery.
+
+### Tablet
+
+The layout progressively reduces density while preserving hierarchy, touch comfort, and clear content grouping.
+
+### Mobile
+
+The experience prioritizes:
+
+- readable single-column layouts;
+- centered content;
+- stable horizontal margins;
+- touch-friendly controls;
+- natural text reflow;
+- reduced visual clutter;
+- mobile-specific composition where a desktop structure does not translate effectively.
+
+This approach helps the experience retain its identity rather than becoming a compressed version of the desktop interface.
+
+---
+
+# Interaction Philosophy
+
+Interactions are used where they improve understanding or discovery.
+
+The experience focuses on making information feel connected rather than simply adding animation.
+
+Examples include:
+
+- stakeholder selection that changes ecosystem context;
+- filtering across event content;
+- guided registration steps;
+- dynamic digital pass generation;
+- shared theme behavior;
+- saved journey state.
+
+The interface is designed so that interaction has a clear purpose:
+
+**to help the visitor understand what matters to them and what to do next.**
+
+---
+
+# Accessibility
+
+Accessibility is considered part of the experience rather than an optional layer.
+
+The interface incorporates:
+
+- semantic HTML structure;
+- keyboard-accessible controls;
+- visible focus states;
+- accessible labels;
+- dynamic state handling;
+- skip-navigation support;
+- responsive text behavior;
+- reduced-motion considerations;
+- contrast-conscious visual design.
+
+The objective is to keep the experience usable across different interaction methods and viewport sizes.
+
+---
+
+# Technology
+
+The platform is intentionally lightweight and dependency-conscious.
+
+### Core technologies
+
+- **HTML5** — semantic structure and content
+- **CSS3** — design system, layouts, responsive behavior, and presentation
+- **JavaScript (ES6+)** — interactions, filtering, navigation, registration, and state
+- **Browser APIs** — client-side storage, DOM interaction, and responsive behavior
+
+The current experience does not require a frontend framework.
+
+This keeps the implementation portable and makes the experience suitable for direct static deployment.
+
+---
+
+# Frontend Structure
+
+The project separates shared visual foundations, reusable components, page-specific composition, responsive behavior, and interaction logic.
+
+### Styles
+
+```text
+css/
+├── tokens.css
+├── base.css
+├── components.css
+├── pages.css
+├── responsive.css
+└── final-polish.css
+```
+
+### Interaction logic
+
+```text
+js/
+├── data.js
+├── main.js
+├── navigation.js
+├── theme.js
+├── ecosystem.js
+├── tracks.js
+├── speakers.js
+├── past-events.js
+├── partners.js
+├── registration.js
+├── filters.js
+└── contact.js
+```
+
+This structure keeps shared patterns reusable while allowing individual event experiences to retain their own behavior and composition.
+
+---
+
+# Content Relationships
+
+The underlying content model is organized around connected event information:
 
 ```text
 Stakeholder
@@ -244,435 +312,50 @@ Stakeholder
    └── Next Actions
 ```
 
-The current implementation does not include a CMS or application backend. The data model is kept centralized so future migration to an API, CMS, or application framework can preserve the existing content relationships.
+The purpose of this structure is to make relationships visible throughout the experience.
 
-### Primary developer rule
-
-When changing event content, prefer updating the shared data source in:
-
-```text
-js/data.js
-```
-
-instead of duplicating the same information across multiple HTML files.
-
-This reduces content drift between pages.
+A visitor can begin with their role, move toward a relevant theme, discover people and opportunities, and continue toward an action without losing context.
 
 ---
 
-# 7. Developer Guide
+# Theme Support
 
-This section is intended for engineers or maintainers who will modify, deploy, or extend the website.
+The platform supports both dark and light themes through a shared theme experience.
 
-## 7.1 Where to Make Common Changes
-
-### Event content
-
-Use:
-
-```text
-js/data.js
-```
-
-for shared event information, tracks, speakers, ecosystem relationships, and other reusable content data.
-
-### Shared visual tokens
-
-Use:
-
-```text
-css/tokens.css
-```
-
-for shared color, spacing, typography, sizing, and other design-system values.
-
-Do not introduce one-off values into multiple files when the value represents a reusable design token.
-
-### Shared components
-
-Use:
-
-```text
-css/components.css
-```
-
-for patterns that appear across multiple pages.
-
-### Page-specific styling
-
-Use:
-
-```text
-css/pages.css
-```
-
-when the change genuinely belongs to one page or one page-specific component.
-
-### Shared responsive behavior
-
-Use:
-
-```text
-css/responsive.css
-```
-
-for cross-page breakpoint behavior.
-
-### Ecosystem-specific responsive behavior
-
-The stakeholder map is intentionally isolated from broad global responsive overrides. Changes to its narrow-screen composition should remain scoped to the ecosystem experience.
-
-This is important because changing the global container or breakpoint rules can unintentionally alter unrelated pages.
-
-### Interactions
-
-Use the page-specific JavaScript module rather than placing large inline scripts inside HTML files.
+Theme preference can be retained locally so that the interface can remain consistent across visits in supported browsers.
 
 ---
 
-## 7.2 Change-Safety Rules
+# Client-Side Personalization
 
-When modifying the production frontend:
+The experience uses lightweight browser-side state for selected preferences and journey information.
 
-1. Prefer the smallest scoped change that solves the problem.
-2. Avoid global CSS overrides when the requirement is page-specific.
-3. Keep shared data centralized.
-4. Preserve existing accessibility attributes and keyboard behavior.
-5. Test both the changed viewport and at least one desktop viewport after a responsive change.
-6. Verify adjacent components for regression rather than testing only the modified element.
-7. Do not place secrets, credentials, API keys, or private data in frontend files.
+This supports experiences such as:
 
----
+- theme preference;
+- selected ecosystem information;
+- saved journey items;
+- registration-related state.
 
-## 7.3 Responsive Development
-
-The website uses shared breakpoints plus page-specific responsive composition.
-
-### Desktop priorities
-
-- information density;
-- multi-column layouts;
-- visual composition;
-- hover/pointer-driven discovery;
-- relationship mapping.
-
-### Tablet priorities
-
-- reduced column count;
-- comfortable tap targets;
-- controlled content width;
-- predictable transition from desktop composition.
-
-### Mobile priorities
-
-- single-column readability;
-- centered content;
-- stable side margins;
-- content reflow;
-- touch-friendly controls;
-- reduced visual clutter.
-
-### Important mobile rule
-
-Do not solve a mobile overflow problem by adding arbitrary negative margins or by forcing a desktop-sized child into a smaller viewport.
-
-For the ecosystem map, the intended model is:
-
-```text
-Viewport
-   ↓
-Available content width
-   ↓
-Centered visual component
-   ↓
-Internal content reflows within that component
-```
+This keeps personalization immediate and responsive within the frontend experience.
 
 ---
 
-# 8. Production Deployment
+# Experience Philosophy
 
-## 8.1 Hosting Model
+Web3 Carnival is built around a simple idea:
 
-The repository can be deployed as a static website.
+> An event should feel like an ecosystem people can navigate, not a brochure they scroll through.
 
-A compatible deployment target should support:
+That principle influences the structure of the platform:
 
-- HTTPS;
-- HTML5;
-- CSS;
-- JavaScript;
-- static image assets;
-- client-side browser storage.
+**Role → Relevance → Discovery → Connection → Action**
 
-Examples include standard web servers and static hosting platforms.
-
-## 8.2 Deployment Directory
-
-The deployable site is contained in:
-
-```text
-web3/
-```
-
-The production document root should point to the directory containing `index.html`.
-
-## 8.3 HTTPS
-
-Production traffic should be served over HTTPS.
-
-This is especially important for:
-
-- secure browser behavior;
-- predictable browser storage behavior;
-- external integrations added later;
-- protection against content or connection tampering.
-
-## 8.4 No Build Step
-
-The current repository does not require:
-
-```text
-npm install
-npm run build
-webpack
-vite build
-```
-
-for its included static frontend.
-
-The HTML, CSS, JavaScript, and assets are deployed directly.
-
-## 8.5 Caching
-
-When deploying behind a CDN or static host, use cache policies appropriate to the asset type.
-
-A practical production approach is:
-
-- long-lived caching for versioned/static image assets;
-- controlled caching for CSS and JavaScript during active releases;
-- short or revalidated caching for HTML during frequent content changes.
-
-## 8.6 Deployment Verification
-
-After every production deployment:
-
-1. Open the production URL in a clean browser session.
-2. Verify the homepage and primary navigation.
-3. Open Ecosystem and test stakeholder switching.
-4. Verify Tracks and Speakers.
-5. Complete the registration flow.
-6. Verify digital pass generation.
-7. Test mobile navigation.
-8. Check for horizontal scrolling.
-9. Open browser developer tools and check for console errors.
-10. Verify assets load with HTTP status 200 where applicable.
+The result is an experience designed to help visitors understand where they fit within the event and what they can do next.
 
 ---
 
-# 9. Production QA and Testing
-
-## 9.1 Important Repository Note
-
-The current repository does **not** include a JavaScript unit-test suite, end-to-end automation suite, CI pipeline, or browser-test configuration.
-
-Therefore, the README does not claim automated test coverage.
-
-Production release validation should be performed using the manual QA matrix below unless an automated test layer is added later.
-
----
-
-## 9.2 Functional QA
-
-### Navigation
-
-- [ ] Homepage navigation opens every primary destination.
-- [ ] Desktop navigation links work.
-- [ ] Mobile navigation opens correctly.
-- [ ] Mobile navigation closes after selection.
-- [ ] No dead internal links exist.
-- [ ] Browser back/forward navigation does not leave the interface in an unusable state.
-
-### Ecosystem
-
-- [ ] All stakeholder segments can be selected.
-- [ ] Selected-state styling is visible.
-- [ ] Connected content updates correctly.
-- [ ] Track links point to the intended destinations.
-- [ ] Speaker entries open correctly.
-- [ ] No horizontal overflow occurs at narrow widths.
-- [ ] The stakeholder cards stay centered.
-- [ ] The detail panel stays centered.
-- [ ] Text remains readable at 320px-wide viewports.
-
-### Tracks
-
-- [ ] Track content loads.
-- [ ] Track filtering works.
-- [ ] Relevant controls remain usable on mobile.
-- [ ] No clipped labels or controls appear.
-
-### Speakers
-
-- [ ] Speaker content loads.
-- [ ] Filtering works.
-- [ ] Speaker cards remain readable at narrow widths.
-- [ ] Images load correctly.
-- [ ] Links and interaction states work.
-
-### Registration
-
-- [ ] Step 1 loads.
-- [ ] Step 2 loads.
-- [ ] Step 3 validation behaves correctly.
-- [ ] Step 4 selections are retained.
-- [ ] Step 5 generates the digital pass.
-- [ ] Back/next interactions do not unexpectedly erase entered data.
-- [ ] Refresh behavior is acceptable for the intended production flow.
-
-### Theme
-
-- [ ] Dark theme applies correctly.
-- [ ] Light theme applies correctly.
-- [ ] Theme state persists when browser storage is available.
-- [ ] The site remains usable if browser storage is unavailable.
-
----
-
-# 10. Responsive QA Matrix
-
-At minimum, validate the site at these viewport widths:
-
-| Category | Widths |
-|---|---|
-| Small mobile | 320px, 360px |
-| Standard mobile | 390px, 430px |
-| Tablet | 768px, 820px, 1024px |
-| Desktop | 1280px, 1440px, 1920px |
-
-### Mobile checks
-
-For every mobile width:
-
-- [ ] no unexpected horizontal scrollbar;
-- [ ] no card extends beyond the viewport;
-- [ ] left/right spacing is consistent;
-- [ ] headings wrap correctly;
-- [ ] buttons remain tappable;
-- [ ] navigation remains reachable;
-- [ ] images preserve their intended aspect ratio;
-- [ ] relationship-map cards remain centered;
-- [ ] ecosystem detail content remains within the viewport.
-
-### Desktop checks
-
-For every desktop width:
-
-- [ ] no unintended mobile rules leak into desktop;
-- [ ] primary content remains visually centered;
-- [ ] multi-column layouts retain intended hierarchy;
-- [ ] hover interactions remain functional;
-- [ ] whitespace does not become excessive at larger widths.
-
----
-
-# 11. Browser QA
-
-At minimum, production validation should cover:
-
-- Chromium-based browsers;
-- Firefox;
-- WebKit/Safari where available.
-
-The goal is to detect:
-
-- layout differences;
-- unsupported browser behavior;
-- font/rendering issues;
-- `localStorage` edge cases;
-- focus behavior;
-- responsive breakpoint issues;
-- JavaScript console errors.
-
-Browser-specific behavior should be fixed at the smallest responsible scope rather than by adding broad compatibility hacks.
-
----
-
-# 12. Accessibility QA
-
-Accessibility should be treated as part of release quality.
-
-Verify:
-
-- semantic headings follow a logical hierarchy;
-- interactive elements are keyboard reachable;
-- focus states remain visible;
-- buttons and links have meaningful accessible names;
-- dynamic controls expose their state where required;
-- mobile navigation is keyboard operable;
-- form controls have associated labels;
-- text remains readable at small widths;
-- reduced-motion preferences are respected where animations are present;
-- color is not the only method used to communicate state.
-
-A production release should additionally be checked with an accessibility auditing tool and, where practical, a screen reader.
-
----
-
-# 13. Performance QA
-
-Before release, verify:
-
-- no unnecessarily large asset is loaded for a small component;
-- images are served at appropriate dimensions;
-- unused console logging is removed;
-- JavaScript errors are absent;
-- layout does not visibly jump while assets load;
-- the homepage remains responsive during initial interaction;
-- third-party requests, if later introduced, are limited and intentional.
-
-The current repository contains a lightweight frontend and does not require a build optimizer, but deployment-level compression and CDN delivery are still recommended.
-
----
-
-# 14. Security and Production Boundaries
-
-The frontend is client-side code. Anything shipped under `web3/` is visible to users.
-
-Do not put any of the following into frontend source:
-
-- API secrets;
-- private tokens;
-- database credentials;
-- administrative keys;
-- confidential user information.
-
-The current registration and digital-pass behavior is client-side. If the production event requires authoritative registration, payment, ticket issuance, attendee authentication, or protected attendee data, those operations must be implemented through a trusted backend service rather than browser-only JavaScript.
-
----
-
-# 15. Current Runtime Boundaries
-
-The repository provides the frontend experience.
-
-The following services are **not implemented inside this package**:
-
-- server-side authentication;
-- server-side registration persistence;
-- payment processing;
-- authoritative ticket issuance;
-- CRM synchronization;
-- real-time event scheduling backend;
-- production analytics pipeline;
-- content-management backend.
-
-These are architectural boundaries, not defects in the frontend repository.
-
-If external production services are added later, their integration should be isolated behind explicit API/service layers instead of embedding credentials or business logic directly in reusable UI components.
-
----
-
-# 16. Project Structure
+# Project Structure
 
 ```text
 web3/
@@ -722,136 +405,80 @@ web3/
 
 ---
 
-# 17. Local Development
+# Deployment
 
-## Option A — Direct browser open
+The current frontend is suitable for static web deployment.
 
-Open:
+The project can be served directly from a standard web server or static hosting platform capable of delivering HTML, CSS, JavaScript, and image assets.
 
-```text
-index.html
-```
-
-in a modern browser.
-
-## Option B — Local HTTP server
-
-Using Python:
+A local preview can also be started with:
 
 ```bash
 python -m http.server 8000
 ```
 
-Then open:
+and accessed at:
 
 ```text
 http://localhost:8000/
 ```
 
-## Option C — VS Code
+---
 
-Open the `web3` folder in VS Code and use the included `.vscode` configuration or any local static-server extension.
+# Current Scope
 
-For frontend changes, browser developer tools should be used to inspect:
+The current implementation focuses on the complete frontend experience and its interactive event journeys.
 
-- viewport dimensions;
-- layout boxes;
-- computed styles;
-- console errors;
-- storage state;
-- keyboard focus;
-- network asset failures.
+Client-side experiences include:
+
+- event discovery;
+- stakeholder exploration;
+- track and speaker discovery;
+- guided registration;
+- personalized digital pass presentation;
+- theme switching;
+- browser-side journey state.
+
+Capabilities such as authenticated attendee accounts, payment processing, server-side ticket issuance, CRM synchronization, real-time event operations, and content management require corresponding production services beyond the frontend layer.
 
 ---
 
-# 18. Release Checklist
+# Future Evolution
 
-A release should not be considered complete until the following are checked.
+The architecture is designed so that the experience can evolve into a larger event platform.
 
-## Functional
+Potential extensions include:
 
-- [ ] All primary pages open.
-- [ ] Navigation works on desktop and mobile.
-- [ ] Ecosystem stakeholder selection works.
-- [ ] Tracks work.
-- [ ] Speakers work.
-- [ ] Registration works from start to finish.
-- [ ] Digital pass generation works.
-- [ ] Theme switching works.
+- content management for tracks, sessions, speakers, and partners;
+- persistent attendee accounts;
+- server-side registration;
+- ticket and credential management;
+- personalized attendee dashboards;
+- event networking;
+- calendar integration;
+- CRM integration;
+- analytics and engagement insights;
+- real-time schedule updates.
 
-## Responsive
-
-- [ ] 320px checked.
-- [ ] 360px checked.
-- [ ] 390px checked.
-- [ ] 430px checked.
-- [ ] Tablet checked.
-- [ ] Desktop checked.
-- [ ] No unintended horizontal scrolling.
-
-## Visual
-
-- [ ] No clipped content.
-- [ ] No broken images.
-- [ ] No unexpected spacing regressions.
-- [ ] Typography remains consistent.
-- [ ] Mobile cards stay within viewport.
-- [ ] Ecosystem relationship-map composition remains centered.
-
-## Accessibility
-
-- [ ] Keyboard navigation checked.
-- [ ] Focus states checked.
-- [ ] Labels checked.
-- [ ] Dynamic states checked.
-- [ ] Reduced-motion behavior checked.
-
-## Browser
-
-- [ ] Chromium checked.
-- [ ] Firefox checked.
-- [ ] WebKit/Safari checked where available.
-
-## Production
-
-- [ ] HTTPS enabled.
-- [ ] Correct document root configured.
-- [ ] Production URL verified.
-- [ ] Browser console checked for errors.
-- [ ] Required assets load successfully.
-- [ ] No development-only debugging output remains.
-- [ ] No secrets or credentials are present in frontend files.
+The underlying information architecture can remain intact as these capabilities are introduced.
 
 ---
 
-# 19. Change Management
+# Why the Experience Is Different
 
-For future modifications:
+The website is designed around relationships rather than isolated content.
 
-1. Identify whether the requirement is global, page-specific, or component-specific.
-2. Modify the smallest appropriate source file.
-3. Preserve existing shared data relationships.
-4. Run the relevant functional QA.
-5. Run the responsive QA matrix when layout changes are involved.
-6. Check at least one unaffected page for regression.
-7. Review browser console errors before deployment.
-8. Deploy only after the production checklist passes.
+A visitor should be able to move naturally through:
 
-For responsive CSS changes, the minimum regression set should include:
+**Stakeholder → Track → Speaker → Opportunity → Registration → Digital Pass**
 
-```text
-320px
-390px
-430px
-768px
-1440px
-```
+That continuity makes the event feel like one connected digital product.
 
-This catches the most common failure mode where a mobile fix unintentionally changes desktop behavior.
+Instead of asking visitors to understand the entire event first, the experience begins with what is most relevant to them and expands outward.
 
 ---
 
-# 20. Design Documentation
+# Design Documentation
 
 Additional design rationale is available in:
 
@@ -859,54 +486,27 @@ Additional design rationale is available in:
 design.md
 ```
 
-Use that document for deeper explanation of:
-
-- visual direction;
-- interaction principles;
-- layout reasoning;
-- design-system choices.
-
-This README should remain the operational and technical entry point for deployment and maintenance.
+This document provides deeper context around the visual system, interaction principles, and design direction.
 
 ---
 
-# 21. Important Implementation Note
+# Closing Statement
 
-The Stakeholder Relationship Map recently received a targeted narrow-screen responsive correction.
+Web3 Carnival is a connected event experience built to make a complex Web3 ecosystem easier to discover, understand, and navigate.
 
-The correction is intentionally scoped to the ecosystem experience and focuses on:
+It combines:
 
-- dynamic width based on available viewport space;
-- centered stakeholder cards;
-- centered detail content;
-- safe shrinking of nested grid items;
-- preventing horizontal overflow;
-- preserving the wider-screen composition.
+- role-based exploration;
+- connected event content;
+- immersive visual design;
+- responsive interaction;
+- guided registration;
+- personalized event output.
 
-Do not replace this behavior with a global fixed-width rule. The map should derive its usable width from the available viewport.
-
----
-
-# 22. Summary
-
-Web3 Carnival is implemented as a connected event experience rather than a conventional event brochure.
-
-The core product decisions are:
-
-- role-based ecosystem discovery;
-- connected tracks, speakers, and opportunities;
-- progressive registration;
-- personalized digital pass output;
-- centralized content data;
-- responsive layouts that are recomposed where required;
-- accessibility-aware interaction;
-- a cohesive premium visual system;
-- a lightweight static frontend suitable for direct deployment.
-
-The repository is production-ready as a frontend delivery package within the boundaries documented above. Any backend-dependent capability such as authoritative ticketing, authentication, payment, persistent attendee records, or CRM integration must be provided by the corresponding production services.
+The result is a digital experience that treats the event as an ecosystem of people, ideas, tracks, and opportunities — not simply a collection of pages.
 
 ---
 
 ## License / Usage
 
-This repository is provided as a project implementation. Confirm ownership and licensing requirements for any third-party images, fonts, logos, or event content before public or commercial deployment.
+Confirm ownership and licensing requirements for any third-party images, fonts, logos, and event content before public or commercial use.
