@@ -112,6 +112,7 @@
     function saveJourney(ids) {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(ids));
+        window.dispatchEvent(new CustomEvent('w3c:carnival-legacy-sync', { detail: { ids } }));
       } catch (e) {
         // localStorage disabled/restricted — journey just won't persist
       }
@@ -347,6 +348,7 @@
         <p class="modal-desc" id="session-modal-desc">${escapeHtml(session.description)}</p>
         <div class="modal-actions">
           <button type="button" class="btn btn-primary session-add-btn${added ? ' added' : ''}" data-journey-toggle="${session.id}" aria-pressed="${added ? 'true' : 'false'}" aria-label="${added ? 'Remove' : 'Add'} ${escapeHtml(session.title)} ${added ? 'from' : 'to'} My Journey">${added ? '✓ In Journey' : '+ Add to My Journey'}</button>
+          <button type="button" class="btn btn-secondary" data-carnival-calendar-session="${session.id}">Add to Calendar</button>
         </div>
         ${related.length ? `
           <div class="modal-related-title">Related Sessions</div>

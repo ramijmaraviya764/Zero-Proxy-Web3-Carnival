@@ -8,7 +8,461 @@ Web3 Carnival brings together event discovery, stakeholder exploration, tracks, 
 
 ## Overview
 
-Traditional event websites often present information as separate pages: event details, speakers, schedules, partners, and registration.
+Traditional event websites often present information as separate pages: event details, speakers, schedules, partners, and registra# Web3 Carnival
+
+> A premium, responsive digital experience for a global Web3 event — built around discovery, relevance, planning, and action.
+
+Web3 Carnival is a framework-free front-end event experience built with **HTML5, CSS3, and vanilla JavaScript**. It combines event discovery, persona-based navigation, tracks, speakers, ecosystem exploration, guided registration, digital pass presentation, and a persistent **My Carnival** planning experience.
+
+The project is designed to make a complex Web3 event feel like a connected ecosystem rather than a collection of disconnected pages.
+
+---
+
+## Overview
+
+The experience is organized around a simple journey:
+
+**Discover → Personalize → Explore → Plan → Register**
+
+Visitors can:
+
+- Discover the event through role- and persona-based entry points.
+- Explore Web3 tracks, sessions, speakers, partners, and ecosystem stakeholders.
+- Filter and navigate event content without a frontend framework.
+- Build a personal event journey with **My Carnival**.
+- Save sessions, speakers, and tracks in browser-side state.
+- Detect schedule conflicts and generate a personalized schedule.
+- Export saved sessions to an `.ics` calendar file.
+- Complete a guided registration flow and access a digital pass presentation.
+- Switch between dark and light themes with locally retained preferences.
+
+---
+
+## Experience Highlights
+
+### Event Discovery
+
+- Branded hero experience and event storytelling.
+- Persona-based CTAs such as **Attend, Speak, Build, Invest, and Partner**.
+- Track highlights, event statistics, and contextual calls to action.
+- Connected navigation across the full event experience.
+
+### Content Exploration
+
+- Dedicated event overview and agenda.
+- Track discovery across the core Web3 themes.
+- Speaker directory with filtering.
+- Past-event archive and timeline.
+- Ecosystem and stakeholder exploration.
+- Partner and sponsor presentation.
+- Contact and support routes.
+
+### My Carnival
+
+**My Carnival** acts as the attendee planning layer across the site.
+
+It includes:
+
+- Persistent saved sessions, speakers, and tracks.
+- A personal agenda/dashboard.
+- Next-session visibility.
+- Schedule conflict detection.
+- Deterministic recommendations based on saved context.
+- A **Build My Schedule** workflow.
+- Calendar export through `.ics`.
+- Registration and digital-pass linking.
+- Client-side persistence using browser storage.
+
+The planner is intentionally implemented as a lightweight front-end feature rather than a backend-dependent account system.
+
+---
+
+## Product Flow
+
+```mermaid
+flowchart LR
+    A[Home] --> B[Personalize]
+    B --> C[Explore Tracks]
+    C --> D[Explore Speakers]
+    D --> E[Explore Event]
+    E --> F[My Carnival]
+    F --> G[Build Schedule]
+    G --> H[Register]
+    H --> I[Digital Pass]
+    I --> J[Event Day]
+```
+
+The broader information architecture connects the event through:
+
+**Stakeholder → Track → Session → Speaker → Opportunity → Registration → Digital Pass**
+
+---
+
+## Pages
+
+| Page | Purpose |
+|---|---|
+| `index.html` | Home, hero, personas, track highlights, stats, and event CTAs |
+| `event.html` | Event overview, agenda, venue, and key event details |
+| `tracks.html` | Web3 track exploration |
+| `speakers.html` | Speaker directory and filtering |
+| `past-events.html` | Past event archive and timeline |
+| `ecosystem.html` | Ecosystem and stakeholder discovery |
+| `partners.html` | Partner and sponsor listings |
+| `register.html` | Guided registration experience |
+| `contact.html` | Contact and support information |
+| `my-carnival.html` | Personalized attendee planning dashboard |
+
+---
+
+## Tech Stack
+
+### Core
+
+- **HTML5** — semantic page structure and content
+- **CSS3** — design system, layout, responsive behavior, and presentation
+- **JavaScript (ES6+)** — navigation, filtering, registration, personalization, scheduling, and UI interactions
+- **Browser APIs** — DOM interaction, local storage, and client-side calendar export
+
+### Architecture
+
+The project deliberately avoids a frontend framework. Shared visual foundations, page composition, responsive behavior, and interaction logic are separated into focused files.
+
+---
+
+## Project Structure
+
+```text
+web3/
+├── index.html
+├── event.html
+├── tracks.html
+├── speakers.html
+├── past-events.html
+├── ecosystem.html
+├── partners.html
+├── register.html
+├── contact.html
+├── my-carnival.html
+│
+├── assets/
+│
+├── css/
+│   ├── tokens.css
+│   ├── base.css
+│   ├── components.css
+│   ├── pages.css
+│   ├── responsive.css
+│   ├── final-polish.css
+│   └── my-carnival.css
+│
+├── js/
+│   ├── data.js
+│   ├── main.js
+│   ├── navigation.js
+│   ├── theme.js
+│   ├── filters.js
+│   ├── tracks.js
+│   ├── speakers.js
+│   ├── past-events.js
+│   ├── ecosystem.js
+│   ├── partners.js
+│   ├── registration.js
+│   ├── contact.js
+│   ├── my-carnival-core.js
+│   └── my-carnival.js
+│
+├── screenshots/
+│
+├── tests/
+│   └── my-carnival-core.test.js
+│
+├── design.md
+└── README.md
+```
+
+### Separation of concerns
+
+**CSS**
+- `tokens.css` — shared design tokens
+- `base.css` — global foundations
+- `components.css` — reusable UI patterns
+- `pages.css` — page-level composition
+- `responsive.css` — responsive behavior
+- `final-polish.css` — refined global presentation
+- `my-carnival.css` — planner-specific styling
+
+**JavaScript**
+- `data.js` — centralized event content
+- `navigation.js` — shared navigation behavior
+- `theme.js` — theme switching and persistence
+- `filters.js` — filtering utilities
+- page-specific files — page interaction and rendering
+- `my-carnival-core.js` — planner state, conflict logic, recommendations, and calendar generation
+- `my-carnival.js` — planner page and UI integration
+
+---
+
+## Data Model
+
+Event content is centralized in `js/data.js` rather than duplicated across pages.
+
+The model connects:
+
+```text
+WEB3_CARNIVAL_DATA
+├── personas
+├── tracks
+├── sessions
+├── speakers
+├── eventDetails
+└── pastEvents
+```
+
+This makes the frontend easier to update while keeping the presentation layer separate from the content model.
+
+---
+
+## Client-Side State
+
+The project intentionally uses browser-side state instead of a backend account system.
+
+Examples include:
+
+- theme preference
+- selected ecosystem information
+- saved sessions
+- saved speakers
+- saved tracks
+- planner state
+- registration-related state
+
+The My Carnival layer maintains compatibility with the existing saved-journey behavior while extending it into a broader personal planning experience.
+
+Because this state is stored in the browser, it is **device/browser specific** and is not currently synchronized between devices.
+
+---
+
+## Local Development
+
+This is a static site and does not require a frontend framework, database, or application server.
+
+### Option 1 — Python
+
+From the project root:
+
+```bash
+python -m http.server 5500
+```
+
+Open:
+
+```text
+http://localhost:5500
+```
+
+### Option 2 — Node static server
+
+If you already use a static server such as `serve`:
+
+```bash
+npx serve .
+```
+
+Open the local URL shown by the server.
+
+### Option 3 — VS Code
+
+Open the project folder in VS Code and use a static-server extension such as **Live Server**.
+
+Using an HTTP server is recommended over opening pages directly with `file://` because the project contains multiple local assets and scripts.
+
+---
+
+## Testing
+
+The core My Carnival scheduling and state logic is covered using Node's built-in test runner.
+
+Run:
+
+```bash
+node --test tests/my-carnival-core.test.js
+```
+
+The test suite covers:
+
+- migration from the legacy saved-journey state
+- overlapping-session conflict detection
+- malformed or invalid session-time handling
+- schedule generation without conflicting sessions
+- `.ics` calendar export generation
+
+---
+
+## Theme System
+
+The interface supports both **dark and light themes** through shared design tokens and theme behavior.
+
+The selected theme can be retained locally so the interface remains consistent across supported visits in the same browser.
+
+The overall design direction is intentionally:
+
+- dark-first
+- premium
+- editorial
+- immersive
+- restrained in color
+- responsive across desktop and mobile
+
+Detailed visual reasoning is documented in `design.md`.
+
+---
+
+## Deployment
+
+The current project is suitable for static hosting.
+
+It can be deployed to any platform capable of serving:
+
+- HTML
+- CSS
+- JavaScript
+- image assets
+- SVG assets
+
+Examples of suitable static deployment platforms include GitHub Pages, Netlify, Vercel static hosting, Cloudflare Pages, or a standard web server.
+
+No backend is required for the current front-end prototype.
+
+---
+
+## Current Scope
+
+This repository focuses on the **frontend event experience and interactive user journey**.
+
+### Included
+
+- Event discovery
+- Persona-based navigation
+- Track and session exploration
+- Speaker discovery and filtering
+- Ecosystem and partner exploration
+- Guided registration
+- Digital pass presentation
+- My Carnival planning
+- Theme switching
+- Browser-side personalization
+- Calendar export
+- Responsive desktop and mobile layouts
+
+### Not currently included
+
+- Authenticated attendee accounts
+- Server-side registration storage
+- Payment processing
+- Production ticket issuance
+- CRM synchronization
+- Real-time event operations
+- Content-management backend
+- Cross-device planner synchronization
+
+Those capabilities would require production backend and infrastructure services beyond the current frontend layer.
+
+---
+
+## Future Evolution
+
+The current information architecture is intentionally structured so the product can evolve without rebuilding the experience from scratch.
+
+Potential next-stage capabilities include:
+
+- Content management for tracks, sessions, speakers, and partners
+- Persistent attendee accounts
+- Server-side registration
+- Ticket and credential management
+- Cross-device attendee dashboards
+- Event networking
+- Live schedule updates
+- Venue navigation
+- CRM integration
+- Analytics and engagement insights
+- Real-time event operations
+
+The existing relationships between roles, tracks, sessions, speakers, and actions can remain the foundation for those extensions.
+
+---
+
+## Design Philosophy
+
+> **An event should feel like an ecosystem people can navigate, not a brochure they scroll through.**
+
+The experience is built around:
+
+**Role → Relevance → Discovery → Connection → Action**
+
+That principle drives the information architecture and the visual hierarchy.
+
+Instead of requiring visitors to understand the entire event before taking action, the site starts from what is most relevant to the visitor and expands outward into tracks, people, opportunities, and planning.
+
+---
+
+## Screenshots
+
+The repository includes a `screenshots/` directory containing desktop and mobile references for the experience.
+
+For a complete presentation flow, the project also includes the major page journey:
+
+**Home → Event → Tracks → Speakers → Past Events → Ecosystem → Partners → Contact → Register → My Carnival**
+
+---
+
+## Design Documentation
+
+For deeper visual and interaction rationale, see:
+
+```text
+design.md
+```
+
+This document serves as the design reference for the event experience, including the visual system, interaction direction, and page-level design intent.
+
+---
+
+## Project Status
+
+**Status:** Frontend prototype / portfolio and presentation build
+
+The current implementation is intentionally lightweight and framework-free. It is designed to demonstrate the product direction, information architecture, responsive UI, and attendee planning experience.
+
+---
+
+## Usage & Licensing
+
+This repository is intended for event-site prototype, portfolio, and demonstration use unless otherwise specified by the owning organization.
+
+Before public or commercial use, confirm ownership and licensing requirements for all third-party:
+
+- images
+- fonts
+- logos
+- icons
+- event content
+- brand assets
+
+No ownership or commercial license for third-party material is implied by this repository.
+
+---
+
+## Summary
+
+Web3 Carnival is designed as a connected digital event product rather than a static collection of pages.
+
+It brings together:
+
+**Role-based exploration + connected event content + premium visual design + responsive interaction + guided registration + personalized planning**
+
+The result is a frontend experience that helps visitors understand where they fit within the event, discover what matters to them, build a plan, and move toward participation.
+tion.
 
 Web3 Carnival takes a more connected approach.
 

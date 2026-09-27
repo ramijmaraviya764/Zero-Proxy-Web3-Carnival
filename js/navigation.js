@@ -83,6 +83,11 @@
 
         <!-- Nav Actions: Theme Toggle, Register CTA, Mobile Menu Button -->
         <div class="nav-actions">
+          <button type="button" class="nav-carnival-trigger" data-carnival-open aria-label="Open My Carnival planner">
+            <span>My Carnival</span>
+            <span class="nav-carnival-count" data-carnival-count hidden aria-label="Saved items count">0</span>
+          </button>
+
           <button class="theme-toggle-btn" aria-label="Toggle theme" title="Toggle theme">
             <!-- Moon icon (for dark mode) -->
             <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -116,6 +121,10 @@
       <div id="mobile-nav-drawer" class="mobile-nav-drawer" aria-hidden="true">
         <nav class="mobile-nav-links" aria-label="Mobile Navigation">
           ${mobileLinksHtml}
+          <button type="button" class="mobile-nav-link mobile-nav-link--carnival" data-carnival-open>
+            <span>My Carnival</span>
+            <span aria-hidden="true">↗</span>
+          </button>
         </nav>
         <div class="mobile-nav-cta">
           <a href="register.html" class="btn btn-primary btn-full">Register Now</a>

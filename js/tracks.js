@@ -172,6 +172,7 @@
         <div class="track-detail-stats" aria-label="Track summary">
           <div><strong>${trackSpeakers.length}</strong><span>speakers</span></div>
           <div><strong>${trackSessions.length}</strong><span>sessions</span></div>
+          <button type="button" class="btn btn-secondary btn-sm" data-carnival-save-track="${escapeHtml(track.id)}" aria-pressed="false">Follow Track</button>
           <a href="event.html?track=${encodeURIComponent(track.id)}#discovery">Full schedule ↗</a>
         </div>`;
     }
@@ -226,6 +227,7 @@
             <p>${escapeHtml(session.description)}</p>
             <div class="explorer-session-footer">
               <span>${escapeHtml(speaker ? speaker.name : session.speaker)}</span>
+              <button type="button" class="btn btn-ghost btn-sm" data-carnival-save-session="${escapeHtml(session.id)}" aria-pressed="false">Save Session</button>
               <a href="event.html?session=${encodeURIComponent(session.id)}#discovery">View in Event ↗</a>
             </div>
           </article>`;
