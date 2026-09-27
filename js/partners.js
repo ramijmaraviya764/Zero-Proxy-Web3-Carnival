@@ -29,6 +29,28 @@
       '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
     }[char]));
 
+
+    /**
+     * Render a consistent monochrome SVG icon for partner categories.
+     * @param {string} id Partner category identifier.
+     * @returns {string} Inline SVG markup.
+     */
+    function renderPartnerIcon(id) {
+      const paths = {
+        sponsor: '<path d="M12 3v18M7 6h8a3 3 0 0 1 0 6H9a3 3 0 0 0 0 6h8"/>',
+        payment: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/>',
+        ticketing: '<path d="M5 5h14v14H5z"/><path d="M9 5v14M15 5v14"/>',
+        community: '<circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M3 20c.7-3 2.5-5 5-5s4.3 2 5 5M11 20c.7-3 2.5-5 5-5s4.3 2 5 5"/>',
+        media: '<path d="M4 5h16v14H4z"/><path d="m10 9 5 3-5 3V9Z"/>',
+        speaker: '<path d="M12 14a4 4 0 1 0-4-4v5a4 4 0 0 0 8 0v-5"/><path d="M5 13v1a7 7 0 0 0 14 0v-1"/><path d="M12 21v-3"/>',
+        volunteer: '<path d="M8 12a4 4 0 1 0-4-4"/><path d="M16 12a4 4 0 1 1 4-4"/><path d="M4 20c0-3 2-5 5-5h6c3 0 5 2 5 5"/>',
+        demo: '<path d="M7 4h10v16H7z"/><path d="m10 9 5 3-5 3V9Z"/>',
+        global: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>'
+      };
+      const key = /payment/i.test(id) ? 'payment' : /ticket/i.test(id) ? 'ticketing' : /community/i.test(id) ? 'community' : /media/i.test(id) ? 'media' : /speaker/i.test(id) ? 'speaker' : /volunteer/i.test(id) ? 'volunteer' : /demo/i.test(id) ? 'demo' : /global/i.test(id) ? 'global' : 'sponsor';
+      return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[key]}</svg>`;
+    }
+
     // Resolve each category's real partner list from partnerTiers by index
     // (single source of truth — names are never retyped here), or mark it
     // as a placeholder-only category when no tierIndex is supplied.
@@ -69,7 +91,7 @@
         const count = cat.partners.length || cat.placeholderCount;
         return `
           <a href="#partner-tier-${cat.id}" class="partner-category-link${i === 0 ? ' is-active' : ''}" data-category-link="${cat.id}">
-            <span aria-hidden="true">${cat.icon}</span>
+            <span aria-hidden="true">${renderPartnerIcon(cat.id)}</span>
             <span>${escapeHtml(cat.label)}</span>
             <span class="partner-category-count">${count}</span>
           </a>
@@ -106,18 +128,18 @@
         const placeholderTiles = Array.from({ length: cat.placeholderCount }).map((_, i) => `
           <div class="partner-tile is-placeholder">
             <span class="partner-tile-label">${escapeHtml(cat.tierLabel)}</span>
-            <span class="partner-placeholder-tag">Placeholder ${i + 1}</span>
+            <span class="partner-placeholder-tag">Open partnership</span>
           </div>
         `).join('');
 
         const note = cat.placeholderCount
-          ? `<p class="archive-gallery-note">${escapeHtml(cat.tierLabel)} isn't a confirmed, named partner in the supplied foundation yet — the tiles above are clearly marked open slots, not invented companies.</p>`
+          ? `<p class="archive-gallery-note">${escapeHtml(cat.tierLabel)} is currently an open partnership opportunity in the supplied foundation.</p>`
           : '';
 
         return `
           <div class="partner-tier-block" id="partner-tier-${cat.id}" data-tier-id="${cat.id}">
             <div class="partner-tier-header">
-              <div class="partner-tier-icon" aria-hidden="true">${cat.icon}</div>
+              <div class="partner-tier-icon" aria-hidden="true">${renderPartnerIcon(cat.id)}</div>
               <div>
                 <h3 class="partner-tier-name">${escapeHtml(cat.label)}</h3>
                 <p class="partner-tier-desc">${escapeHtml(cat.description)}</p>
@@ -157,7 +179,7 @@
       if (!els.valueProps || !valueProps.length) return;
       els.valueProps.innerHTML = valueProps.map(v => `
         <div class="card value-prop-card">
-          <div class="value-prop-icon" aria-hidden="true">${v.icon}</div>
+          <div class="value-prop-icon" aria-hidden="true">${renderPartnerIcon((v.id || v.title || 'sponsor').toLowerCase())}</div>
           <h3>${escapeHtml(v.title)}</h3>
           <p>${escapeHtml(v.desc)}</p>
         </div>
@@ -165,16 +187,11 @@
     }
 
     /* ---------- 7. Get Involved paths (real 6 application types) ---------- */
-    const involveIcons = {
-      sponsor: '\uD83E\uDD1D', speaker: '\uD83C\uDF99\uFE0F', media: '\uD83D\uDCF0',
-      community: '\uD83C\uDF10', volunteer: '\uD83D\uDE4C', 'super-demo': '\uD83D\uDE80'
-    };
-
     function renderInvolve() {
       if (!els.involveGrid || !involvePaths.length) return;
       els.involveGrid.innerHTML = involvePaths.map(path => `
         <div class="card involve-card">
-          <div class="value-prop-icon" aria-hidden="true">${involveIcons[path.id] || '\u2726'}</div>
+          <div class="value-prop-icon" aria-hidden="true">${renderPartnerIcon(path.id)}</div>
           <h3>${escapeHtml(path.title)}</h3>
           <p>${escapeHtml(path.description)}</p>
           <a href="register.html?type=${encodeURIComponent(path.id)}" class="btn btn-secondary btn-sm">Apply as ${escapeHtml(path.title)}</a>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact &amp; Help Desk — Web3 Carnival</title>
-  <meta name="description" content="Get in touch with the Web3 Carnival operations, sponsorship, and media teams.">
+  <meta name="description" content="Role-specific communication paths for attendees, sponsors, speakers, and media at Web3 Carnival 2026.">
   <meta name="theme-color" content="#05060B">
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -12,52 +12,242 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Design System CSS -->
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/pages.css">
   <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/final-polish.css">
 </head>
 <body>
 
   <a href="#main-content" class="skip-link">Skip to main content</a>
-
-  <!-- Header rendered by navigation.js -->
   <header id="site-header" class="site-header"></header>
 
   <main id="main-content">
-    <section class="page-header" aria-labelledby="page-title">
-      <div class="container page-header-content">
-        <nav class="page-breadcrumbs" aria-label="Breadcrumb">
+    <section class="page-intro" aria-labelledby="page-title">
+      <div class="container page-intro__container">
+        <nav class="page-intro__breadcrumb" aria-label="Breadcrumb">
           <a href="index.html">Home</a>
-          <span aria-hidden="true">/</span>
+          <span class="page-intro__breadcrumb-sep" aria-hidden="true">/</span>
           <span aria-current="page">Contact</span>
         </nav>
-        <h1 id="page-title" class="page-title">Contact &amp; Inquiries</h1>
-        <p class="page-lead">Direct communication channels for sponsors, media accreditation, speakers, and attendee support.</p>
+        <div class="page-intro__content">
+          <div class="page-intro__main">
+            <h1 id="page-title" class="page-intro__title">Let's connect.</h1>
+          </div>
+          <div class="page-intro__support">
+            <p class="page-intro__lead">Choose the path that matches your role. Your request will be routed to the relevant Web3 Carnival team.</p>
+            <div class="page-intro__meta">
+              <span class="page-intro__meta-tag page-intro__meta-tag--highlight">4 Dedicated Paths</span>
+              <span class="page-intro__meta-tag">Typical reply &lt; 24h</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <div class="container">
-      <div class="shell-status-card">
-        <div class="shell-status-icon" aria-hidden="true">💬</div>
-        <h2>Role-Specific Contact Channels</h2>
-        <p>This shell is connected to the Web3 Carnival design system foundation. Segmented contact forms and operational channels will be extended in Phase 9.</p>
-        <div style="display: flex; gap: var(--space-3); margin-top: var(--space-2);">
-          <a href="index.html" class="btn btn-secondary">Back to Home</a>
-          <a href="register.html" class="btn btn-primary">Registration Desk</a>
+    <section class="section contact-section" aria-labelledby="channels-heading">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="channels-heading" class="section-title">Choose your path</h2>
+          <p class="section-desc">Jump directly to the form fields and response team that match what you are trying to do at the carnival.</p>
+        </div>
+
+        <div class="contact-channels-grid" data-contact-role-grid>
+          <a href="contact.html?role=attendee#contact-form" class="contact-channel-card contact-role-card" data-contact-role-card="attendee">
+            <div class="contact-channel-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7a3 3 0 0 0 0 6 3 3 0 0 0 0 6h16V7H4Z"/><path d="M9 7v12"/></svg></div>
+            <h3 class="contact-channel-title">Attendee</h3>
+            <p class="contact-channel-desc">Get help with registration, passes, accessibility, venue logistics, visa letters, or your personal event plan.</p>
+            <span class="contact-channel-link">Open attendee desk &rarr;</span>
+            <span class="contact-channel-email">attendees@web3carnival.world</span>
+          </a>
+
+          <a href="contact.html?role=sponsor#contact-form" class="contact-channel-card contact-role-card" data-contact-role-card="sponsor">
+            <div class="contact-channel-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m8 12 2.5 2.5a2.1 2.1 0 0 0 3 0l2-2"/><path d="M4 10 8 6l4 4"/><path d="m20 10-4-4-4 4"/><path d="M4 10v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/></svg></div>
+            <h3 class="contact-channel-title">Sponsor</h3>
+            <p class="contact-channel-desc">Discuss sponsorship tiers, custom activations, stage presence, partnership objectives, or enterprise packages.</p>
+            <span class="contact-channel-link">Open partnerships desk &rarr;</span>
+            <span class="contact-channel-email">sponsors@web3carnival.world</span>
+          </a>
+
+          <a href="contact.html?role=speaker#contact-form" class="contact-channel-card contact-role-card" data-contact-role-card="speaker">
+            <div class="contact-channel-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="13" rx="4"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4M8 22h8"/></svg></div>
+            <h3 class="contact-channel-title">Speaker</h3>
+            <p class="contact-channel-desc">Submit a talk idea, discuss track fit, coordinate panels or workshops, and handle speaker logistics.</p>
+            <span class="contact-channel-link">Open speakers bureau &rarr;</span>
+            <span class="contact-channel-email">program@web3carnival.world</span>
+          </a>
+
+          <a href="contact.html?role=media#contact-form" class="contact-channel-card contact-role-card" data-contact-role-card="media">
+            <div class="contact-channel-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div>
+            <h3 class="contact-channel-title">Media</h3>
+            <p class="contact-channel-desc">Request press accreditation, interview slots, media lounge access, or information for planned coverage.</p>
+            <span class="contact-channel-link">Open media desk &rarr;</span>
+            <span class="contact-channel-email">media@web3carnival.world</span>
+          </a>
+        </div>
+
+        <div class="contact-split-layout">
+          <div class="contact-form-shell" id="contact-form-section">
+            <div class="contact-form-context">
+              <span class="section-eyebrow" data-contact-role-eyebrow>Attendee Support</span>
+              <h3 class="contact-form-heading" data-contact-form-heading>Tell us what you need.</h3>
+              <p class="section-desc" data-contact-form-desc>We will route your message to the attendee operations team.</p>
+            </div>
+
+            <div class="contact-role-switcher" role="navigation" aria-label="Contact role">
+              <a href="contact.html?role=attendee#contact-form" class="contact-role-switch" data-role-switch="attendee">Attendee</a>
+              <a href="contact.html?role=sponsor#contact-form" class="contact-role-switch" data-role-switch="sponsor">Sponsor</a>
+              <a href="contact.html?role=speaker#contact-form" class="contact-role-switch" data-role-switch="speaker">Speaker</a>
+              <a href="contact.html?role=media#contact-form" class="contact-role-switch" data-role-switch="media">Media</a>
+            </div>
+
+            <form id="contact-form" novalidate>
+              <div class="contact-dynamic-fields" data-contact-dynamic-fields></div>
+
+              <div class="form-group">
+                <label class="form-label" for="contact-name">Full Name</label>
+                <input class="form-input" type="text" id="contact-name" name="name" required autocomplete="name" placeholder="e.g. Alex Rivera">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="contact-email">Email Address</label>
+                <input class="form-input" type="email" id="contact-email" name="email" required autocomplete="email" placeholder="name@domain.com">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="contact-message">How can we help?</label>
+                <textarea class="form-textarea" id="contact-message" name="message" rows="5" required placeholder="Give the team enough context to route this on the first reply."></textarea>
+              </div>
+
+              <div class="contact-form-footer-row">
+                <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+                <span class="contact-reply-note">Typical reply within 24 hours</span>
+              </div>
+              <div id="contact-form-feedback" class="contact-form-feedback" hidden role="alert" aria-live="polite"></div>
+            </form>
+
+            <div class="contact-confirmation" data-contact-confirmation hidden aria-live="polite"></div>
+          </div>
+
+          <aside class="contact-office-card" aria-labelledby="contact-ops-heading">
+            <h3 class="contact-ops-heading" id="contact-ops-heading">Global Flagship Hub</h3>
+
+            <div class="contact-meta-item">
+              <span class="contact-meta-label">Physical Venue</span>
+              <span class="contact-meta-val">Marina Convergence Hall</span>
+              <span class="contact-ops-detail">8 Bayfront Concourse, Singapore 018956</span>
+            </div>
+
+            <div class="contact-meta-item">
+              <span class="contact-meta-label">Hybrid Virtual Stage</span>
+              <span class="contact-meta-val">Livestreamed Globally (UTC+8)</span>
+              <span class="contact-ops-detail">Global relay servers across Americas, Europe &amp; Asia</span>
+            </div>
+
+            <div class="contact-meta-item">
+              <span class="contact-meta-label">Operating Hours</span>
+              <span class="contact-meta-val">08:00 – 20:00 SGT</span>
+              <span class="contact-ops-detail">24/7 during flagship event week (Nov 13–17, 2026)</span>
+            </div>
+
+            <div class="contact-ops-links">
+              <span class="contact-meta-label">Real-Time Channels</span>
+              <div class="contact-ops-channels">
+                <a href="https://t.me/web3carnival" target="_blank" rel="noopener noreferrer" class="pill pill-cyan">Telegram Community &rarr;</a>
+                <a href="https://discord.gg/web3carnival" target="_blank" rel="noopener noreferrer" class="pill pill-accent">Discord Server &rarr;</a>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <div class="section-header text-center contact-faq-header">
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-desc">Immediate answers to common event, proposal, and registration questions.</p>
+        </div>
+
+        <div class="faq-grid">
+          <div class="faq-item">
+            <button type="button" class="faq-question" aria-expanded="false">
+              <span>What is included with the Hybrid Virtual pass?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" hidden><p>The Virtual Pass provides live access to all 7 track stages, interactive live chat and Q&amp;A, on-demand replay recordings within 24 hours, and virtual networking lounges.</p></div>
+          </div>
+
+          <div class="faq-item">
+            <button type="button" class="faq-question" aria-expanded="false">
+              <span>How are speaker proposals evaluated?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" hidden><p>Track chairs review submissions for technical rigor, novelty, relevance to the chosen track, and educational value. Main-track speaking slots are not sold as paid placements.</p></div>
+          </div>
+
+          <div class="faq-item">
+            <button type="button" class="faq-question" aria-expanded="false">
+              <span>Can I transfer or upgrade my registration pass?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" hidden><p>Pass changes are supported before the stated transfer deadline. Contact attendee support with your registration or pass ID and the team will confirm the available option.</p></div>
+          </div>
+
+          <div class="faq-item">
+            <button type="button" class="faq-question" aria-expanded="false">
+              <span>What should media include in an accreditation request?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" hidden><p>Include your outlet, role, intended coverage, publishing deadline, and a representative work link when available. The media team will confirm accreditation and interview availability.</p></div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
+
+    <section class="section section-surface contact-policy-section" id="policies" aria-labelledby="policy-heading">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="policy-heading" class="section-title">Policies &amp; resources</h2>
+          <p class="section-desc">Reference points for contact, registration, and participation expectations.</p>
+        </div>
+        <div class="contact-policy-grid">
+          <article class="contact-policy-card" id="privacy">
+            <h3>Privacy Policy</h3>
+            <p>Contact details submitted through this frontend-only form are used only to demonstrate routing in the current prototype. No backend transmission occurs in this build.</p>
+          </article>
+          <article class="contact-policy-card" id="terms">
+            <h3>Terms of Service</h3>
+            <p>Registration and participation details shown in this prototype represent the Web3 Carnival 2026 product flow and should be confirmed by the operating team before production use.</p>
+          </article>
+          <article class="contact-policy-card" id="code-of-conduct">
+            <h3>Code of Conduct</h3>
+            <p>Participants are expected to maintain professional, respectful conduct across stages, workshops, networking areas, and online channels.</p>
+          </article>
+          <article class="contact-policy-card" id="brand-kit">
+            <h3>Brand Guidelines</h3>
+            <p>For media and partner brand assets, use the Media or Sponsor contact path above so the relevant team can provide the current approved package.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section final-cta-section reveal" aria-labelledby="contact-cta-heading">
+      <div class="container final-cta-inner">
+        <h2 id="contact-cta-heading" class="section-title">Ready to take the next step?</h2>
+        <p class="section-desc">Register for the event, apply for a role, or send a routed inquiry to the right team.</p>
+        <div class="final-cta-actions">
+          <a href="register.html" class="btn btn-primary btn-lg">Register</a>
+          <a href="event.html" class="btn btn-secondary btn-lg">Explore Event Schedule</a>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- Footer rendered by navigation.js -->
   <footer id="site-footer" class="site-footer"></footer>
 
   <script src="js/data.js"></script>
   <script src="js/theme.js"></script>
   <script src="js/navigation.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/contact.js"></script>
 </body>
 </html>

@@ -169,13 +169,17 @@
       listEl.innerHTML = '';
 
       if (!ids.length) {
-        if (emptyEl) emptyEl.style.display = 'block';
-        listEl.style.display = 'none';
+        if (emptyEl) emptyEl.hidden = false;
+        if (listEl) listEl.hidden = true;
+        const panel = document.querySelector('[data-journey-panel]');
+        if (panel) panel.hidden = true;
         return;
       }
 
-      if (emptyEl) emptyEl.style.display = 'none';
-      listEl.style.display = 'flex';
+      if (emptyEl) emptyEl.hidden = true;
+      listEl.hidden = false;
+      const panel = document.querySelector('[data-journey-panel]');
+      if (panel) panel.hidden = false;
 
       ids.forEach(id => {
         const session = sessions.find(s => s.id === id);
@@ -260,7 +264,7 @@
         card.setAttribute('data-session-id', session.id);
         card.innerHTML = `
           <div class="card-session-pills">
-            ${track ? `<span class="pill pill-accent">${escapeHtml(track.icon)} ${escapeHtml(track.name)}</span>` : ''}
+            ${track ? `<span class="pill pill-accent">${renderTrackIcon(track.id)} ${escapeHtml(track.name)}</span>` : ''}
             ${level ? `<span class="pill">${escapeHtml(level.label)}</span>` : ''}
           </div>
           <h3 class="card-session-title">${escapeHtml(session.title)}</h3>
@@ -294,13 +298,14 @@
       if (filtered.length > INITIAL_SESSION_LIMIT && !showAllSessions) {
         const moreButton = document.createElement('button');
         moreButton.type = 'button';
-        moreButton.className = 'btn btn-secondary';
+        moreButton.className = 'btn btn-secondary session-more-btn';
         moreButton.setAttribute('data-more-sessions', 'true');
-        moreButton.textContent = 'More View';
-        moreButton.style.display = 'block';
-        moreButton.style.margin = 'var(--space-6) auto 0';
+        moreButton.setAttribute('aria-expanded', 'false');
+        moreButton.setAttribute('aria-controls', 'session-results');
+        moreButton.textContent = `View ${filtered.length - INITIAL_SESSION_LIMIT} more sessions`;
         moreButton.addEventListener('click', () => {
           showAllSessions = true;
+          moreButton.setAttribute('aria-expanded', 'true');
           renderSessions();
         });
         grid.insertAdjacentElement('afterend', moreButton);
@@ -333,7 +338,7 @@
       modalDialog.innerHTML = `
         <button type="button" class="modal-close-btn" data-modal-close aria-label="Close session details">✕</button>
         <div class="modal-pills">
-          ${track ? `<span class="pill pill-accent">${escapeHtml(track.icon)} ${escapeHtml(track.name)}</span>` : ''}
+          ${track ? `<span class="pill pill-accent">${renderTrackIcon(track.id)} ${escapeHtml(track.name)}</span>` : ''}
           ${level ? `<span class="pill">${escapeHtml(level.label)}</span>` : ''}
           ${day ? `<span class="pill pill-cyan">${escapeHtml(day.label)} · ${escapeHtml(session.time)}</span>` : ''}
         </div>
@@ -341,7 +346,7 @@
         <p class="modal-speaker"><strong>${escapeHtml(session.speaker)}</strong> — ${escapeHtml(session.speakerRole)}</p>
         <p class="modal-desc" id="session-modal-desc">${escapeHtml(session.description)}</p>
         <div class="modal-actions">
-          <button type="button" class="btn btn-primary session-add-btn${added ? ' added' : ''}" data-journey-toggle="${session.id}" aria-pressed="${added ? 'true' : 'false'}" aria-label="${added ? 'Remove' : 'Add'} ${escapeHtml(session.title)} ${added ? 'from' : 'to'} My Journey" style="border-radius: var(--radius-sm);">${added ? '✓ In Journey' : '+ Add to My Journey'}</button>
+          <button type="button" class="btn btn-primary session-add-btn${added ? ' added' : ''}" data-journey-toggle="${session.id}" aria-pressed="${added ? 'true' : 'false'}" aria-label="${added ? 'Remove' : 'Add'} ${escapeHtml(session.title)} ${added ? 'from' : 'to'} My Journey">${added ? '✓ In Journey' : '+ Add to My Journey'}</button>
         </div>
         ${related.length ? `
           <div class="modal-related-title">Related Sessions</div>
@@ -437,9 +442,9 @@
       const container = document.querySelector('[data-timeline]');
       if (!container || !Array.isArray(data.eventTimeline)) return;
 
-      container.innerHTML = data.eventTimeline.map(stage => `
+      container.innerHTML = data.eventTimeline.map((stage, index) => `
         <div class="timeline-stage">
-          <div class="timeline-stage-marker" aria-hidden="true">${escapeHtml(stage.icon)}</div>
+          <div class="timeline-stage-marker" aria-hidden="true">${String(index + 1).padStart(2, '0')}</div>
           <div class="timeline-stage-body">
             <div class="timeline-stage-kicker">${escapeHtml(stage.kicker)}</div>
             <h3 class="timeline-stage-name">${escapeHtml(stage.name)}</h3>
@@ -478,11 +483,47 @@
     }
 
     // ----------------------------------------------------------------------
+    // Deep-link integration
+    // ----------------------------------------------------------------------
+    const urlParams = new URLSearchParams(window.location.search);
+    const trackParam = urlParams.get('track');
+    const sessionParam = urlParams.get('session');
+    const initialSession = sessionParam ? sessions.find(session => session.id === sessionParam) : null;
+
+    if (trackParam && trackById[trackParam]) {
+      filterState.track = trackParam;
+    }
+
+    if (initialSession && trackById[initialSession.trackId]) {
+      filterState.track = initialSession.trackId;
+      showAllSessions = true;
+    }
+
+    // ----------------------------------------------------------------------
     // Init
     // ----------------------------------------------------------------------
     renderTimeline();
     renderVenue();
     renderSessions();
     syncJourneyUI();
+
+    // Keep the selected deep-link filter visibly active after initial render.
+    if (filterState.track !== 'all') {
+      root.querySelectorAll('[data-filter-group="track"] .filter-btn').forEach(button => {
+        const active = button.getAttribute('data-filter-value') === filterState.track;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+    }
+
+    // Session deep links open the same accessible modal used by the event cards.
+    if (initialSession) {
+      const trigger = grid.querySelector(`[data-open-session="${CSS.escape(initialSession.id)}"]`);
+      if (trigger) {
+        requestAnimationFrame(() => {
+          openModal(initialSession.id, trigger);
+        });
+      }
+    }
   });
 })();

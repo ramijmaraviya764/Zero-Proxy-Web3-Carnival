@@ -34,6 +34,22 @@
   --border-medium: rgba(255, 255, 255, 0.16);
   --border-highlight: rgba(139, 92, 246, 0.4);
 
+  /* Semantic alpha surfaces — use these instead of hardcoded white/black overlays. */
+  --surface-hover: rgba(255, 255, 255, 0.05);
+  --surface-active: rgba(91, 95, 239, 0.12);
+  --surface-accent: rgba(91, 95, 239, 0.15);
+  --surface-cyan: rgba(34, 211, 238, 0.08);
+  --surface-success: rgba(52, 211, 153, 0.08);
+  --surface-success-strong: rgba(52, 211, 153, 0.15);
+  --surface-warning: rgba(251, 191, 36, 0.08);
+  --border-accent: rgba(91, 95, 239, 0.25);
+  --border-cyan: rgba(34, 211, 238, 0.3);
+  --border-success: rgba(52, 211, 153, 0.3);
+  --border-warning: rgba(251, 191, 36, 0.25);
+  --overlay-scrim: rgba(5, 6, 11, 0.82);
+  --overlay-panel: rgba(5, 6, 11, 0.72);
+  --text-on-accent: #FFFFFF;
+
   /* Gradients */
   --gradient-signature: linear-gradient(135deg, #8B5CF6 0%, #5B5FEF 45%, #22D3EE 100%);
   --gradient-signature-hover: linear-gradient(135deg, #9D74FF 0%, #6E72FF 45%, #38E1FA 100%);
@@ -141,6 +157,21 @@
   --border-subtle: rgba(18, 19, 28, 0.08);
   --border-medium: rgba(18, 19, 28, 0.16);
   --border-highlight: rgba(124, 58, 237, 0.35);
+
+  --surface-hover: rgba(18, 19, 28, 0.04);
+  --surface-active: rgba(76, 70, 224, 0.10);
+  --surface-accent: rgba(76, 70, 224, 0.08);
+  --surface-cyan: rgba(8, 145, 168, 0.08);
+  --surface-success: rgba(5, 150, 105, 0.08);
+  --surface-success-strong: rgba(5, 150, 105, 0.14);
+  --surface-warning: rgba(180, 83, 9, 0.08);
+  --border-accent: rgba(76, 70, 224, 0.22);
+  --border-cyan: rgba(8, 145, 168, 0.28);
+  --border-success: rgba(5, 150, 105, 0.24);
+  --border-warning: rgba(180, 83, 9, 0.24);
+  --overlay-scrim: rgba(18, 19, 28, 0.56);
+  --overlay-panel: rgba(247, 247, 251, 0.92);
+  --text-on-accent: #FFFFFF;
 
   /* Gradients */
   --gradient-signature-subtle: linear-gradient(135deg, rgba(124, 58, 237, 0.08) 0%, rgba(76, 70, 224, 0.08) 45%, rgba(8, 145, 168, 0.06) 100%);

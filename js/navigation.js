@@ -14,7 +14,8 @@
     { label: 'Speakers', href: 'speakers.html', id: 'speakers' },
     { label: 'Past Events', href: 'past-events.html', id: 'past-events' },
     { label: 'Ecosystem', href: 'ecosystem.html', id: 'ecosystem' },
-    { label: 'Partners', href: 'partners.html', id: 'partners' }
+    { label: 'Partners', href: 'partners.html', id: 'partners' },
+    { label: 'Contact', href: 'contact.html', id: 'contact' }
   ];
 
   /**
@@ -54,10 +55,17 @@
       <div class="container nav-container">
         <a href="index.html" class="nav-brand" aria-label="Web3 Carnival Home">
           <div class="nav-brand-logo" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-              <polyline points="2 17 12 22 22 17"></polyline>
-              <polyline points="2 12 12 17 22 12"></polyline>
+            <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="nav-mark-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#8B5CF6" />
+                  <stop offset="45%" stop-color="#5B5FEF" />
+                  <stop offset="100%" stop-color="#22D3EE" />
+                </linearGradient>
+              </defs>
+              <polygon points="16,4 2,11 16,18 30,11" stroke="url(#nav-mark-grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+              <polyline points="2,18 16,25 30,18" stroke="url(#nav-mark-grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+              <polyline points="2,23 16,30 30,23" stroke="url(#nav-mark-grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
             </svg>
           </div>
           <div class="nav-brand-text">
@@ -138,10 +146,17 @@
           <div class="footer-brand">
             <a href="index.html" class="nav-brand" aria-label="Web3 Carnival Home">
               <div class="nav-brand-logo" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-                  <polyline points="2 17 12 22 22 17"></polyline>
-                  <polyline points="2 12 12 17 22 12"></polyline>
+                <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="footer-mark-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#8B5CF6" />
+                      <stop offset="45%" stop-color="#5B5FEF" />
+                      <stop offset="100%" stop-color="#22D3EE" />
+                    </linearGradient>
+                  </defs>
+                  <polygon points="16,4 2,11 16,18 30,11" stroke="url(#footer-mark-grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                  <polyline points="2,18 16,25 30,18" stroke="url(#footer-mark-grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                  <polyline points="2,23 16,30 30,23" stroke="url(#footer-mark-grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
                 </svg>
               </div>
               <div class="nav-brand-text">
@@ -199,20 +214,20 @@
           <div class="footer-col">
             <h4 class="footer-col-title">Legal</h4>
             <ul class="footer-links-list">
-              <li><a href="#privacy" class="footer-link">Privacy Policy</a></li>
-              <li><a href="#terms" class="footer-link">Terms of Service</a></li>
-              <li><a href="#code-of-conduct" class="footer-link">Code of Conduct</a></li>
-              <li><a href="#brand-kit" class="footer-link">Brand Guidelines</a></li>
+              <li><a href="contact.html#privacy" class="footer-link">Privacy Policy</a></li>
+              <li><a href="contact.html#terms" class="footer-link">Terms of Service</a></li>
+              <li><a href="contact.html#code-of-conduct" class="footer-link">Code of Conduct</a></li>
+              <li><a href="contact.html#brand-kit" class="footer-link">Brand Guidelines</a></li>
             </ul>
           </div>
 
           <!-- Col 5: Newsletter -->
           <div class="footer-col">
             <h4 class="footer-col-title">Stay Connected</h4>
-            <p class="footer-brand-desc" style="margin-bottom: var(--space-3);">
+            <p class="footer-brand-desc footer-newsletter-intro">
               Receive speaker announcements, track agendas, and early-bird ticket releases.
             </p>
-            <form class="footer-newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing to Web3 Carnival updates!'); this.reset();">
+            <form class="footer-newsletter-form" data-newsletter-form>
               <input type="email" class="form-input" placeholder="Enter your email" required aria-label="Email address for newsletter">
               <button type="submit" class="btn btn-primary btn-sm">Subscribe</button>
             </form>
@@ -223,9 +238,9 @@
         <div class="footer-bottom">
           <p>&copy; 2026 Web3 Carnival. All rights reserved. GDG KalaKriti Designathon FinTech Track.</p>
           <div class="footer-bottom-links">
-            <a href="#privacy" class="footer-link">Privacy</a>
+            <a href="contact.html#privacy" class="footer-link">Privacy</a>
             <span aria-hidden="true">&bull;</span>
-            <a href="#terms" class="footer-link">Terms</a>
+            <a href="contact.html#terms" class="footer-link">Terms</a>
             <span aria-hidden="true">&bull;</span>
             <a href="contact.html" class="footer-link">Help Desk</a>
           </div>
@@ -237,28 +252,61 @@
   /**
    * Bind Mobile Toggle & Drawer Events
    */
+  /**
+   * Return visible focusable descendants for keyboard-trap handling.
+   *
+   * @param {HTMLElement} container Container to inspect.
+   * @returns {HTMLElement[]} Visible focusable elements.
+   */
+  function getFocusableElements(container) {
+    return Array.from(container.querySelectorAll(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )).filter(element => element.offsetParent !== null);
+  }
+
+  /**
+   * Bind the mobile navigation toggle, focus trap, escape handling, and
+   * viewport cleanup without introducing a second navigation implementation.
+   *
+   * @returns {void}
+   */
   function setupMobileNavigation() {
     const mobileToggle = document.querySelector('.mobile-toggle');
     const mobileDrawer = document.getElementById('mobile-nav-drawer');
 
     if (!mobileToggle || !mobileDrawer) return;
 
+    let previousFocus = null;
+
     function openMobileMenu() {
+      previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : mobileToggle;
       mobileToggle.setAttribute('aria-expanded', 'true');
       mobileDrawer.setAttribute('aria-hidden', 'false');
       mobileDrawer.classList.add('open');
       document.body.style.overflow = 'hidden';
+
+      const focusable = getFocusableElements(mobileDrawer);
+      if (focusable.length) {
+        requestAnimationFrame(() => focusable[0].focus());
+      }
     }
 
-    function closeMobileMenu() {
+    function closeMobileMenu(restoreFocus = true) {
       mobileToggle.setAttribute('aria-expanded', 'false');
       mobileDrawer.setAttribute('aria-hidden', 'true');
       mobileDrawer.classList.remove('open');
       document.body.style.overflow = '';
+
+      if (restoreFocus) {
+        const target = previousFocus && typeof previousFocus.focus === 'function'
+          ? previousFocus
+          : mobileToggle;
+        target.focus();
+      }
     }
 
-    mobileToggle.addEventListener('click', (e) => {
-      e.stopPropagation();
+    mobileToggle.addEventListener('click', (event) => {
+      event.stopPropagation();
       const isOpen = mobileToggle.getAttribute('aria-expanded') === 'true';
       if (isOpen) {
         closeMobileMenu();
@@ -267,27 +315,71 @@
       }
     });
 
-    // Close on escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && mobileToggle.getAttribute('aria-expanded') === 'true') {
+    document.addEventListener('keydown', (event) => {
+      if (mobileToggle.getAttribute('aria-expanded') !== 'true') return;
+
+      if (event.key === 'Escape') {
+        event.preventDefault();
         closeMobileMenu();
-        mobileToggle.focus();
+        return;
+      }
+
+      if (event.key !== 'Tab') return;
+      const focusable = getFocusableElements(mobileDrawer);
+      if (!focusable.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
       }
     });
 
-    // Close on click outside drawer
-    document.addEventListener('click', (e) => {
+    document.addEventListener('click', (event) => {
       if (mobileToggle.getAttribute('aria-expanded') === 'true' &&
-          !mobileDrawer.contains(e.target) &&
-          !mobileToggle.contains(e.target)) {
+          !mobileDrawer.contains(event.target) &&
+          !mobileToggle.contains(event.target)) {
         closeMobileMenu();
       }
     });
 
-    // Close when clicking mobile nav links
-    const mobileLinks = mobileDrawer.querySelectorAll('.mobile-nav-link');
-    mobileLinks.forEach(link => {
-      link.addEventListener('click', closeMobileMenu);
+    mobileDrawer.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => closeMobileMenu(false));
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 1120 && mobileToggle.getAttribute('aria-expanded') === 'true') {
+        closeMobileMenu(false);
+      }
+    }, { passive: true });
+  }
+
+  /**
+   * Bind the static frontend newsletter mock interaction without an inline
+   * event handler or blocking browser alert.
+   *
+   * @returns {void}
+   */
+  function setupNewsletterForm() {
+    const form = document.querySelector('[data-newsletter-form]');
+    const status = document.querySelector('[data-newsletter-status]');
+    if (!form || !status) return;
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      status.textContent = 'You are subscribed to Web3 Carnival updates.';
+      const input = form.querySelector('input[type="email"]');
+      if (input) input.value = '';
     });
   }
 
@@ -326,6 +418,7 @@
 
     setupMobileNavigation();
     setupScrollHeader();
+    setupNewsletterForm();
   });
 
   // Expose on window for programmatic calls if needed

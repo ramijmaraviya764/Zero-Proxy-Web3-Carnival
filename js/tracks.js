@@ -23,7 +23,7 @@
     });
 
     const state = {
-      selectedTrackId: null,
+      selectedTrackId: tracks[0]?.id || null,
       selectedSpeakerId: null,
       query: '',
       filter: 'all'
@@ -40,6 +40,34 @@
     const escapeHtml = value => String(value ?? '').replace(/[&<>'"]/g, char => ({
       '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
     }[char]));
+
+    /**
+     * Determine whether a speaker image is a generic placeholder service.
+     * @param {string} photo Source URL.
+     * @returns {boolean} True when the source is not a supplied portrait.
+     */
+    function isPlaceholderPhoto(photo) {
+      return !photo || /pravatar\.cc/i.test(String(photo));
+    }
+
+    /**
+     * Render the track glyph using the site's monochrome SVG icon language.
+     * @param {string} trackId Track identifier.
+     * @returns {string} Accessible inline SVG markup.
+     */
+    function renderTrackIcon(trackId) {
+      const icons = {
+        infra: '<path d="M8 4v5M16 15v5M4 8h5M15 16h5M9 9l6 6M15 9 9 15"/>',
+        dao: '<path d="M12 3v5M12 16v5M4 8l4 4-4 4M20 8l-4 4 4 4M8 12h8"/>',
+        metaverse: '<path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/>',
+        zk: '<path d="M12 3 19 6v5c0 4.4-2.7 7.7-7 10-4.3-2.3-7-5.6-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/>',
+        defi: '<path d="M6 18V8M12 18V5M18 18v-9"/><path d="m4 16 8-6 5 3 3-4"/>',
+        enterprise: '<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 9h2M14 9h2M8 13h2M14 13h2M8 17h8"/>',
+        nft: '<path d="m12 3 7 4v10l-7 4-7-4V7l7-4Z"/><path d="m9 12 2 2 4-4"/>'
+      };
+      const pathMarkup = icons[trackId] || icons.infra;
+      return `<svg class="w3c-inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${pathMarkup}</svg>`;
+    }
 
     function sessionsForTrack(trackId) {
       return sessions.filter(session => session.trackId === trackId);
@@ -106,7 +134,7 @@
         return `
           <button type="button" class="track-explorer-card${selected ? ' is-selected' : ''}" data-track-id="${escapeHtml(track.id)}" aria-pressed="${selected ? 'true' : 'false'}">
             <span class="track-explorer-card-top">
-              <span class="track-explorer-icon" aria-hidden="true">${escapeHtml(track.icon)}</span>
+              <span class="track-explorer-icon" aria-hidden="true">${renderTrackIcon(track.id)}</span>
               <span class="track-explorer-number">0${index + 1}</span>
             </span>
             <span class="track-explorer-title">${escapeHtml(track.name)}</span>
@@ -134,7 +162,7 @@
       const trackSessions = sessionsForTrack(track.id);
       detail.innerHTML = `
         <div class="track-detail-copy">
-          <div class="track-detail-icon" aria-hidden="true">${escapeHtml(track.icon)}</div>
+          <div class="track-detail-icon" aria-hidden="true">${renderTrackIcon(track.id)}</div>
           <div>
             <p class="section-kicker">Selected track</p>
             <h2 id="track-detail-title">${escapeHtml(track.name)}</h2>
@@ -166,8 +194,7 @@
         return `
           <button type="button" class="explorer-speaker-card${selected ? ' is-selected' : ''}" data-speaker-id="${escapeHtml(speaker.id)}" aria-pressed="${selected ? 'true' : 'false'}">
             <span class="explorer-speaker-photo-wrap">
-              <img class="explorer-speaker-photo" src="${escapeHtml(speaker.photo)}" alt="${escapeHtml(speaker.name)}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.hidden=false;">
-              <span class="explorer-speaker-initials" hidden>${escapeHtml(speaker.initials)}</span>
+              ${isPlaceholderPhoto(speaker.photo) ? `<span class="explorer-speaker-initials">${escapeHtml(speaker.initials)}</span>` : `<img class="explorer-speaker-photo" src="${escapeHtml(speaker.photo)}" alt="${escapeHtml(speaker.name)}" loading="lazy" data-fallback-image><span class="explorer-speaker-initials" hidden>${escapeHtml(speaker.initials)}</span>`}
             </span>
             <span class="explorer-speaker-copy">
               <strong>${escapeHtml(speaker.name)}</strong>

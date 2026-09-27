@@ -21,6 +21,11 @@
     .nav-actions {
       gap: var(--space-2);
     }
+
+    .hero-section {
+      min-height: calc(100svh - var(--nav-height));
+      align-items: flex-start;
+    }
   
     /* Countdown units (4× 52px + separators + gaps) don't fit in the ~327px
        of usable width on a 375px phone — tighten it, and let it wrap onto
@@ -68,17 +73,37 @@
      ========================================================================== */
   @media (min-width: 768px) {
     .section {
-      padding-top: var(--space-16);
-      padding-bottom: var(--space-16);
+      padding-top: clamp(2.25rem, 3.5vw, 3.25rem);
+      padding-bottom: clamp(2.25rem, 3.5vw, 3.25rem);
+    }
+
+    .section-compact {
+      padding-top: clamp(1.25rem, 2.2vw, 2rem);
+      padding-bottom: clamp(1.25rem, 2.2vw, 2rem);
+    }
+
+    .section-tight {
+      padding-top: var(--space-4);
+      padding-bottom: var(--space-4);
     }
   
     .hero-section {
-      padding-top: calc(var(--space-16) + 1.5rem);
-      padding-bottom: var(--space-20);
+      min-height: calc(100svh - var(--nav-height));
+      padding-top: clamp(2.5rem, 4vw, 3.75rem);
+      padding-bottom: clamp(2.5rem, 4vw, 4rem);
     }
   
     .stats-grid {
       grid-template-columns: repeat(3, 1fr);
+    }
+
+    .stats-grid--event,
+    .edition-stats-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .tracks-grid-4 {
+      grid-template-columns: repeat(2, 1fr);
     }
   
     .tracks-grid {
@@ -130,9 +155,9 @@
   }
   
   /* ==========================================================================
-     Desktop Screens (>= 1024px)
+     Desktop Screens (>= 1120px)
      ========================================================================== */
-  @media (min-width: 1024px) {
+  @media (min-width: 1120px) {
     .container {
       padding-left: var(--container-pad-desktop);
       padding-right: var(--container-pad-desktop);
@@ -155,13 +180,26 @@
     .tracks-grid {
       grid-template-columns: repeat(3, 1fr);
     }
+
+    .tracks-grid-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
   
     .speakers-grid {
       grid-template-columns: repeat(4, 1fr);
     }
   
     .stats-grid {
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Re-assert both 4-column stat variants here: same specificity as the
+       plain .stats-grid rule above, and this block comes later in the
+       cascade, so without this the 4-col override from the 768px block
+       gets silently clobbered at desktop widths, leaving a 3+1 orphan row. */
+    .stats-grid--event,
+    .edition-stats-grid {
+      grid-template-columns: repeat(4, 1fr);
     }
   
     .partner-grid {
@@ -197,7 +235,7 @@
      No existing design/layout values are changed.
      ========================================================================== */
   
-  @media (max-width: 1023px) {
+  @media (max-width: 1119px) {
   
     /* Allow the mobile drawer to extend outside the sticky header */
     .site-header {
@@ -243,7 +281,7 @@
      Make sure mobile drawer fix never affects desktop navigation.
      ========================================================================== */
   
-  @media (min-width: 1024px) {
+  @media (min-width: 1120px) {
     .mobile-nav-drawer {
       position: static;
     }

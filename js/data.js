@@ -51,6 +51,7 @@ const WEB3_CARNIVAL_DATA = {
       attendees: "4,200+ Attendees",
       attendeesValue: 4200,
       icon: "🎪",
+      image: "assets/event-singapore.jpg",
       summary: "The most recent documented edition, and the largest crowd on record — held in Singapore."
     },
     {
@@ -62,6 +63,7 @@ const WEB3_CARNIVAL_DATA = {
       attendees: "3,100+ Attendees",
       attendeesValue: 3100,
       icon: "🕌",
+      image: "assets/event-dubai.jpg",
       summary: "The second flagship edition in the archive, hosted in Dubai, UAE."
     },
     {
@@ -73,6 +75,7 @@ const WEB3_CARNIVAL_DATA = {
       attendees: "2,400+ Attendees",
       attendeesValue: 2400,
       icon: "🌍",
+      image: "assets/event-lisbon.jpg",
       summary: "The earliest edition currently on record — the starting point for the carnival's global footprint, hosted in Lisbon, Portugal."
     }
   ],
@@ -163,7 +166,7 @@ const WEB3_CARNIVAL_DATA = {
       track: "ZK & Security",
       initials: "ER",
       location: "Zurich, CH",
-      photo: "https://i.pravatar.cc/320?img=47"
+      photo: "assets/speaker-elena.jpg"
     },
     {
       name: "Marcus Vance",
@@ -171,7 +174,7 @@ const WEB3_CARNIVAL_DATA = {
       track: "CeFi DeFi & Staking",
       initials: "MV",
       location: "Singapore, SG",
-      photo: "https://i.pravatar.cc/320?img=13"
+      photo: "assets/speaker-marcus.jpg"
     },
     {
       name: "Aaliyah Chen",
@@ -179,7 +182,7 @@ const WEB3_CARNIVAL_DATA = {
       track: "Blockchain & its Infrastructure",
       initials: "AC",
       location: "San Francisco, US",
-      photo: "https://i.pravatar.cc/320?img=25"
+      photo: "assets/speaker-aaliyah.jpg"
     },
     {
       name: "David K. O'Connor",
@@ -187,7 +190,7 @@ const WEB3_CARNIVAL_DATA = {
       track: "DAO & Governance",
       initials: "DO",
       location: "London, UK",
-      photo: "https://i.pravatar.cc/320?img=33"
+      photo: "assets/speaker-david.jpg"
     }
   ],
 
@@ -197,47 +200,47 @@ const WEB3_CARNIVAL_DATA = {
   // added here (not a second dataset) so the Speakers directory (Phase 4)
   // and the Tracks Explorer (Phase 3) both read from this one array.
   speakers: [
-    { id: "elena-rostova", name: "Dr. Elena Rostova", role: "Lead Cryptographer, ZeroShield Labs", location: "Zurich, CH", initials: "ER", photo: "https://i.pravatar.cc/320?img=47", trackIds: ["infra", "zk"],
+    { id: "elena-rostova", name: "Dr. Elena Rostova", role: "Lead Cryptographer, ZeroShield Labs", location: "Zurich, CH", initials: "ER", photo: "assets/speaker-elena.jpg", trackIds: ["infra", "zk"],
       bio: "Elena leads applied cryptography research at ZeroShield, moving zero-knowledge proof systems out of whitepapers and into production rollups. She previously built verification tooling for two major L2 launches.",
       expertise: ["Zero-Knowledge Proofs", "Protocol Security", "Applied Cryptography"],
       socials: { twitter: "https://twitter.com/elenarostova", linkedin: "https://linkedin.com/in/elenarostova", website: "https://zeroshieldlabs.io" } },
-    { id: "aaliyah-chen", name: "Aaliyah Chen", role: "Core Protocol Architect, NovaLayer", location: "San Francisco, US", initials: "AC", photo: "https://i.pravatar.cc/320?img=25", trackIds: ["infra", "nft"],
+    { id: "aaliyah-chen", name: "Aaliyah Chen", role: "Core Protocol Architect, NovaLayer", location: "San Francisco, US", initials: "AC", photo: "assets/speaker-aaliyah.jpg", trackIds: ["infra", "nft"],
       bio: "Aaliyah designs cross-chain messaging and settlement layers at NovaLayer, with a focus on minimizing trust assumptions between chains. Her recent work extends into dynamic, on-chain NFT metadata.",
       expertise: ["Cross-Chain Interoperability", "Protocol Architecture", "NFT Infrastructure"],
       socials: { twitter: "https://twitter.com/aaliyahchen", linkedin: "https://linkedin.com/in/aaliyahchen" } },
-    { id: "david-oconnor", name: "David K. O'Connor", role: "Head of Governance, OlympusDAO Council", location: "London, UK", initials: "DO", photo: "https://i.pravatar.cc/320?img=33", trackIds: ["dao"],
+    { id: "david-oconnor", name: "David K. O'Connor", role: "Head of Governance, OlympusDAO Council", location: "London, UK", initials: "DO", photo: "assets/speaker-david.jpg", trackIds: ["dao"],
       bio: "David chairs OlympusDAO's governance council, rebuilding treasury policy and voter participation programs after periods of low engagement. He writes and speaks widely on sustainable DAO tokenomics.",
       expertise: ["DAO Governance", "Treasury Management", "Policy & Compliance"],
       socials: { twitter: "https://twitter.com/davidkoconnor", linkedin: "https://linkedin.com/in/davidkoconnor" } },
-    { id: "priya-nathan", name: "Priya Nathan", role: "Governance Lead, Constellation DAO", location: "Bengaluru, IN", initials: "PN", photo: "https://i.pravatar.cc/320?img=44", trackIds: ["dao", "nft"],
+    { id: "priya-nathan", name: "Priya Nathan", role: "Governance Lead, Constellation DAO", location: "Bengaluru, IN", initials: "PN", photo: "assets/speaker-priya.jpg", trackIds: ["dao", "nft"],
       bio: "Priya designs on-chain voting systems and governance UX for Constellation DAO, and researches phygital products that tie physical goods to verifiable on-chain provenance.",
       expertise: ["Governance UX", "Voting Systems", "Phygital Products"],
       socials: { linkedin: "https://linkedin.com/in/priyanathan", website: "https://constellationdao.xyz" } },
-    { id: "jonas-weber", name: "Jonas Weber", role: "Studio Director, Aetherfall Games", location: "Berlin, DE", initials: "JW", photo: "https://i.pravatar.cc/320?img=12", trackIds: ["metaverse"],
+    { id: "jonas-weber", name: "Jonas Weber", role: "Studio Director, Aetherfall Games", location: "Berlin, DE", initials: "JW", photo: "assets/speaker-jonas.jpg", trackIds: ["metaverse"],
       bio: "Jonas leads game economy design at Aetherfall, one of the studios that survived the play-to-earn hype cycle. He now advises on sustainable in-game economies for GameFi projects.",
       expertise: ["GameFi Economies", "Virtual Worlds", "Player Retention"],
       socials: { twitter: "https://twitter.com/jonasweber", linkedin: "https://linkedin.com/in/jonasweber" } },
-    { id: "mei-lin-tan", name: "Mei Lin Tan", role: "Founder, Persona Protocol", location: "Singapore, SG", initials: "MT", photo: "https://i.pravatar.cc/320?img=32", trackIds: ["metaverse"],
+    { id: "mei-lin-tan", name: "Mei Lin Tan", role: "Founder, Persona Protocol", location: "Singapore, SG", initials: "MT", photo: "assets/speaker-mei.jpg", trackIds: ["metaverse"],
       bio: "Mei Lin founded Persona Protocol to give people portable, verifiable identity inside immersive worlds — without depending on any single platform to hold that identity.",
       expertise: ["Sovereign Identity", "Immersive Platforms", "Privacy Engineering"],
       socials: { twitter: "https://twitter.com/meilintan", website: "https://personaprotocol.io" } },
-    { id: "tomas-reyes", name: "Tomás Reyes", role: "Principal Auditor, Sentinel Security", location: "Madrid, ES", initials: "TR", photo: "https://i.pravatar.cc/320?img=68", trackIds: ["zk"],
+    { id: "tomas-reyes", name: "Tomás Reyes", role: "Principal Auditor, Sentinel Security", location: "Madrid, ES", initials: "TR", photo: "assets/speaker-tomas.jpg", trackIds: ["zk"],
       bio: "Tomás leads smart contract audits at Sentinel Security, and maintains the firm's public vulnerability-class database drawn from a year of production audits.",
       expertise: ["Smart Contract Auditing", "Security Research", "Threat Modeling"],
       socials: { twitter: "https://twitter.com/tomasreyes", linkedin: "https://linkedin.com/in/tomasreyes" } },
-    { id: "marcus-vance", name: "Marcus Vance", role: "Founding Partner, Genesis Capital", location: "Singapore, SG", initials: "MV", photo: "https://i.pravatar.cc/320?img=13", trackIds: ["defi"],
+    { id: "marcus-vance", name: "Marcus Vance", role: "Founding Partner, Genesis Capital", location: "Singapore, SG", initials: "MV", photo: "assets/speaker-marcus.jpg", trackIds: ["defi"],
       bio: "Marcus co-founded Genesis Capital and tracks institutional capital flows across DeFi primitives, publishing allocator data most funds keep to themselves.",
       expertise: ["Institutional Capital", "DeFi Strategy", "Market Structure"],
       socials: { linkedin: "https://linkedin.com/in/marcusvance", website: "https://genesis.capital" } },
-    { id: "kwame-boateng", name: "Kwame Boateng", role: "Head of Infrastructure, StakeForge", location: "Accra, GH", initials: "KB", photo: "https://i.pravatar.cc/320?img=11", trackIds: ["defi"],
+    { id: "kwame-boateng", name: "Kwame Boateng", role: "Head of Infrastructure, StakeForge", location: "Accra, GH", initials: "KB", photo: "assets/speaker-kwame.jpg", trackIds: ["defi"],
       bio: "Kwame runs validator infrastructure at StakeForge across multiple chains at institutional scale, and writes about the operational lessons that don't make it into whitepapers.",
       expertise: ["Validator Operations", "Staking Infrastructure", "Network Reliability"],
       socials: { twitter: "https://twitter.com/kwameboateng", linkedin: "https://linkedin.com/in/kwameboateng" } },
-    { id: "sofia-marchetti", name: "Sofia Marchetti", role: "General Counsel, Ledger & Co.", location: "Milan, IT", initials: "SM", photo: "https://i.pravatar.cc/320?img=49", trackIds: ["enterprise"],
+    { id: "sofia-marchetti", name: "Sofia Marchetti", role: "General Counsel, Ledger & Co.", location: "Milan, IT", initials: "SM", photo: "assets/speaker-sofia.jpg", trackIds: ["enterprise"],
       bio: "Sofia built Ledger & Co.'s compliance framework for tokenizing real-world assets across three major regulatory regimes, and advises enterprise clients on blockchain legal strategy.",
       expertise: ["Regulatory Compliance", "RWA Tokenization", "Legal Strategy"],
       socials: { linkedin: "https://linkedin.com/in/sofiamarchetti" } },
-    { id: "henrik-solberg", name: "Henrik Solberg", role: "VP Blockchain Strategy, Nordkraft Group", location: "Oslo, NO", initials: "HS", photo: "https://i.pravatar.cc/320?img=52", trackIds: ["enterprise"],
+    { id: "henrik-solberg", name: "Henrik Solberg", role: "VP Blockchain Strategy, Nordkraft Group", location: "Oslo, NO", initials: "HS", photo: "assets/speaker-henrik.jpg", trackIds: ["enterprise"],
       bio: "Henrik leads blockchain strategy for Nordkraft Group's enterprise consortium work, one of the few pilots in its sector to survive past proof-of-concept.",
       expertise: ["Enterprise Consortiums", "Blockchain Strategy", "Change Management"],
       socials: { twitter: "https://twitter.com/henriksolberg", linkedin: "https://linkedin.com/in/henriksolberg", website: "https://nordkraftgroup.com" } }

@@ -21,16 +21,27 @@
     const trackById = Object.fromEntries(tracks.map(t => [t.id, t]));
     const speakerById = Object.fromEntries(speakers.map(s => [s.id, s]));
 
-    // Union of every speaker's expertise tags, in first-seen order.
-    const expertiseTags = [];
+    // Ensure the 4 primary expertise tags specified by the user are first:
+    const primaryExpertiseTags = [
+      'Zero-Knowledge Proofs',
+      'Protocol Security',
+      'Applied Cryptography',
+      'Cross-Chain Interoperability'
+    ];
+    const otherTags = [];
     speakers.forEach(s => (s.expertise || []).forEach(tag => {
-      if (!expertiseTags.includes(tag)) expertiseTags.push(tag);
+      if (!primaryExpertiseTags.includes(tag) && !otherTags.includes(tag)) {
+        otherTags.push(tag);
+      }
     }));
+    const expertiseTags = [...primaryExpertiseTags, ...otherTags];
 
     const state = {
       query: '',
       trackFilter: 'all',
-      expertiseFilter: 'all'
+      expertiseFilter: 'all',
+      trackExpanded: false,
+      expertiseExpanded: false
     };
 
     const searchInput = root.querySelector('#speaker-search');
@@ -51,6 +62,41 @@
       const idx = raw.indexOf(',');
       if (idx === -1) return { title: raw, org: '' };
       return { title: raw.slice(0, idx).trim(), org: raw.slice(idx + 1).trim() };
+    }
+
+    /**
+     * Determine whether a speaker image is a generic placeholder service.
+     * @param {string} photo Source URL.
+     * @returns {boolean} True when the source is not a supplied portrait.
+     */
+    function isPlaceholderPhoto(photo) {
+      return !photo || /pravatar\.cc/i.test(String(photo));
+    }
+
+    /**
+     * Render a consistent line icon for a track label.
+     * @param {string} trackId Track identifier.
+     * @returns {string} Inline SVG markup.
+     */
+    function renderTrackIcon(trackId) {
+      const icons = {
+        infra: '<path d="M8 4v5M16 15v5M4 8h5M15 16h5M9 9l6 6M15 9 9 15"/>',
+        dao: '<path d="M12 3v5M12 16v5M4 8l4 4-4 4M20 8l-4 4 4 4M8 12h8"/>',
+        metaverse: '<path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/>',
+        zk: '<path d="M12 3 19 6v5c0 4.4-2.7 7.7-7 10-4.3-2.3-7-5.6-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/>',
+        defi: '<path d="M6 18V8M12 18V5M18 18v-9"/><path d="m4 16 8-6 5 3 3-4"/>',
+        enterprise: '<rect x="4" y="5" width="16" height="15" rx="2"/>',
+        nft: '<path d="m12 3 7 4v10l-7 4-7-4V7l7-4Z"/>'
+      };
+      return `<svg class="w3c-inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icons[trackId] || icons.infra}</svg>`;
+    }
+
+    /**
+     * Render a compact location marker without relying on emoji glyphs.
+     * @returns {string} Inline SVG location icon.
+     */
+    function renderLocationIcon() {
+      return '<svg class="speaker-location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>';
     }
 
     function sessionsForSpeaker(speakerId) {
@@ -89,26 +135,67 @@
     }
 
     // ------------------------------------------------------------------
-    // Filter bars (track + expertise) — same accessible pattern as Tracks
+    // Professional Inline Expandable Filter System
     // ------------------------------------------------------------------
-    function buildFilterBar(container, stateKey, options, getId, getLabel) {
+    function buildFilterBar(container, stateKey, expandedKey, options, getId, getLabel, limit) {
       if (!container) return;
       container.innerHTML = '';
-      const make = (id, label) => {
+
+      const primaryOptions = options.slice(0, limit);
+      const remainingOptions = options.slice(limit);
+
+      // If an option in the hidden set is active, auto-expand so the active filter is visible
+      const isHiddenActive = remainingOptions.some(opt => getId(opt) === state[stateKey]);
+      if (isHiddenActive) {
+        state[expandedKey] = true;
+      }
+
+      const isExpanded = state[expandedKey];
+
+      const makeBtn = (id, label, isExtra = false) => {
         const button = document.createElement('button');
         button.type = 'button';
-        button.className = 'filter-btn' + (state[stateKey] === id ? ' active' : '');
+        button.className = 'filter-btn' + (state[stateKey] === id ? ' active' : '') + (isExtra ? ' filter-pill-extra' : '');
         button.textContent = label;
         button.setAttribute('aria-pressed', state[stateKey] === id ? 'true' : 'false');
         button.addEventListener('click', function () {
           state[stateKey] = id;
-          buildFilterBar(container, stateKey, options, getId, getLabel);
+          rebuildAllFilters();
           renderGrid();
         });
         container.appendChild(button);
+        return button;
       };
-      make('all', 'All');
-      options.forEach(opt => make(getId(opt), getLabel(opt)));
+
+      // 1. "All" button
+      makeBtn('all', 'All');
+
+      // 2. Primary visible options
+      primaryOptions.forEach(opt => makeBtn(getId(opt), getLabel(opt)));
+
+      // 3. If expanded, render remaining options in normal document flow
+      if (isExpanded) {
+        remainingOptions.forEach(opt => makeBtn(getId(opt), getLabel(opt), true));
+      }
+
+      // 4. Inline toggle button (+ More / − Show less) if remaining options exist
+      if (remainingOptions.length > 0) {
+        const toggleBtn = document.createElement('button');
+        toggleBtn.type = 'button';
+        toggleBtn.className = 'filter-btn filter-toggle-btn' + (isExpanded ? ' is-expanded' : '');
+        toggleBtn.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+        toggleBtn.textContent = isExpanded ? '− Show less' : `+ More (${remainingOptions.length})`;
+        toggleBtn.addEventListener('click', function () {
+          state[expandedKey] = !state[expandedKey];
+          rebuildAllFilters();
+        });
+        container.appendChild(toggleBtn);
+      }
+    }
+
+    function rebuildAllFilters() {
+      buildFilterBar(trackFilterBar, 'trackFilter', 'trackExpanded', tracks, t => t.id, t => t.name, 5);
+      buildFilterBar(expertiseFilterBar, 'expertiseFilter', 'expertiseExpanded', expertiseTags, t => t, t => t, 4);
     }
 
     // ------------------------------------------------------------------
@@ -133,7 +220,7 @@
     // Speaker grid (cards)
     // ------------------------------------------------------------------
     function socialIcon(kind) {
-      return { twitter: '𝕏', linkedin: 'in', website: '🔗' }[kind] || '🔗';
+      return { twitter: '<span aria-hidden="true">𝕏</span>', linkedin: '<span aria-hidden="true">in</span>', website: '<span aria-hidden="true">↗</span>' }[kind] || '<span aria-hidden="true">↗</span>';
     }
 
     function renderSocials(speaker, size) {
@@ -166,20 +253,22 @@
         const { title, org } = splitRoleOrg(speaker.role);
         const speakerTracks = tracksForSpeaker(speaker).slice(0, 2);
         const tagChips = (speaker.expertise || []).slice(0, 2);
+        const media = isPlaceholderPhoto(speaker.photo)
+          ? `<span class="card-speaker-placeholder" aria-hidden="true">${escapeHtml(speaker.initials)}</span>`
+          : `<img class="card-speaker-img" src="${escapeHtml(speaker.photo)}" alt="Portrait of ${escapeHtml(speaker.name)}" loading="lazy" data-fallback-image><span class="card-speaker-placeholder" hidden aria-hidden="true">${escapeHtml(speaker.initials)}</span>`;
         return `
           <article class="card-speaker" data-speaker-card="${escapeHtml(speaker.id)}">
             <button type="button" class="card-speaker-trigger" data-open-speaker="${escapeHtml(speaker.id)}" aria-haspopup="dialog" aria-label="View full profile for ${escapeHtml(speaker.name)}">
               <span class="card-speaker-media">
-                <img class="card-speaker-img" src="${escapeHtml(speaker.photo)}" alt="Portrait of ${escapeHtml(speaker.name)}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.hidden=false;">
-                <span class="card-speaker-placeholder" hidden>${escapeHtml(speaker.initials)}</span>
+                ${media}
               </span>
               <span class="card-speaker-body">
                 <span class="card-speaker-name">${escapeHtml(speaker.name)}</span>
                 <span class="card-speaker-role">${escapeHtml(title)}</span>
                 ${org ? `<span class="card-speaker-org">${escapeHtml(org)}</span>` : ''}
-                <span class="card-speaker-location">📍 ${escapeHtml(speaker.location)}</span>
+                <span class="card-speaker-location">${renderLocationIcon()} ${escapeHtml(speaker.location)}</span>
                 <span class="card-speaker-tags">
-                  ${speakerTracks.map(t => `<span class="pill pill-accent">${escapeHtml(t.icon)} ${escapeHtml(t.name)}</span>`).join('')}
+                  ${speakerTracks.map(t => `<span class="pill pill-accent">${renderTrackIcon(t.id)} ${escapeHtml(t.name)}</span>`).join('')}
                   ${tagChips.map(tag => `<span class="pill">${escapeHtml(tag)}</span>`).join('')}
                 </span>
               </span>
@@ -197,9 +286,10 @@
       state.query = '';
       state.trackFilter = 'all';
       state.expertiseFilter = 'all';
+      state.trackExpanded = false;
+      state.expertiseExpanded = false;
       if (searchInput) searchInput.value = '';
-      buildFilterBar(trackFilterBar, 'trackFilter', tracks, t => t.id, t => t.name);
-      buildFilterBar(expertiseFilterBar, 'expertiseFilter', expertiseTags, t => t, t => t);
+      rebuildAllFilters();
       renderGrid();
     }
 
@@ -224,17 +314,20 @@
       const related = relatedSpeakers(speaker);
       const socials = renderSocials(speaker, 'lg');
 
+      const modalMedia = isPlaceholderPhoto(speaker.photo)
+        ? `<span class="modal-speaker-initials">${escapeHtml(speaker.initials)}</span>`
+        : `<img src="${escapeHtml(speaker.photo)}" alt="Portrait of ${escapeHtml(speaker.name)}" data-fallback-image><span class="modal-speaker-initials" hidden>${escapeHtml(speaker.initials)}</span>`;
+
       modalDialog.innerHTML = `
         <button type="button" class="modal-close-btn" data-modal-close aria-label="Close speaker profile">✕</button>
         <div class="modal-speaker-header">
           <span class="modal-speaker-photo-wrap">
-            <img src="${escapeHtml(speaker.photo)}" alt="Portrait of ${escapeHtml(speaker.name)}" onerror="this.style.display='none'; this.nextElementSibling.hidden=false;">
-            <span class="modal-speaker-initials" hidden>${escapeHtml(speaker.initials)}</span>
+            ${modalMedia}
           </span>
           <div>
-            <h2 class="modal-title" id="speaker-modal-title" style="padding-right:0;margin-bottom:4px;">${escapeHtml(speaker.name)}</h2>
-            <p class="modal-speaker" style="margin:0;"><strong>${escapeHtml(title)}</strong>${org ? ` — ${escapeHtml(org)}` : ''}</p>
-            <p class="modal-speaker" style="margin:0; font-size: var(--text-sm);">📍 ${escapeHtml(speaker.location)}</p>
+            <h2 class="modal-title modal-title--speaker" id="speaker-modal-title">${escapeHtml(speaker.name)}</h2>
+            <p class="modal-speaker modal-speaker--compact"><strong>${escapeHtml(title)}</strong>${org ? ` — ${escapeHtml(org)}` : ''}</p>
+            <p class="modal-speaker modal-speaker--location">${escapeHtml(speaker.location)}</p>
           </div>
         </div>
 
@@ -255,7 +348,7 @@
           <div class="modal-related-list">
             ${speakerTracks.map(t => `
               <a class="modal-related-item" href="tracks.html#${encodeURIComponent(t.id)}">
-                <span class="modal-related-item-title">${escapeHtml(t.icon)} ${escapeHtml(t.name)}</span>
+                <span class="modal-related-item-title">${renderTrackIcon(t.id)} ${escapeHtml(t.name)}</span>
                 <span class="modal-related-item-meta">${escapeHtml(t.description)}</span>
               </a>
             `).join('')}
@@ -367,8 +460,7 @@
       });
     }
 
-    buildFilterBar(trackFilterBar, 'trackFilter', tracks, t => t.id, t => t.name);
-    buildFilterBar(expertiseFilterBar, 'expertiseFilter', expertiseTags, t => t, t => t);
+    rebuildAllFilters();
 
     renderHeroStats();
     renderGrid();

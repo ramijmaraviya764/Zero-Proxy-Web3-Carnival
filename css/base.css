@@ -155,7 +155,7 @@ ul, ol {
 
 /* Selection */
 ::selection {
-  background: rgba(139, 92, 246, 0.35);
+  background: var(--surface-accent);
   color: var(--text-primary);
 }
 
@@ -177,13 +177,32 @@ main {
 
 /* Section Wrapper Base */
 .section {
-  padding-top: var(--space-12);
-  padding-bottom: var(--space-12);
+  padding-top: clamp(2rem, 3.5vw, 3rem);
+  padding-bottom: clamp(2rem, 3.5vw, 3rem);
   position: relative;
 }
 
+/* Modifiers for intentional, gap-free pacing */
+.section-compact {
+  padding-top: clamp(1.25rem, 2.5vw, 2rem);
+  padding-bottom: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.section-tight {
+  padding-top: var(--space-4);
+  padding-bottom: var(--space-4);
+}
+
+.section-pt-0 {
+  padding-top: 0;
+}
+
+.section-pb-0 {
+  padding-bottom: 0;
+}
+
 .section-header {
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-6);
 }
 
 .section-header.text-center {
@@ -195,7 +214,8 @@ main {
   margin-right: auto;
 }
 
-.section-eyebrow {
+.section-eyebrow,
+.section-kicker {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
@@ -209,12 +229,13 @@ main {
 }
 
 .section-title {
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-2);
 }
 
 .section-desc {
   font-size: var(--text-lg);
   color: var(--text-secondary);
+  line-height: var(--lh-body);
 }
 
 /* Visually Hidden Utility for A11y */
@@ -229,3 +250,4 @@ main {
   white-space: nowrap;
   border: 0;
 }
+

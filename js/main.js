@@ -14,6 +14,28 @@
   }
 
   /**
+   * Provide a deterministic initials fallback for optional speaker imagery.
+   * Uses capture-phase error handling so dynamically-rendered images receive
+   * the same behavior without inline event handlers.
+   *
+   * @returns {void}
+   */
+  function initImageFallbacks() {
+    document.addEventListener('error', (event) => {
+      const image = event.target;
+      if (!(image instanceof HTMLImageElement) || !image.matches('[data-fallback-image]')) {
+        return;
+      }
+
+      image.hidden = true;
+      const fallback = image.nextElementSibling;
+      if (fallback instanceof HTMLElement) {
+        fallback.hidden = false;
+      }
+    }, true);
+  }
+
+  /**
    * Countdown Timer to Web3 Carnival Flagship Event (Nov 14, 2026)
    */
   function initCountdownTimer() {
@@ -223,6 +245,8 @@
   /**
    * Initialize Global Behaviors
    */
+  initImageFallbacks();
+
   document.addEventListener('DOMContentLoaded', () => {
     initCountdownTimer();
     initStatCounters();
@@ -230,12 +254,5 @@
     initScrollReveal();
     initPersonaStrip();
 
-    // Log Designathon System Verification
-    console.info(
-      "%c🎪 Web3 Carnival Design System Ready\n%cGDG KalaKriti Designathon · FinTech Track · Scenario 1\nTheme: " +
-      (document.documentElement.getAttribute('data-theme') || 'dark'),
-      "color: #5B5FEF; font-size: 14px; font-weight: bold;",
-      "color: #22D3EE; font-size: 11px;"
-    );
   });
 })();

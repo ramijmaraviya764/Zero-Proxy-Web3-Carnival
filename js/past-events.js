@@ -123,7 +123,7 @@
         const selected = state.selectedId === edition.id;
         return `
           <button type="button" class="edition-card${selected ? ' is-selected' : ''}" data-edition-id="${escapeHtml(edition.id)}" aria-pressed="${selected ? 'true' : 'false'}">
-            <span class="edition-card-banner" aria-hidden="true">${escapeHtml(edition.icon)}</span>
+            <span class="edition-card-banner past-event-banner--archive" data-edition-id="${escapeHtml(edition.id)}" aria-hidden="true"><span class="past-event-year-display">${escapeHtml(edition.year)}</span><span class="past-event-city-display">${escapeHtml(edition.location)}</span></span>
             <span class="edition-card-body">
               <span class="edition-card-top">
                 <span class="edition-card-name">${escapeHtml(edition.edition)}</span>
@@ -152,10 +152,7 @@
       const isLargest = edition.attendeesValue === maxAttendees;
 
       detailShell.innerHTML = `
-        <div class="edition-detail-visual" aria-hidden="true">
-          <span class="edition-detail-visual-tag pill pill-accent">Archived Edition</span>
-          ${escapeHtml(edition.icon)}
-        </div>
+        <div class="edition-detail-visual" data-edition-id="${escapeHtml(edition.id)}" aria-hidden="true"></div>
         <div class="edition-detail-copy">
           <h3 id="edition-detail-title">${escapeHtml(edition.edition)}</h3>
           <div class="edition-detail-meta-row">
@@ -238,8 +235,8 @@
           const selected = state.selectedId === edition.id;
           return `
             <div class="edition-compare-row">
-              <span class="edition-compare-label"${selected ? ' style="color:var(--accent-cyan)"' : ''}>${escapeHtml(edition.year)}</span>
-              <span class="edition-compare-track"><span class="edition-compare-fill" data-fill="${pct}" style="width:0"></span></span>
+              <span class="edition-compare-label${selected ? ' is-selected' : ''}">${escapeHtml(edition.year)}</span>
+              <span class="edition-compare-track"><span class="edition-compare-fill" data-fill="${pct}"></span></span>
               <span class="edition-compare-value">${escapeHtml(edition.attendees)}</span>
             </div>`;
         }).join('');
@@ -247,7 +244,7 @@
         // Animate bar widths in on next frame (keeps the 0 -> value transition, reduced-motion safe).
         requestAnimationFrame(() => {
           compareWrap.querySelectorAll('[data-fill]').forEach(fill => {
-            fill.style.width = isReducedMotion() ? fill.dataset.fill + '%' : fill.dataset.fill + '%';
+            fill.style.width = `${fill.dataset.fill}%`;
           });
         });
       }
@@ -255,22 +252,28 @@
 
     /* ---------- 6. Photography / highlights gallery ---------- */
     function renderGallery() {
-      const edition = editionById[state.selectedId];
+      if (!galleryGrid) return;
+      const edition = editionById[state.selectedId] || editions[0];
       if (!edition) return;
 
-      if (galleryHeading) galleryHeading.textContent = `${edition.edition} gallery`;
-      if (!galleryGrid) return;
+      const highlights = [
+        { value: edition.year, label: 'Edition year' },
+        { value: edition.location, label: 'Host location' },
+        { value: edition.attendees.replace(/\s*Attendees?$/i, ''), label: 'Documented attendees' },
+        { value: edition.country, label: 'Country represented' }
+      ];
 
-      const angles = [135, 200, 60, 320];
-      galleryGrid.innerHTML = angles.map((angle, i) => `
-        <figure class="archive-gallery-tile" style="background: linear-gradient(${angle}deg, rgba(139,92,246,.22), rgba(91,95,239,.14) 45%, rgba(34,211,238,.12)), var(--bg-raised);">
-          <span class="archive-gallery-badge pill pill-accent">Placeholder</span>
-          <span class="archive-gallery-tile-icon" aria-hidden="true">${escapeHtml(edition.icon)}</span>
-          <figcaption>${escapeHtml(edition.edition)} \u2014 ${escapeHtml(edition.location)} &middot; photo ${i + 1} of ${angles.length}, archive pending</figcaption>
-        </figure>`).join('');
+      galleryGrid.innerHTML = highlights.map(item => `
+        <figure class="archive-gallery-tile">
+          <img class="archive-gallery-image" src="${escapeHtml(edition.image)}" alt="${escapeHtml(edition.edition)} event scene" loading="lazy">
+          <figcaption>
+            <span class="archive-highlight-value">${escapeHtml(item.value)}</span>
+            <span class="archive-highlight-label">${escapeHtml(item.label)}</span>
+          </figcaption>
+        </figure>
+      `).join('');
     }
 
-    /* ---------- 7. Speaker / partner archive note ---------- */
     function renderRoster() {
       const edition = editionById[state.selectedId];
       if (rosterHeading && edition) rosterHeading.textContent = `Speakers & partners \u2014 ${edition.edition}`;

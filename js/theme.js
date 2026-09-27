@@ -1,6 +1,8 @@
 /**
  * Web3 Carnival Design System - Theme Controller
- * Handles dark / light theme toggling, localStorage persistence, and system preference detection
+ * Handles dark / light theme toggling and localStorage persistence.
+ * Dark mode is the product default; the visitor OS color scheme is never
+ * consulted or applied automatically.
  */
 
 (function () {
@@ -11,7 +13,7 @@
 
   /**
    * Determine preferred initial theme
-   * Priority: 1. localStorage -> 2. System preference -> 3. Default to 'dark'
+   * Priority: 1. explicit localStorage preference -> 2. dark product default
    */
   function getPreferredTheme() {
     try {
@@ -23,11 +25,10 @@
       // localStorage disabled / restricted
     }
 
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-      return 'light';
-    }
-
-    return 'dark'; // Dark theme is default according to design system
+    // Dark-first product default. The visitor's OS color scheme must not
+    // override the design system unless the visitor explicitly selected a
+    // light theme through the site's own toggle.
+    return 'dark';
   }
 
   /**
@@ -41,12 +42,18 @@
       root.removeAttribute(THEME_ATTR); // default dark theme is root default
     }
 
+    const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+    if (themeColorMeta) {
+      themeColorMeta.setAttribute('content', theme === 'light' ? '#F7F7FB' : '#05060B');
+    }
+
     // Update aria attributes and labels on all theme buttons
     const buttons = document.querySelectorAll('.theme-toggle-btn');
     buttons.forEach(btn => {
       const isLight = theme === 'light';
       btn.setAttribute('aria-label', isLight ? 'Switch to Dark Mode' : 'Switch to Light Mode');
       btn.setAttribute('title', isLight ? 'Switch to Dark Mode' : 'Switch to Light Mode');
+      btn.setAttribute('data-theme-target', isLight ? 'dark' : 'light');
     });
 
     try {
@@ -81,22 +88,6 @@
     if (btn) toggleTheme();
   });
 
-  // Initialize event listeners when DOM is loaded
-  document.addEventListener('DOMContentLoaded', () => {
-    // Listen to OS changes only if no manual preference stored
-    if (window.matchMedia) {
-      window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
-        let hasStored = false;
-        try {
-          hasStored = Boolean(localStorage.getItem(STORAGE_KEY));
-        } catch (err) {}
-
-        if (!hasStored) {
-          applyTheme(e.matches ? 'light' : 'dark');
-        }
-      });
-    }
-  });
 
   // Expose toggle on window object for testing or manual triggers
   window.Web3CarnivalTheme = {
