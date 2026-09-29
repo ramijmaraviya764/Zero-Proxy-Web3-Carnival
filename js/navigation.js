@@ -252,6 +252,8 @@
             <a href="contact.html#terms" class="footer-link">Terms</a>
             <span aria-hidden="true">&bull;</span>
             <a href="contact.html" class="footer-link">Help Desk</a>
+            <span aria-hidden="true">&bull;</span>
+            <a href="index.html?tour=1" class="footer-link" data-tour-trigger aria-label="Start interactive tour guide">Tour Guide</a>
           </div>
         </div>
       </div>

@@ -1,0 +1,369 @@
+/**
+ * Web3 Carnival – Onboarding Coachmark (v3.3)
+ *
+ * Layers (z-index):
+ *   9998  .onboarding-scrim           empty div covering the whole screen, excluding highlighted button via clip-path cutout
+ *   9999  .onboarding-target--active  particular button highlighted with color & glow
+ *   9999  .onboarding-ring            cyan & purple glowing spotlight ring
+ *  10000  #onboarding-card            coachmark tooltip (compact, height: auto on all steps)
+ */
+
+/* ==========================================================================
+   1. Scrim – whole-screen empty div, cut out over the highlighted button
+   ========================================================================== */
+
+.onboarding-scrim {
+  position:   fixed;
+  inset:      0;
+  width:      100vw;
+  height:     100vh;
+  z-index:    9998;
+  background: rgba(3, 7, 18, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  pointer-events: auto;
+
+  /* Fade transition */
+  opacity: 1;
+  transition: opacity 200ms ease;
+}
+
+.onboarding-scrim[hidden] {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .onboarding-scrim { transition: none; }
+}
+
+/* ==========================================================================
+   2. Highlight ring – cyan & purple neon aura around target button
+   ========================================================================== */
+
+.onboarding-ring {
+  position: fixed;
+  z-index:  9999;
+  pointer-events: none;
+
+  border: 2px solid var(--accent-cyan);
+  box-shadow:
+    0 0 0 3px  rgba(34, 211, 238, 0.35),
+    0 0 16px   rgba(34, 211, 238, 0.85),
+    0 0 36px   rgba(139, 92, 246, 0.55),
+    inset 0 0 12px rgba(34, 211, 238, 0.3);
+
+  animation: ob-ring-pulse 2s ease-in-out infinite;
+
+  transition:
+    top           200ms cubic-bezier(0.16, 1, 0.3, 1),
+    left          200ms cubic-bezier(0.16, 1, 0.3, 1),
+    width         200ms cubic-bezier(0.16, 1, 0.3, 1),
+    height        200ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-radius 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes ob-ring-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 3px  rgba(34, 211, 238, 0.35),
+      0 0 16px   rgba(34, 211, 238, 0.85),
+      0 0 36px   rgba(139, 92, 246, 0.55),
+      inset 0 0 12px rgba(34, 211, 238, 0.3);
+  }
+  50% {
+    box-shadow:
+      0 0 0 4px  rgba(34, 211, 238, 0.55),
+      0 0 24px   rgba(34, 211, 238, 1),
+      0 0 48px   rgba(139, 92, 246, 0.75),
+      inset 0 0 16px rgba(34, 211, 238, 0.45);
+  }
+}
+
+.onboarding-ring[hidden] {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .onboarding-ring {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   3. Target element – only the particular button highlighted with vivid color
+   ========================================================================== */
+
+.onboarding-target--active {
+  position: relative !important;
+  z-index:  9999    !important;
+  box-shadow: 0 0 22px rgba(34, 211, 238, 0.85), 0 0 42px rgba(139, 92, 246, 0.5) !important;
+  border-color: var(--accent-cyan) !important;
+  color: #FAFAF8 !important;
+}
+
+.onboarding-target--active.btn-secondary {
+  background: rgba(18, 19, 28, 0.85) !important;
+}
+
+/* ==========================================================================
+   4. Coachmark card – strictly compact, height: auto across all steps
+   ========================================================================== */
+
+#onboarding-card {
+  position:   fixed;
+  z-index:    10000;
+
+  width:      min(320px, calc(100vw - 24px));
+  max-width:  calc(100vw - 20px);
+  height:     auto !important;
+  box-sizing: border-box;
+
+  background:    var(--bg-surface);
+  border:        1px solid var(--border-medium);
+  border-radius: var(--radius-lg);           /* 18px */
+  padding:       clamp(14px, 3.5vw, 20px);
+  box-shadow:
+    var(--shadow-lg),
+    0 0 0 1px var(--border-highlight),
+    0 0 24px  rgba(91, 95, 239, 0.16);
+
+  /* Entrance animation and smooth reveal */
+  animation: ob-card-in 220ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+@keyframes ob-card-in {
+  from { opacity: 0; transform: translateY(6px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)   scale(1); }
+}
+
+#onboarding-card[hidden] { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  #onboarding-card { animation: none; }
+}
+
+/* ==========================================================================
+   5. Card header: eyebrow + close button
+   ========================================================================== */
+
+.ob-header {
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+  margin-bottom:   var(--space-3);           /* 12px */
+}
+
+.ob-eyebrow {
+  font-family:    var(--font-display);
+  font-size:      var(--text-xs);            /* 12px */
+  font-weight:    var(--fw-semibold);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color:          var(--accent-cyan);
+  min-height:     1em;
+}
+
+.ob--welcome .ob-eyebrow { visibility: hidden; }
+
+/* ==========================================================================
+   6. Close button
+   ========================================================================== */
+
+.ob-close {
+  display:       grid;
+  place-items:   center;
+  width:         26px;
+  height:        26px;
+  flex-shrink:   0;
+  background:    transparent;
+  border:        1px solid transparent;
+  border-radius: var(--radius-sm);
+  color:         var(--text-muted);
+  cursor:        pointer;
+  transition:
+    background   var(--transition-fast),
+    color        var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.ob-close:hover {
+  background:   var(--surface-hover);
+  color:        var(--text-primary);
+  border-color: var(--border-subtle);
+}
+
+.ob-close:focus-visible {
+  outline:        2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   7. Title
+   ========================================================================== */
+
+.ob-title {
+  font-family:  var(--font-display);
+  font-size:    var(--text-base);            /* 16px */
+  font-weight:  var(--fw-bold);
+  line-height:  var(--lh-heading);
+  color:        var(--text-primary);
+  margin:       0 0 var(--space-2);          /* 8px */
+}
+
+.ob--welcome .ob-title {
+  font-size: var(--text-xl);                 /* 20px */
+}
+
+/* ==========================================================================
+   8. Description
+   ========================================================================== */
+
+.ob-desc {
+  font-size:   var(--text-sm);              /* 13px */
+  line-height: var(--lh-body);
+  color:       var(--text-secondary);
+  margin:      0 0 var(--space-5);          /* 20px */
+}
+
+/* ==========================================================================
+   9. Action row
+   ========================================================================== */
+
+.ob-actions {
+  display:     flex;
+  align-items: center;
+  gap:         var(--space-3);
+}
+
+.ob-skip {
+  background:    transparent;
+  border:        1px solid transparent;
+  border-radius: var(--radius-full);
+  color:         var(--text-muted);
+  font-family:   var(--font-body);
+  font-size:     var(--text-sm);
+  font-weight:   var(--fw-medium);
+  cursor:        pointer;
+  padding:       var(--space-1) var(--space-2);
+  white-space:   nowrap;
+  transition:
+    color        var(--transition-fast),
+    background   var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.ob-skip:hover {
+  color:        var(--text-secondary);
+  background:   var(--surface-hover);
+  border-color: var(--border-subtle);
+}
+
+.ob-skip:focus-visible {
+  outline:        2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.ob-next {
+  flex: 1;
+}
+
+/* Welcome variant */
+.ob--welcome .ob-actions {
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.ob--welcome .ob-next,
+.ob--welcome .ob-skip {
+  width: 100%;
+  flex:  unset;
+  text-align: center;
+}
+
+/* ==========================================================================
+   10. Screen-reader only progress
+   ========================================================================== */
+
+.ob-sr-progress {
+  position:  absolute;
+  width:     1px;
+  height:    1px;
+  padding:   0;
+  overflow:  hidden;
+  clip:      rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border:    0;
+}
+
+/* ==========================================================================
+   11. Responsive card scaling (stays floating around the button on any screen)
+   ========================================================================== */
+
+@media (max-width: 480px) {
+  #onboarding-card {
+    border-radius: var(--radius-md);
+    padding: 13px 15px;
+    width: min(300px, calc(100vw - 20px));
+  }
+
+  .ob-title {
+    font-size: 0.95rem !important;
+  }
+
+  .ob-desc {
+    font-size: 0.8rem !important;
+    margin-bottom: 12px !important;
+  }
+
+  .ob-actions {
+    gap: 8px;
+  }
+
+  .ob-next,
+  .ob-skip {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+}
+
+/* ==========================================================================
+   12. Light-theme overrides
+   ========================================================================== */
+
+[data-theme="light"] .onboarding-scrim {
+  background: rgba(18, 19, 28, 0.4);
+}
+
+[data-theme="light"] #onboarding-card {
+  background:    var(--bg-surface);
+  border-color:  var(--border-medium);
+  box-shadow:
+    var(--shadow-lg),
+    0 0 0 1px var(--border-accent);
+}
+
+[data-theme="light"] .onboarding-ring {
+  border-color: var(--accent-indigo);
+  box-shadow:
+    0 0 0 3px  rgba(76, 70, 224, 0.25),
+    0 0 16px   rgba(76, 70, 224, 0.6),
+    0 0 36px   rgba(124, 58, 237, 0.4),
+    inset 0 0 12px rgba(76, 70, 224, 0.2);
+}
+
+[data-theme="light"] .onboarding-target--active {
+  box-shadow: 0 0 22px rgba(76, 70, 224, 0.45), 0 0 36px rgba(124, 58, 237, 0.25) !important;
+  border-color: var(--accent-indigo) !important;
+}
+
+[data-theme="light"] .onboarding-target--active.btn-secondary {
+  color: var(--text-primary) !important;
+  background: var(--bg-surface) !important;
+}
+
+[data-theme="light"] .onboarding-target--active.btn-primary {
+  color: #ffffff !important;
+  background: var(--accent-indigo) !important;
+}
