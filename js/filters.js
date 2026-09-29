@@ -112,6 +112,7 @@
     function saveJourney(ids) {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(ids));
+        window.dispatchEvent(new CustomEvent('w3c:carnival-legacy-sync', { detail: { ids } }));
       } catch (e) {
         // localStorage disabled/restricted — journey just won't persist
       }
@@ -218,6 +219,24 @@
       const div = document.createElement('div');
       div.textContent = str;
       return div.innerHTML;
+    }
+
+    /**
+     * Render the track glyph used by session cards and the session modal.
+     * Kept local to this page so event.html does not depend on tracks.js.
+     */
+    function renderTrackIcon(trackId) {
+      const icons = {
+        infra: '<path d="M8 4v5M16 15v5M4 8h5M15 16h5M9 9l6 6M15 9 9 15"/>',
+        dao: '<path d="M12 3v5M12 16v5M4 8l4 4-4 4M20 8l-4 4 4 4M8 12h8"/>',
+        metaverse: '<path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/>',
+        zk: '<path d="M12 3 19 6v5c0 4.4-2.7 7.7-7 10-4.3-2.3-7-5.6-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/>',
+        defi: '<path d="M6 18V8M12 18V5M18 18v-9"/><path d="m4 16 8-6 5 3 3-4"/>',
+        enterprise: '<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 9h2M14 9h2M8 13h2M14 13h2M8 17h8"/>',
+        nft: '<path d="m12 3 7 4v10l-7 4-7-4V7l7-4Z"/><path d="m9 12 2 2 4-4"/>'
+      };
+      const pathMarkup = icons[trackId] || icons.infra;
+      return `<svg class="w3c-inline-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${pathMarkup}</svg>`;
     }
 
     function getFilteredSessions() {
@@ -347,6 +366,7 @@
         <p class="modal-desc" id="session-modal-desc">${escapeHtml(session.description)}</p>
         <div class="modal-actions">
           <button type="button" class="btn btn-primary session-add-btn${added ? ' added' : ''}" data-journey-toggle="${session.id}" aria-pressed="${added ? 'true' : 'false'}" aria-label="${added ? 'Remove' : 'Add'} ${escapeHtml(session.title)} ${added ? 'from' : 'to'} My Journey">${added ? '✓ In Journey' : '+ Add to My Journey'}</button>
+          <button type="button" class="btn btn-secondary" data-carnival-calendar-session="${session.id}">Add to Calendar</button>
         </div>
         ${related.length ? `
           <div class="modal-related-title">Related Sessions</div>

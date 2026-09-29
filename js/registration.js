@@ -201,9 +201,42 @@
       }
     }
 
+    /**
+     * Persist registration identity so My Carnival can reconnect the digital pass
+     * and selected interests on later pages.
+     * @returns {void}
+     */
+    function persistRegistrationProfile() {
+      if (!window.Web3Carnival || !window.Web3Carnival.getState || !window.Web3CarnivalCore) return;
+      const current = window.Web3Carnival.getState();
+      const next = {
+        ...current,
+        tracks: Array.from(new Set([...(current.tracks || []), ...state.tracks])),
+        profile: {
+          ...current.profile,
+          name: state.name,
+          email: state.email,
+          role: state.role,
+          organization: state.organization,
+          goal: state.goal,
+          passId: state.passId
+        }
+      };
+
+      try {
+        localStorage.setItem(window.Web3CarnivalCore.STORAGE_KEY, JSON.stringify(next));
+        localStorage.setItem(window.Web3CarnivalCore.LEGACY_JOURNEY_KEY, JSON.stringify(next.sessions || []));
+        window.dispatchEvent(new CustomEvent('w3c:carnival-change', { detail: next }));
+      } catch (error) {
+        // Registration remains usable even if browser storage is restricted.
+      }
+    }
+
     // Step 5: Render Digital Event Pass (Signature Moment)
     function renderDigitalPass() {
       if (!digitalPassEl) return;
+
+      persistRegistrationProfile();
 
       const selectedTracks = tracks.filter(t => state.tracks.includes(t.id));
       const goalObj = allGoals.find(g => g.id === state.goal) || { title: 'Attendee', icon: 'ticket' };
@@ -486,6 +519,22 @@
         state.email = '';
         state.role = '';
         state.organization = '';
+        try {
+          const current = window.Web3Carnival && window.Web3Carnival.getState ? window.Web3Carnival.getState() : null;
+          if (current && window.Web3CarnivalCore) {
+            current.profile = {
+              name: '',
+              email: '',
+              role: '',
+              organization: '',
+              goal: '',
+              passId: ''
+            };
+            localStorage.setItem(window.Web3CarnivalCore.STORAGE_KEY, JSON.stringify(current));
+          }
+        } catch (error) {
+          // Keep restart functional when storage is restricted.
+        }
         renderGoals();
         renderTracks();
         if (form) form.reset();

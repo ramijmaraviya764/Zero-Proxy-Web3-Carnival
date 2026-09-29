@@ -273,7 +273,10 @@
                 </span>
               </span>
             </button>
-            <span class="card-speaker-socials">${renderSocials(speaker)}</span>
+            <div class="card-speaker-actions">
+              <button type="button" class="btn btn-secondary btn-sm" data-carnival-save-speaker="${escapeHtml(speaker.id)}" aria-pressed="false">Follow Speaker</button>
+              <span class="card-speaker-socials">${renderSocials(speaker)}</span>
+            </div>
           </article>`;
       }).join('');
 
@@ -338,10 +341,10 @@
           <div class="modal-tag-list">${speaker.expertise.map(tag => `<span class="pill">${escapeHtml(tag)}</span>`).join('')}</div>
         ` : ''}
 
-        ${socials ? `
-          <div class="modal-section-title">Connect</div>
-          <div class="modal-social-row">${socials}</div>
-        ` : ''}
+        <div class="modal-actions">
+          <button type="button" class="btn btn-primary" data-carnival-save-speaker="${escapeHtml(speaker.id)}" aria-pressed="false">Follow Speaker</button>
+          ${socials ? `<div class="modal-social-row">${socials}</div>` : ''}
+        </div>
 
         ${speakerTracks.length ? `
           <div class="modal-section-title">Related Tracks</div>
